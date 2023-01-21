@@ -519,6 +519,11 @@ magic-string@^0.27.0:
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.13"
 
+material-icons@^1.13.1:
+  version "1.13.1"
+  resolved "https://registry.npmjs.org/material-icons/-/material-icons-1.13.1.tgz"
+  integrity sha512-6EwhlEa4rwydNSWw11ig1oz/h/KcarJXn4n50Wd69v5Eh026Y6xBo9zLPeX4iF8+qUZV862X0AUUA0m0VaihWg==
+
 mime-db@1.52.0:
   version "1.52.0"
   resolved "https://registry.npmjs.org/mime-db/-/mime-db-1.52.0.tgz"
