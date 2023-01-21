@@ -1,8 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Navbar from './Navbar'
 
 const Enrutador = () => {
     return (
         <BrowserRouter>
+
+            <Navbar/>
+
             <Routes>
                 {/* Vista general */}
                 <Route path='/' element={ <><h1>Inico</h1></> } />
