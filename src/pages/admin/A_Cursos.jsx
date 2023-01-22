@@ -4,11 +4,39 @@ const A_Cursos = () => {
 
   const alerta = () => {
     Swal.fire({
-      title: 'Curso guardado correctamente',
+      title: "Guardar curso",
+      text: 'Curso guardado correctamente',
       icon: 'success',
-      showConfirmButton: false,
       timer: 2000,
       timerProgressBar: true
+    })
+  }
+
+  const alertaEliminar = () => {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success mx-2',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Eliminar curso',
+      text: "¿Esta seguro de querer eliminar el curso?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminalo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Eliminar curso",
+          text: "El curso a sido eliminado correctamente",
+          icon: 'success'
+        }
+        )
+      }
     })
   }
 
@@ -46,7 +74,7 @@ const A_Cursos = () => {
                 <div className="d-flex justify-content-end">
                   <button className='btn btn-primary'><span className='material-icons'>edit</span></button>
                   <div className="mx-1"></div>
-                  <button className='btn btn-danger'><span className='material-icons'>delete</span></button>
+                  <button className='btn btn-danger' onClick={alertaEliminar}><span className='material-icons'>delete</span></button>
                 </div>
               </div>
             </div>
@@ -85,17 +113,17 @@ const A_Cursos = () => {
 
                 <div className="mb-3">
                   <label htmlFor="video" className="form-label">Video introductorio del curso</label>
-                  <input className="form-control" type="file" id="video"/>
+                  <input className="form-control" type="file" id="video" />
                 </div>
 
                 <div className="mb-3">
                   <label htmlFor="miniatura" className="form-label">Miniatura del curso</label>
-                  <input className="form-control" type="file" id="miniatura"/>
+                  <input className="form-control" type="file" id="miniatura" />
                 </div>
 
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-danger" data-bs-dismiss="modal"><span className='material-icons'>close</span>Cerrar</button>
+                <button type="button" className="btn btn-danger"  data-bs-dismiss="modal"><span className='material-icons'>close</span>Cerrar</button>
                 <button type="button" className="btn btn-success" onClick={alerta} data-bs-dismiss="modal" ><span className='material-icons'>save</span> Guardar</button>
               </div>
             </div>
