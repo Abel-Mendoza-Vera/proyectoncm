@@ -1,7 +1,9 @@
 import Swal from "sweetalert2"
-import Tarjeta from "../../components/curso/Tarjeta"
+import A_Tabla from "../../components/curso/A_Tabla"
 
 const A_Cursos = () => {
+
+  
 
   const alerta = () => {
     Swal.fire({
@@ -31,11 +33,22 @@ const A_Cursos = () => {
           </div>
         </div>
 
-        { /** Lista de las tarjetas de los cursos */}
-        <div className='row mt-5 g-4' >
-          <Tarjeta/>
-        </div>
+        {/** Tabla */}
+        <A_Tabla/>
 
+
+        { /** Lista de las tarjetas de los cursos 
+        <div className='row mt-3 row-cols-auto g-3 mx-auto' >
+          {
+            cantCursos.map((curso) => {
+              return (
+              <>
+              <Tarjeta key={curso.idCurso} curso={curso} />
+              </>)
+            })
+          }
+        </div>
+      */}
         <div className="modal fade" id="agregarCursoModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
             <div className="modal-content">

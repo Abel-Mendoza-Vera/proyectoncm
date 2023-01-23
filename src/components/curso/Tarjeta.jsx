@@ -1,35 +1,8 @@
-import Swal from "sweetalert2"
 import imgCurso from '../../assets/curso.jpg'
 
-const Tarjeta = () => {
+const Tarjeta = ({curso}) => {
 
-    const alertaEliminar = () => {
-
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success mx-2',
-                cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-        })
-
-        swalWithBootstrapButtons.fire({
-            title: 'Eliminar curso',
-            text: "¿Esta seguro de querer eliminar el curso?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Si, eliminalo'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Eliminar curso",
-                    text: "El curso a sido eliminado correctamente",
-                    icon: 'success'
-                }
-                )
-            }
-        })
-    }
+    const identificador = `curso${curso.idCurso}`
 
     return (
         < div className='col' >
@@ -40,8 +13,8 @@ const Tarjeta = () => {
                     <p className="card-text text-end text-danger"><strong>Precio</strong></p>
 
                     <p className="card-text">
-                        Descripción del curso Descripción del curso Descripción del curso Descripción del curso<span className="collapse" id="collapseExample" >Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso </span>
-                        <a className="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Descripción del curso Descripción del curso Descripción del curso Descripción del curso<span className="collapse" id={identificador} >Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso Descripción del curso </span>
+                        <a className="btn btn-primary" data-bs-toggle="collapse" href={`#${identificador}`} role="button" aria-expanded="false" aria-controls="collapseExample">
                             Ver más
                         </a>
 

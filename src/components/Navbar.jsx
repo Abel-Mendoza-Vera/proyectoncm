@@ -3,8 +3,8 @@ import logo from '../assets/logo.png'
 
 const Navbar = () => {
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
-            <div className="container-fluid">
+        <nav className="navbar navbar-expand-lg  bg-ligth">
+            <div className="container-fluid shadow">
                 <Link to="/" className="navbar-brand" >
                     <img src={logo} alt="Logo de Novatec Consultores Mexico" height='35' />
                 </Link>
