@@ -57,6 +57,7 @@ export const useCursoStore = create((set) => ({
             idVideo: 0,
             idMiniatura: 0
         },
+
     ],
 
     

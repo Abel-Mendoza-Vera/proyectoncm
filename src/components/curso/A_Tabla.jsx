@@ -1,40 +1,67 @@
+import { useState } from "react"
 import { useCursoStore } from "../../store/cursoStore"
-import {shallow} from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 import A_Registro from "./A_Registro"
 
 const A_Tabla = () => {
 
-    const {cursos} = useCursoStore((state) => ({
+    const { cursos } = useCursoStore((state) => ({
         cursos: state.cursos
     }), shallow)
 
-    return (
-        <div className="overflow-y-auto" style={{ height: "525px" }} >
-            <table className='table table-hover mt-4'>
-                <thead style={{ backgroundColor: "#274A93", color: "white" }}>
-                    <tr>
-                        <th>Id</th>
-                        <th>Curso</th>
-                        <th>Objetivo</th>
-                        <th>Precio</th>
-                        <th>Duración</th>
-                        <th>Estatus</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
+    let listaCursos = cursos
+    const [buscador, setBuscador] = useState("")
 
-                <tbody className='table-group-divider' >
-                    {
-                        cursos.map((curso) => {
-                            return (
-                                <A_Registro key={curso.idCurso} curso={curso} />
-                            )
-                        })
-                        
-                    }
-                </tbody>
-            </table>
-        </div>
+    const handleChange = (e) => {
+        setBuscador(e.target.value)
+        console.log(buscador)
+    }
+
+    if ( !buscador ){
+        listaCursos = cursos
+    }
+    else{
+        listaCursos = cursos.filter( ( curso ) => curso.nombre.toLowerCase().includes(buscador.toLowerCase()) )
+    }
+
+    return (
+        <>
+            <div className="row mt-3 justify-content-end">
+                <div className='col-6'>
+                    <div className="input-group">
+                        <input value={buscador} onChange={(e) => handleChange(e)} className='form-control' placeholder='Buscar' type="search" name="buscador" />
+                        <span className='input-group-text material-icons'>search</span>
+                    </div>
+                </div>
+            </div>
+
+            <div className="overflow-y-auto" style={{ height: "525px" }} >
+                <table id="datosCurso" className='table table-hover mt-4'>
+                    <thead style={{ backgroundColor: "#274A93", color: "white" }}>
+                        <tr>
+                            <th>Id</th>
+                            <th>Curso</th>
+                            <th>Objetivo</th>
+                            <th>Precio</th>
+                            <th>Duración</th>
+                            <th>Estatus</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody className='table-group-divider' >
+                        {
+                            listaCursos.map((curso) => {
+                                return (
+                                    <A_Registro key={curso.idCurso} curso={curso} />
+                                )
+                            })
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </>
     )
 }
 

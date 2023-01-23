@@ -44,8 +44,7 @@ const Formulario = () => {
         <>
 
             { /** Boton para mostrar el modal */}
-
-            <input className='form-control' placeholder='Buscar' type="search" name="buscar" />
+            <button className='btn btn-outline-success' data-bs-toggle="modal" data-bs-target="#agregarCursoModal" ><span className="material-icons">add</span>Agregar</button>
 
             {/** Modal - Formulario */}
             <div className="modal fade" id="agregarCursoModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
