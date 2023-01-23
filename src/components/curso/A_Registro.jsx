@@ -1,6 +1,12 @@
 import Swal from "sweetalert2"
+import { useCursoStore } from "../../store/cursoStore"
 
 const A_Registro = ( { curso } ) => {
+
+    const { deleteCurso, activeCurso } = useCursoStore((state) => ({
+        deleteCurso: state.deleteCurso,
+        activeCurso: state.activeCurso
+    }))
 
     const alertaEliminar = () => {
         const swalWithBootstrapButtons = Swal.mixin({
@@ -19,6 +25,8 @@ const A_Registro = ( { curso } ) => {
             confirmButtonText: 'Si, eliminalo'
         }).then((result) => {
             if (result.isConfirmed) {
+                deleteCurso(curso.idCurso)
+
                 Swal.fire({
                     title: "Eliminar curso",
                     text: "El curso a sido eliminado correctamente",
@@ -37,18 +45,21 @@ const A_Registro = ( { curso } ) => {
             <td>$ {curso.precio} MXN</td>
             <td>{curso.duracion} horas</td>
             <td>
-                <div className='form-check form-switch'>
-                    {
-                        curso.estatus == 0 ?
-                            (<><input className="form-check-input" disabled type="checkbox" role="switch" id={`curso${curso.idCurso}`} /></>)
-                            :
-                            (<><input className="form-check-input" disabled type="checkbox" role="switch" id={`curso${curso.idCurso}`} checked /></>)
-                    }
-                </div>
+                {
+                    curso.estatus == 1 ? 
+                    <span className="material-icons text-success">toggle_on</span>
+                    :
+                    <span className="material-icons text-danger">toggle_off</span>
+                }
             </td>
             <td>
                 <button className='btn btn-primary btn-sm me-2'><span className='material-icons'>edit</span></button>
-                <button className='btn btn-danger btn-sm' onClick={alertaEliminar}><span className='material-icons'>delete</span></button>
+                {
+                    curso.estatus == 1 ?
+                    <button className='btn btn-danger btn-sm' onClick={alertaEliminar}><span className='material-icons'>delete</span></button>
+                    :
+                    <button className='btn btn-success btn-sm' onClick={() => activeCurso(curso.idCurso)}><span className='material-icons'>power_settings_new</span></button>
+                }
             </td>
         </tr>
     )

@@ -1,6 +1,34 @@
 import Swal from "sweetalert2"
+import { useState } from "react"
+import { useCursoStore } from "../../store/cursoStore"
 
 const Formulario = () => {
+
+    const addCurso = useCursoStore((state) => state.addCurso)
+
+    const [formulario, setFormulario] = useState({
+        nombre: "",
+        precio: 0,
+        objetivos: "",
+        descripcion: "",
+        duracion: 0, 
+        idVideo: 0,
+        idMiniatura: 0
+    })
+
+    const { nombre, precio, objetivos, descripcion, duracion, idVideo, idMiniatura } = formulario
+
+    const handleChange = (e) => {
+        setFormulario({
+            ...formulario,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    const handleAdd = () => {
+        addCurso(102, nombre, precio, 1, descripcion, objetivos, duracion, idVideo, idMiniatura)
+        alerta()
+    }
 
     const alerta = () => {
         Swal.fire({
@@ -30,23 +58,28 @@ const Formulario = () => {
                         <div className="modal-body">
 
                             <div className="form-floating mb-3">
-                                <input type="text" className="form-control" id="nombre" name='nombre' placeholder="" />
+                                <input type="text" onChange={(e) => handleChange(e)} value={nombre} className="form-control" name='nombre' placeholder="" />
                                 <label htmlFor="nombre">Nombre</label>
                             </div>
 
                             <div className="form-floating mb-3">
-                                <input type="number" min='1' className="form-control" id="precio" name='precio' placeholder="" />
+                                <input type="number"  onChange={(e) => handleChange(e)} value={precio} min='1' className="form-control" name='precio' placeholder="" />
                                 <label htmlFor="precio">Precio</label>
                             </div>
 
                             <div className="form-floating mb-3">
-                                <textarea className="form-control" placeholder="" id="objetivos" rows='3' style={{ height: "100px" }} ></textarea>
+                                <textarea className="form-control"  onChange={(e) => handleChange(e)} value={objetivos} placeholder="" name="objetivos" rows='3' style={{ height: "100px" }} ></textarea>
                                 <label htmlFor="objetivos">Objetivos</label>
                             </div>
 
                             <div className="form-floating mb-3">
-                                <textarea className="form-control" placeholder="" id="descripcion" rows='3' style={{ height: "100px" }} ></textarea>
+                                <textarea className="form-control"  onChange={(e) => handleChange(e)} value={descripcion} placeholder="" name="descripcion" rows='3' style={{ height: "100px" }} ></textarea>
                                 <label htmlFor="descripcion">Descripción</label>
+                            </div>
+
+                            <div className="form-floating mb-3">
+                                <input type="number"  onChange={(e) => handleChange(e)} value={duracion} min='1' className="form-control" name='duracion' placeholder="" />
+                                <label htmlFor="duracion">Duración del curso</label>
                             </div>
 
                             <div className="mb-3">
@@ -62,7 +95,7 @@ const Formulario = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-danger" data-bs-dismiss="modal"><span className='material-icons'>close</span>Cerrar</button>
-                            <button type="button" className="btn btn-success" onClick={alerta} data-bs-dismiss="modal" ><span className='material-icons'>save</span> Guardar</button>
+                            <button type="button" className="btn btn-success" onClick={handleAdd} data-bs-dismiss="modal" ><span className='material-icons'>save</span> Guardar</button>
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,12 @@
 import { useCursoStore } from "../../store/cursoStore"
+import {shallow} from 'zustand/shallow'
 import A_Registro from "./A_Registro"
 
 const A_Tabla = () => {
 
-    const cursos = useCursoStore((state) => state.cursos)
+    const {cursos} = useCursoStore((state) => ({
+        cursos: state.cursos
+    }), shallow)
 
     return (
         <div className="overflow-y-auto" style={{ height: "525px" }} >
@@ -27,6 +30,7 @@ const A_Tabla = () => {
                                 <A_Registro key={curso.idCurso} curso={curso} />
                             )
                         })
+                        
                     }
                 </tbody>
             </table>
