@@ -1,12 +1,12 @@
 import Swal from "sweetalert2"
-import { useCursoStore } from "../../store/cursoStore"
+import { useLeccionStore } from "../../store/leccionStore"
 import { Link } from "react-router-dom"
 
-const A_Registro = ( { curso } ) => {
+const A_RegistroLeccion = ( { leccion } ) => {
 
-    const { deleteCurso, activeCurso } = useCursoStore((state) => ({
-        deleteCurso: state.deleteCurso,
-        activeCurso: state.activeCurso
+    const { deleteLeccion, activeLeccion } = useLeccionStore((state) => ({
+        deleteLeccion: state.deleteLeccion,
+        activeLeccion: state.activeLeccion
     }))
 
     const alertaEliminar = () => {
@@ -19,18 +19,18 @@ const A_Registro = ( { curso } ) => {
         })
 
         swalWithBootstrapButtons.fire({
-            title: 'Eliminar curso',
-            text: "¿Esta seguro de querer eliminar el curso?",
+            title: 'Eliminar leccion',
+            text: "¿Esta seguro de querer eliminar la leccion?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Si, eliminalo'
         }).then((result) => {
             if (result.isConfirmed) {
-                deleteCurso(curso.idCurso)
+                deleteLeccion(leccion.idLeccion)
 
                 Swal.fire({
-                    title: "Eliminar curso",
-                    text: "El curso a sido eliminado correctamente",
+                    title: "Eliminar leccion",
+                    text: "La leccion a sido eliminado correctamente",
                     icon: 'success'
                 }
                 )
@@ -40,30 +40,27 @@ const A_Registro = ( { curso } ) => {
 
     return (
         <tr >
-            <td>{curso.idCurso}</td>
-            <td>{curso.nombre}</td>
-            <td>{curso.objetivos}</td>
-            <td>$ {curso.precio} MXN</td>
-            <td>{curso.duracion} horas</td>
+            <td>{leccion.idLeccion}</td>
+            <td>{leccion.nombre}</td>
             <td>
                 {
-                    curso.estatus == 1 ? 
+                    leccion.estatus == 1 ? 
                     <span className="material-icons text-success">toggle_on</span>
                     :
                     <span className="material-icons text-danger">toggle_off</span>
                 }
             </td>
             <td>
-                <Link to='/admin/cursos_editar' className='btn btn-primary btn-sm me-2'><span className='material-icons'>edit</span> </Link>
+                <Link to='/admin/lecciones' className='btn btn-primary btn-sm me-2'><span className='material-icons'>edit</span> </Link>
                 {
-                    curso.estatus == 1 ?
+                    leccion.estatus == 1 ?
                     <button className='btn btn-danger btn-sm' onClick={alertaEliminar}><span className='material-icons'>delete</span></button>
                     :
-                    <button className='btn btn-success btn-sm' onClick={() => activeCurso(curso.idCurso)}><span className='material-icons'>power_settings_new</span></button>
+                    <button className='btn btn-success btn-sm' onClick={() => activeLeccion(leccion.idLeccion)}><span className='material-icons'>power_settings_new</span></button>
                 }
             </td>
         </tr>
     )
 }
 
-export default A_Registro
+export default A_RegistroLeccion
