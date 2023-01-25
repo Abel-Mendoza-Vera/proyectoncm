@@ -4,7 +4,7 @@ import A_Cursos from '../pages/admin/A_Cursos'
 import A_CursosEditar from '../pages/admin/A_CursosEditar'
 import A_Lecciones from '../pages/admin/A_Lecciones'
 import A_Cuestionarios from '../pages/admin/A_Cuestionarios'
-
+import Home from'../pages/Home'
 
 const Enrutador = () => {
     return (
@@ -14,7 +14,7 @@ const Enrutador = () => {
 
             <Routes>
                 {/* Vista general */}
-                <Route path='/' element={ <><h1>Inicio</h1></> } />
+                <Route path='/' element={ <Home/> } />
 
                 {/* Ruta para el inicio de sesion */}
                 <Route path='/iniciar_sesion' element={ <><h1>Login</h1></> } />
