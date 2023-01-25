@@ -102,7 +102,4 @@ export const useCursoStore = create((set) => ({
         })
     })),
 
-
-
-
 }))
