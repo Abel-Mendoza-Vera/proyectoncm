@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import axios from "axios";
+import { urlCursos } from '../api/rutas.api'
 
 export const useCursoStore = create((set) => ({
 
     cursos: [],
 
     getCursos: async () => {
-        const response = await axios.get("http://localhost:3000/api/curso")
+        const response = await axios.get(urlCursos)
 
         if ( response.status == 200 ) {
             set({ cursos : response.data })
@@ -16,44 +17,64 @@ export const useCursoStore = create((set) => ({
         }
     },
     
-    addCurso: (
-        nombre, precio, estatus, descripcion, objetivos, duracion, idVideo, idMiniatura
-        ) => set((state) => ({
-        cursos: [
-            ...state.cursos,
-            {
-                nombre: nombre,
-                precio: precio,
-                estatus: estatus,
-                descripcion: descripcion,
-                objetivos: objetivos,
-                duracion: duracion,
-                idVideo: idVideo,
-                idMiniatura: idMiniatura
-            }
-        ]
-    })),
+    saveCurso: async (
+        nombre, precio, descripcion, objetivos, duracion
+        ) => {
 
-    deleteCurso: (id) => set((state) => ({
-        cursos: state.cursos.map((curso) => {
+            const response = await axios.post(urlCursos, 
+                {
+                    nombre: nombre, 
+                    objetivos: objetivos,
+                    descripcion: descripcion,
+                    precio: precio,
+                    duracion: duracion,
+                    idVideo: 0,
+                    idMiniatura: 0
+                })
             
-            if(curso.idCurso == id){
-                curso.estatus = 0
+            if ( response.status != 500 ){
+                set((state) => ({ cursos: [ ...state.cursos, response.data ] }))
             }
+            return response.status
 
-            return curso
-        })
-    })),
+        },
 
-    activeCurso: (id) => set((state) => ({
-        cursos: state.cursos.map((curso) => {
-            
-            if(curso.idCurso == id){
-                curso.estatus = 1
-            }
+    deleteCurso: async (id) => {
 
-            return curso
-        })
-    })),
+        const response = await axios.delete(`${urlCursos}/${id}/0`)
+
+        if(response.status == 204){
+            set((state) => ({
+                cursos: state.cursos.map((curso) => {
+                    
+                    if(curso.idCurso == id){
+                        curso.estatus = 0
+                    }
+                    return curso
+                })
+            }))
+        }
+
+        return response.status;
+
+    },
+
+    activeCurso: async (id) => {
+        const response = await axios.delete(`${urlCursos}/${id}/1`)
+
+        if(response.status == 204){
+            set((state) => ({
+                cursos: state.cursos.map((curso) => {
+                    
+                    if(curso.idCurso == id){
+                        curso.estatus = 1
+                    }
+                    return curso
+                })
+            }))
+        }
+
+        return response.status;
+    },
 
 }))

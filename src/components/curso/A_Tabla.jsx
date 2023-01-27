@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { useCursoStore } from "../../store/cursoStore"
-import { useLeccionStore } from '../../store/leccionStore'
 import { shallow } from 'zustand/shallow'
 import A_Registro from "./A_Registro"
 
@@ -15,7 +14,6 @@ const A_Tabla = () => {
 
     const handleChange = (e) => {
         setBuscador(e.target.value)
-        console.log(buscador)
     }
 
     if ( !buscador ){
@@ -36,7 +34,7 @@ const A_Tabla = () => {
                 </div>
             </div>
 
-            <div className="overflow-y-auto" style={{ height: "525px" }} >
+            <div className="overflow-y-auto" style={{ height: "500px" }} >
                 <table id="datosCurso" className='table table-hover mt-4'>
                     <thead style={{ backgroundColor: "#274A93", color: "white" }}>
                         <tr>

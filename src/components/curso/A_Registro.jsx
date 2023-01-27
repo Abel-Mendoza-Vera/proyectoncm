@@ -2,7 +2,7 @@ import Swal from "sweetalert2"
 import { useCursoStore } from "../../store/cursoStore"
 import { Link } from "react-router-dom"
 
-const A_Registro = ( { curso } ) => {
+const A_Registro = ({ curso }) => {
 
     const { deleteCurso, activeCurso } = useCursoStore((state) => ({
         deleteCurso: state.deleteCurso,
@@ -24,18 +24,74 @@ const A_Registro = ( { curso } ) => {
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Si, eliminalo'
-        }).then((result) => {
+        }).then( async (result) => {
             if (result.isConfirmed) {
-                deleteCurso(curso.idCurso)
 
-                Swal.fire({
-                    title: "Eliminar curso",
-                    text: "El curso a sido eliminado correctamente",
-                    icon: 'success'
+                const status = await deleteCurso(curso.idCurso)
+                console.log(status);
+
+                if (status == 204) {
+                    Swal.fire({
+                        title: "Eliminar curso",
+                        text: "El curso ha sido eliminado correctamente",
+                        icon: 'success',
+                        timer: 1500,
+                        timerProgressBar: true
+                    })
                 }
-                )
+                if ( status == 400 ){
+                    Swal.fire({
+                        title: "Eliminar curso",
+                        text: "No se ha encontrado el curso",
+                        icon: 'warning',
+                        timer: 1500,
+                        timerProgressBar: true
+                    })
+                }
+                if (status == 500){
+                    Swal.fire({
+                        title: "Eliminar curso",
+                        text: "Ha ocurrido un error al momento de eliminar un curso",
+                        icon: 'error',
+                        timer: 1500,
+                        timerProgressBar: true
+                    })
+                }
             }
         })
+    }
+
+    const alertaActivar = async () => {
+        const status = await activeCurso(curso.idCurso)
+        console.log(status);
+
+        if (status == 204) {
+            Swal.fire({
+                title: "Activar curso",
+                text: "El curso ha sido activado correctamente",
+                icon: 'success',
+                timer: 1500,
+                timerProgressBar: true
+            })
+        }
+        if ( status == 400 ){
+            Swal.fire({
+                title: "Activar curso",
+                text: "No se ha encontrado el curso",
+                icon: 'warning',
+                timer: 1500,
+                timerProgressBar: true
+            })
+        }
+        if (status == 500){
+            Swal.fire({
+                title: "Activar curso",
+                text: "Ha ocurrido un error al momento de activar un curso",
+                icon: 'error',
+                timer: 1500,
+                timerProgressBar: true
+            })
+        }
     }
 
     return (
@@ -48,19 +104,19 @@ const A_Registro = ( { curso } ) => {
             <td>{curso.duracion} horas</td>
             <td>
                 {
-                    curso.estatus == 1 ? 
-                    <span className="material-icons text-success">toggle_on</span>
-                    :
-                    <span className="material-icons text-danger">toggle_off</span>
+                    curso.estatus == 1 ?
+                        <span className="material-icons text-success">toggle_on</span>
+                        :
+                        <span className="material-icons text-danger">toggle_off</span>
                 }
             </td>
             <td>
                 <Link to='/admin/cursos_editar' className='btn btn-primary btn-sm me-2'><span className='material-icons'>edit</span> </Link>
                 {
                     curso.estatus == 1 ?
-                    <button className='btn btn-danger btn-sm' onClick={alertaEliminar}><span className='material-icons'>delete</span></button>
-                    :
-                    <button className='btn btn-success btn-sm' onClick={() => activeCurso(curso.idCurso)}><span className='material-icons'>power_settings_new</span></button>
+                        <button className='btn btn-danger btn-sm' onClick={alertaEliminar}><span className='material-icons'>delete</span></button>
+                        :
+                        <button className='btn btn-success btn-sm' onClick={alertaActivar}><span className='material-icons'>power_settings_new</span></button>
                 }
             </td>
         </tr>

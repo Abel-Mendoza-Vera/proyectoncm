@@ -1,6 +1,11 @@
 import { useState } from "react"
+import Swal from "sweetalert2"
+
+import { useCursoStore } from "../../store/cursoStore"
 
 const Formulario = () => {
+
+    const saveCurso = useCursoStore((state) => state.saveCurso)
 
     // obtener datos del formulario
     const [formulario, setFormulario] = useState({
@@ -20,10 +25,31 @@ const Formulario = () => {
         })
     }
 
-    // obtener archivos
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        
+    const handleSave = async () => {
+        const status = await saveCurso( nombre, precio, descripcion, objetivos, duracion )
+        alerta(status)
+    }
+
+    const alerta = (status) => {
+        if ( status == 200 ) {
+            Swal.fire({
+                title: "Guardar curso",
+                text: "El curso se ha guardado correctamente",
+                icon: "success",
+                timer: 1500,
+                timerProgressBar: true,
+
+            })
+        }
+        else{
+            Swal.fire({
+                title: "Guardar curso",
+                text: "Ha ocurrio un error al momento de guardar un curso",
+                icon: "error",
+                timer: 1500,
+                timerProgressBar: true,
+            })
+        }
     }
 
 
@@ -43,40 +69,36 @@ const Formulario = () => {
                         </div>
                         <div className="modal-body">
 
+                            <div className="form-floating mb-3">
+                                <input type="text" onChange={(e) => handleChange(e)} value={nombre} className="form-control" name='nombre' placeholder="" />
+                                <label htmlFor="nombre">Nombre</label>
+                            </div>
 
-                            <form onSubmit={handleSubmit} >
-                                <div className="form-floating mb-3">
-                                    <input type="text" onChange={(e) => handleChange(e)} value={nombre} className="form-control" name='nombre' placeholder="" />
-                                    <label htmlFor="nombre">Nombre</label>
-                                </div>
+                            <div className="form-floating mb-3">
+                                <input type="number" onChange={(e) => handleChange(e)} value={precio} min='1' className="form-control" name='precio' placeholder="" />
+                                <label htmlFor="precio">Precio</label>
+                            </div>
 
-                                <div className="form-floating mb-3">
-                                    <input type="number" onChange={(e) => handleChange(e)} value={precio} min='1' className="form-control" name='precio' placeholder="" />
-                                    <label htmlFor="precio">Precio</label>
-                                </div>
+                            <div className="form-floating mb-3">
+                                <textarea className="form-control" onChange={(e) => handleChange(e)} value={objetivos} placeholder="" name="objetivos" rows='3' style={{ height: "100px" }} ></textarea>
+                                <label htmlFor="objetivos">Objetivos</label>
+                            </div>
 
-                                <div className="form-floating mb-3">
-                                    <textarea className="form-control" onChange={(e) => handleChange(e)} value={objetivos} placeholder="" name="objetivos" rows='3' style={{ height: "100px" }} ></textarea>
-                                    <label htmlFor="objetivos">Objetivos</label>
-                                </div>
+                            <div className="form-floating mb-3">
+                                <textarea className="form-control" onChange={(e) => handleChange(e)} value={descripcion} placeholder="" name="descripcion" rows='3' style={{ height: "100px" }} ></textarea>
+                                <label htmlFor="descripcion">Descripción</label>
+                            </div>
 
-                                <div className="form-floating mb-3">
-                                    <textarea className="form-control" onChange={(e) => handleChange(e)} value={descripcion} placeholder="" name="descripcion" rows='3' style={{ height: "100px" }} ></textarea>
-                                    <label htmlFor="descripcion">Descripción</label>
-                                </div>
-
-                                <div className="form-floating mb-3">
-                                    <input type="number" onChange={(e) => handleChange(e)} value={duracion} min='1' className="form-control" name='duracion' placeholder="" />
-                                    <label htmlFor="duracion">Duración del curso</label>
-                                </div>
+                            <div className="form-floating mb-3">
+                                <input type="number" onChange={(e) => handleChange(e)} value={duracion} min='1' className="form-control" name='duracion' placeholder="" />
+                                <label htmlFor="duracion">Duración del curso</label>
+                            </div>
 
 
-                                <div className="d-flex justify-content-evenly">
-                                    <button type="button" className="btn btn-danger" data-bs-dismiss="modal"><span className='material-icons'>close</span>Cerrar</button>
-                                    <button type="submit" className="btn btn-success" data-bs-dismiss="modal"><span className='material-icons'>save</span> Guardar</button>
-                                </div>
-
-                            </form>
+                            <div className="d-flex justify-content-evenly">
+                                <button type="button" className="btn btn-danger" data-bs-dismiss="modal"><span className='material-icons'>close</span>Cerrar</button>
+                                <button onClick={handleSave} type="submit" className="btn btn-success" data-bs-dismiss="modal"><span className='material-icons'>save</span>Guardar</button>
+                            </div>
 
                         </div>
 

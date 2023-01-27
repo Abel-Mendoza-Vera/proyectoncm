@@ -34,37 +34,37 @@ const Nosotros = () => {
             </div>
 
 
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col">
+            <div className="row row-cols-1 row-cols-md-3 g-4">
+                <div className="col">
                     <div className='card' style={{ width: "20rem" }}>
-                        <img src={Mision} class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Misión</h5>
-                            <p class="card-text">Creemos firmemente en la felicidad como motor y potenciador de creatividad y la efectividad en las organizaciones.</p>
-                            <a href="http://novatec-consultores.com/acerca/ " target="_blank" class="btn btn-outline-info">Ver Más</a>
+                        <img src={Mision} className="card-img-top" alt="..." />
+                        <div className="card-body">
+                            <h5 className="card-title text-center">Misión</h5>
+                            <p className="card-text">Creemos firmemente en la felicidad como motor y potenciador de creatividad y la efectividad en las organizaciones.</p>
+                            <a href="http://novatec-consultores.com/acerca/ " target="_blank" className="btn btn-outline-info">Ver Más</a>
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <div className="col">
                     <div className='card' style={{ width: "20rem" }}>
-                        <img src={Vision} class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Visión</h5>
-                            <p class="card-text ">Ser el punto de convergencia entre la creatividad, felicidad y efectividad que necesitan las organizaciones y los seres humanos hoy en día.</p>
-                            <a href="http://novatec-consultores.com/acerca/ " target="_blank" class="btn btn-outline-info">Ver Más</a>
+                        <img src={Vision} className="card-img-top" alt="..." />
+                        <div className="card-body">
+                            <h5 className="card-title text-center">Visión</h5>
+                            <p className="card-text ">Ser el punto de convergencia entre la creatividad, felicidad y efectividad que necesitan las organizaciones y los seres humanos hoy en día.</p>
+                            <a href="http://novatec-consultores.com/acerca/ " target="_blank" className="btn btn-outline-info">Ver Más</a>
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <div className="col">
                     <div className='card' style={{ width: "20rem" }}>
-                        <img src={Valores} class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Valores</h5>
-                            <p class="card-text">Vivimos y Creemos en:
+                        <img src={Valores} className="card-img-top" alt="..." />
+                        <div className="card-body">
+                            <h5 className="card-title text-center">Valores</h5>
+                            <p className="card-text">Vivimos y Creemos en:
                                 <li>Felicidad</li>
                                 <li>Liderazgo</li>
                                 <li>Comunidad</li></p>
-                            <a href="http://novatec-consultores.com/acerca/ " target="_blank" class="btn btn-outline-info">Ver Más</a>
+                            <a href="http://novatec-consultores.com/acerca/ " target="_blank" className="btn btn-outline-info">Ver Más</a>
                         </div>
                     </div>
                 </div>

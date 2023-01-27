@@ -4,9 +4,9 @@ const Us = () => {
 
   return (
     <>
-      
-            <Nosotros/>
-         
+
+      <Nosotros />
+
     </>
   )
 }
