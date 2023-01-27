@@ -109,7 +109,7 @@ const A_Registro = ({ curso }) => {
                 }
             </td>
             <td>
-                <Link to='/admin/cursos_editar' className='btn btn-primary btn-sm me-2'><span className='material-icons'>edit</span> </Link>
+                <Link to={`/admin/cursos_editar/${curso.idCurso}`} className='btn btn-primary btn-sm me-2'><span className='material-icons'>edit</span></Link>
                 {
                     curso.estatus == 1 ?
                         <button className='btn btn-danger btn-sm' onClick={alertaEliminar}><span className='material-icons'>delete</span></button>

@@ -27,7 +27,7 @@ const Enrutador = () => {
                 {/* Rutas administrativas */}
                 <Route path='/admin/*' >
                     <Route path='cursos' element={ <A_Cursos/> } />
-                    <Route path='cursos_editar' element={ <A_CursosEditar/> } />
+                    <Route path='cursos_editar/:cursoId' element={ <A_CursosEditar/> } />
                     <Route path='lecciones' element={<h1>Lecciones</h1> } />
                     <Route path='cuestionarios' element={ <h1>Cuestionarios</h1> } />
                     <Route path='preguntas' element={ <><h1>Preguntas</h1></> } />

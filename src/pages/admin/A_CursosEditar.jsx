@@ -1,5 +1,16 @@
+import { useParams } from "react-router-dom"
+import { shallow } from "zustand/shallow"
+import { useCursoStore } from "../../store/cursoStore"
 
 const A_CursosEditar = () => {
+
+  let { cursoId } = useParams()
+
+  const { cursos } = useCursoStore((state) => ({
+    cursos: state.cursos
+  }),shallow)
+
+  const curso = cursos.find((curso, index) => curso.idCurso == cursoId)
 
   return (
     <>
@@ -13,13 +24,13 @@ const A_CursosEditar = () => {
         {/** Información del curso */}
         <div className="row mt-3">
           <div className="col-8">
-            <h3><strong>Desarrollo personal</strong></h3>
-            <h5 className="text-end text-danger">$ 500.00 MXN</h5>
-            <p><strong>Duración:</strong> 40 horas</p>
+            <h3><strong>{curso.nombre}</strong></h3>
+            <h5 className="text-end text-danger">$ {curso.precio} MXN</h5>
+            <p><strong>Duración:</strong> {curso.duracion} horas</p>
             <p><strong>Objetivo:</strong></p>
-            <p>Mauris non nisl nibh. Pellentesque eget nunc eu sem eleifend accumsan.</p>
+            <p>{curso.objetivos}</p>
             <p><strong>Descripción:</strong></p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan ut felis rutrum sagittis. Sed faucibus ligula mollis scelerisque consectetur. Vivamus vestibulum fringilla ipsum vestibulum ornare. Aenean consequat, nisi et vehicula condimentum, neque magna bibendum ipsum, vitae aliquet dolor lectus ut purus. Fusce sem tellus, mattis iaculis finibus eu, mattis dictum purus. Suspendisse tempus bibendum leo eget rutrum. Donec eget tincidunt velit.</p>
+            <p>{curso.descripcion}</p>
 
           </div>
           <div className="col-4">
