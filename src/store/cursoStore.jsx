@@ -1,29 +1,32 @@
 import { create } from "zustand";
+import { persist } from 'zustand/middleware'
 import axios from "axios";
 import { urlCursos } from '../api/rutas.api'
 
-export const useCursoStore = create((set) => ({
+export const useCursoStore = create(persist(
 
-    cursos: [],
+    (set, get) => ({
 
-    getCursos: async () => {
-        const response = await axios.get(urlCursos)
+        cursos: [],
 
-        if ( response.status == 200 ) {
-            set({ cursos : response.data })
-        }
-        else{
-            set({ cursos : [] })
-        }
-    },
-    
-    saveCurso: async (
-        nombre, precio, descripcion, objetivos, duracion
+        getCursos: async () => {
+            const response = await axios.get(urlCursos)
+
+            if (response.status == 200) {
+                set({ cursos: response.data })
+            }
+            else {
+                set({ cursos: [] })
+            }
+        },
+
+        saveCurso: async (
+            nombre, precio, descripcion, objetivos, duracion
         ) => {
 
-            const response = await axios.post(urlCursos, 
+            const response = await axios.post(urlCursos,
                 {
-                    nombre: nombre, 
+                    nombre: nombre,
                     objetivos: objetivos,
                     descripcion: descripcion,
                     precio: precio,
@@ -31,50 +34,65 @@ export const useCursoStore = create((set) => ({
                     idVideo: 0,
                     idMiniatura: 0
                 })
-            
-            if ( response.status != 500 ){
-                set((state) => ({ cursos: [ ...state.cursos, response.data ] }))
+
+            if (response.status != 500) {
+                set((state) => ({ cursos: [...state.cursos, response.data] }))
             }
             return response.status
 
         },
 
-    deleteCurso: async (id) => {
+        modifyCurso: async (id, nombre, precio, descripcion, objetivos, duracion) => {
+            const response = await axios.patch(`${urlCursos}/${id}`, {
+                nombre: nombre,
+                objetivos: objetivos,
+                descripcion: descripcion,
+                precio: precio,
+                duracion: duracion
+            })
+        },
 
-        const response = await axios.delete(`${urlCursos}/${id}/0`)
+        deleteCurso: async (id) => {
 
-        if(response.status == 204){
-            set((state) => ({
-                cursos: state.cursos.map((curso) => {
-                    
-                    if(curso.idCurso == id){
-                        curso.estatus = 0
-                    }
-                    return curso
-                })
-            }))
-        }
+            const response = await axios.delete(`${urlCursos}/${id}/0`)
 
-        return response.status;
+            if (response.status == 204) {
+                set((state) => ({
+                    cursos: state.cursos.map((curso) => {
 
-    },
+                        if (curso.idCurso == id) {
+                            curso.estatus = 0
+                        }
+                        return curso
+                    })
+                }))
+            }
 
-    activeCurso: async (id) => {
-        const response = await axios.delete(`${urlCursos}/${id}/1`)
+            return response.status;
 
-        if(response.status == 204){
-            set((state) => ({
-                cursos: state.cursos.map((curso) => {
-                    
-                    if(curso.idCurso == id){
-                        curso.estatus = 1
-                    }
-                    return curso
-                })
-            }))
-        }
+        },
 
-        return response.status;
-    },
+        activeCurso: async (id) => {
+            const response = await axios.delete(`${urlCursos}/${id}/1`)
 
-}))
+            if (response.status == 204) {
+                set((state) => ({
+                    cursos: state.cursos.map((curso) => {
+
+                        if (curso.idCurso == id) {
+                            curso.estatus = 1
+                        }
+                        return curso
+                    })
+                }))
+            }
+
+            return response.status;
+        },
+
+    }),
+
+    {
+        name: "curso-storage"
+    }
+))

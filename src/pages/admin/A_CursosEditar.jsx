@@ -1,16 +1,11 @@
 import { useParams } from "react-router-dom"
-import { shallow } from "zustand/shallow"
 import { useCursoStore } from "../../store/cursoStore"
 
 const A_CursosEditar = () => {
 
   let { cursoId } = useParams()
-
-  const { cursos } = useCursoStore((state) => ({
-    cursos: state.cursos
-  }),shallow)
-
-  const curso = cursos.find((curso, index) => curso.idCurso == cursoId)
+  let cursos = useCursoStore((state) => state.cursos)
+  let curso = cursos.find((item) => item.idCurso == cursoId)
 
   return (
     <>

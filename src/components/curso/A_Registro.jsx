@@ -1,8 +1,10 @@
 import Swal from "sweetalert2"
 import { useCursoStore } from "../../store/cursoStore"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const A_Registro = ({ curso }) => {
+
+    const navigate = useNavigate()
 
     const { deleteCurso, activeCurso } = useCursoStore((state) => ({
         deleteCurso: state.deleteCurso,
@@ -92,6 +94,10 @@ const A_Registro = ({ curso }) => {
         }
     }
 
+    const editar_curso = () => {
+        navigate(`/admin/cursos_editar/${curso.idCurso}`)
+    }
+
     return (
         <tr >
             <td>{curso.idCurso}</td>
@@ -109,7 +115,7 @@ const A_Registro = ({ curso }) => {
                 }
             </td>
             <td>
-                <Link to={`/admin/cursos_editar/${curso.idCurso}`} className='btn btn-primary btn-sm me-2'><span className='material-icons'>edit</span></Link>
+                <button className='btn btn-primary btn-sm me-2' onClick={editar_curso} ><span className='material-icons'>edit</span></button>
                 {
                     curso.estatus == 1 ?
                         <button className='btn btn-danger btn-sm' onClick={alertaEliminar}><span className='material-icons'>delete</span></button>
