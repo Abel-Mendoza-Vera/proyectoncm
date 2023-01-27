@@ -3,6 +3,8 @@ import Navbar from './Navbar'
 import A_Cursos from '../pages/admin/A_Cursos'
 import A_CursosEditar from '../pages/admin/A_CursosEditar'
 import Home from'../pages/Home'
+import Contac from '../pages/Contac'
+import Us from '../pages/Us'
 
 const Enrutador = () => {
     return (
@@ -13,6 +15,10 @@ const Enrutador = () => {
             <Routes>
                 {/* Vista general */}
                 <Route path='/' element={ <Home/> } />
+                <Route path='/pages/Contac' element={ <Contac/> } />
+                <Route path='/pages/Us' element={ <Us/> } />
+
+
 
                 {/* Ruta para el inicio de sesion */}
                 <Route path='/iniciar_sesion' element={ <><h1>Login</h1></> } />
