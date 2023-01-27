@@ -43,6 +43,7 @@ const A_Registro = ( { curso } ) => {
             <td>{curso.idCurso}</td>
             <td>{curso.nombre}</td>
             <td>{curso.objetivos}</td>
+            <td>{curso.descripcion}</td>
             <td>$ {curso.precio} MXN</td>
             <td>{curso.duracion} horas</td>
             <td>

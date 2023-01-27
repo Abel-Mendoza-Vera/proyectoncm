@@ -4,11 +4,7 @@ const Home = () => {
 
   return (
     <>
-      
-            <Inicio/>
-         
-        
-
+      <Inicio />
     </>
   )
 }

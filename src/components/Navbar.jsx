@@ -1,7 +1,28 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 
+// Se realiza la carga de todo el store
+import { useCursoStore } from '../store/cursoStore'
+import { useLeccionStore } from '../store/leccionStore'
+import { useArchivoStore } from '../store/archivoStore'
+import { useCuestionarioStore } from '../store/cuestionarioStore'
+
 const Navbar = () => {
+
+    const { getCursos } = useCursoStore((state) => ({ getCursos: state.getCursos }))
+    const { getLecciones } = useLeccionStore((state) => ({ getLecciones: state.getLecciones }))
+    const { getArchivos } = useArchivoStore((state) => ({ getArchivos: state.getArchivos }))
+    const { getCuestionarios } = useCuestionarioStore((state) => ({ getCuestionarios: state.getCuestionarios }))
+
+    useEffect(() => {
+        getCursos()
+        getLecciones()
+        getArchivos()
+        getCuestionarios()
+    }, [])
+    
+
     return (
         <nav className="navbar navbar-expand-lg  bg-ligth">
             <div className="container-fluid shadow">

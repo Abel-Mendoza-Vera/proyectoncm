@@ -2,8 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './Navbar'
 import A_Cursos from '../pages/admin/A_Cursos'
 import A_CursosEditar from '../pages/admin/A_CursosEditar'
-import A_Lecciones from '../pages/admin/A_Lecciones'
-import A_Cuestionarios from '../pages/admin/A_Cuestionarios'
 import Home from'../pages/Home'
 
 const Enrutador = () => {
@@ -24,8 +22,8 @@ const Enrutador = () => {
                 <Route path='/admin/*' >
                     <Route path='cursos' element={ <A_Cursos/> } />
                     <Route path='cursos_editar' element={ <A_CursosEditar/> } />
-                    <Route path='lecciones' element={<A_Lecciones/>   } />
-                    <Route path='cuestionarios' element={ <A_Cuestionarios/> } />
+                    <Route path='lecciones' element={<h1>Lecciones</h1> } />
+                    <Route path='cuestionarios' element={ <h1>Cuestionarios</h1> } />
                     <Route path='preguntas' element={ <><h1>Preguntas</h1></> } />
                     <Route path='empleados' element={ <><h1>Empleados</h1></> } />
                     <Route path='usuarios' element={ <><h1>Usuarios</h1></> } />

@@ -1,44 +1,31 @@
-import Swal from "sweetalert2"
 import { useState } from "react"
-import { useCursoStore } from "../../store/cursoStore"
 
 const Formulario = () => {
 
-    const addCurso = useCursoStore((state) => state.addCurso)
-
+    // obtener datos del formulario
     const [formulario, setFormulario] = useState({
         nombre: "",
-        precio: 0,
+        precio: 1,
         objetivos: "",
         descripcion: "",
-        duracion: 0, 
-        idVideo: 0,
-        idMiniatura: 0
+        duracion: 1
     })
 
-    const { nombre, precio, objetivos, descripcion, duracion, idVideo, idMiniatura } = formulario
+    const { nombre, precio, objetivos, descripcion, duracion } = formulario
 
     const handleChange = (e) => {
         setFormulario({
             ...formulario,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
-    const handleAdd = () => {
-        addCurso(102, nombre, precio, 1, descripcion, objetivos, duracion, idVideo, idMiniatura)
-        alerta()
+    // obtener archivos
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
     }
 
-    const alerta = () => {
-        Swal.fire({
-            title: "Guardar curso",
-            text: 'Curso guardado correctamente',
-            icon: 'success',
-            timer: 2000,
-            timerProgressBar: true
-        })
-    }
 
     return (
         <>
@@ -56,46 +43,43 @@ const Formulario = () => {
                         </div>
                         <div className="modal-body">
 
-                            <div className="form-floating mb-3">
-                                <input type="text" onChange={(e) => handleChange(e)} value={nombre} className="form-control" name='nombre' placeholder="" />
-                                <label htmlFor="nombre">Nombre</label>
-                            </div>
 
-                            <div className="form-floating mb-3">
-                                <input type="number"  onChange={(e) => handleChange(e)} value={precio} min='1' className="form-control" name='precio' placeholder="" />
-                                <label htmlFor="precio">Precio</label>
-                            </div>
+                            <form onSubmit={handleSubmit} >
+                                <div className="form-floating mb-3">
+                                    <input type="text" onChange={(e) => handleChange(e)} value={nombre} className="form-control" name='nombre' placeholder="" />
+                                    <label htmlFor="nombre">Nombre</label>
+                                </div>
 
-                            <div className="form-floating mb-3">
-                                <textarea className="form-control"  onChange={(e) => handleChange(e)} value={objetivos} placeholder="" name="objetivos" rows='3' style={{ height: "100px" }} ></textarea>
-                                <label htmlFor="objetivos">Objetivos</label>
-                            </div>
+                                <div className="form-floating mb-3">
+                                    <input type="number" onChange={(e) => handleChange(e)} value={precio} min='1' className="form-control" name='precio' placeholder="" />
+                                    <label htmlFor="precio">Precio</label>
+                                </div>
 
-                            <div className="form-floating mb-3">
-                                <textarea className="form-control"  onChange={(e) => handleChange(e)} value={descripcion} placeholder="" name="descripcion" rows='3' style={{ height: "100px" }} ></textarea>
-                                <label htmlFor="descripcion">Descripción</label>
-                            </div>
+                                <div className="form-floating mb-3">
+                                    <textarea className="form-control" onChange={(e) => handleChange(e)} value={objetivos} placeholder="" name="objetivos" rows='3' style={{ height: "100px" }} ></textarea>
+                                    <label htmlFor="objetivos">Objetivos</label>
+                                </div>
 
-                            <div className="form-floating mb-3">
-                                <input type="number"  onChange={(e) => handleChange(e)} value={duracion} min='1' className="form-control" name='duracion' placeholder="" />
-                                <label htmlFor="duracion">Duración del curso</label>
-                            </div>
+                                <div className="form-floating mb-3">
+                                    <textarea className="form-control" onChange={(e) => handleChange(e)} value={descripcion} placeholder="" name="descripcion" rows='3' style={{ height: "100px" }} ></textarea>
+                                    <label htmlFor="descripcion">Descripción</label>
+                                </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="video" className="form-label">Video introductorio del curso</label>
-                                <input className="form-control" type="file" id="video" />
-                            </div>
+                                <div className="form-floating mb-3">
+                                    <input type="number" onChange={(e) => handleChange(e)} value={duracion} min='1' className="form-control" name='duracion' placeholder="" />
+                                    <label htmlFor="duracion">Duración del curso</label>
+                                </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="miniatura" className="form-label">Miniatura del curso</label>
-                                <input className="form-control" type="file" id="miniatura" />
-                            </div>
+
+                                <div className="d-flex justify-content-evenly">
+                                    <button type="button" className="btn btn-danger" data-bs-dismiss="modal"><span className='material-icons'>close</span>Cerrar</button>
+                                    <button type="submit" className="btn btn-success" data-bs-dismiss="modal"><span className='material-icons'>save</span> Guardar</button>
+                                </div>
+
+                            </form>
 
                         </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-danger" data-bs-dismiss="modal"><span className='material-icons'>close</span>Cerrar</button>
-                            <button type="button" className="btn btn-success" onClick={handleAdd} data-bs-dismiss="modal" ><span className='material-icons'>save</span> Guardar</button>
-                        </div>
+
                     </div>
                 </div>
             </div>

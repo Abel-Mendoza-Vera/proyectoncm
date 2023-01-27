@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useCursoStore } from "../../store/cursoStore"
+import { useLeccionStore } from '../../store/leccionStore'
 import { shallow } from 'zustand/shallow'
 import A_Registro from "./A_Registro"
 
@@ -42,6 +43,7 @@ const A_Tabla = () => {
                             <th>Id</th>
                             <th>Curso</th>
                             <th>Objetivo</th>
+                            <th>Descripción</th>
                             <th>Precio</th>
                             <th>Duración</th>
                             <th>Estatus</th>
@@ -51,6 +53,11 @@ const A_Tabla = () => {
 
                     <tbody className='table-group-divider' >
                         {
+
+                            listaCursos.length == 0 ?
+
+                            (<tr><td colSpan='8' ><h2 className="text-center" ><strong>No hay cursos registrados</strong></h2></td></tr>):
+
                             listaCursos.map((curso) => {
                                 return (
                                     <A_Registro key={curso.idCurso} curso={curso} />

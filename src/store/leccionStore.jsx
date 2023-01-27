@@ -1,46 +1,22 @@
 import { create } from "zustand";
+import axios from "axios";
+import { urlLecciones } from '../api/rutas.api';
 
 export const useLeccionStore = create((set) => ({
-    lecciones: [
-        {
-            idLeccion: 1,
-            nombre: "Leccion 1",
-            estatus: 1,
-            descripcion: "En esta leccion aprenderas las bases para poder gobernarte a ti mismo, para que lleges a ser una persona mas decisiva en la vida",
-            idVideo: 0,
-        },
-        {
-            idLeccion: 2,
-            nombre: "Leccion 2",
-            estatus: 1,
-            descripcion: "En esta leccion aprenderas las bases para poder gobernarte a ti mismo, para que lleges a ser una persona mas decisiva en la vida",
-            idVideo: 0,
-        },
-        {
-            idLeccion: 3,
-            nombre: "Leccion 3",
-            estatus: 1,
-            descripcion: "En esta leccion aprenderas las bases para poder gobernarte a ti mismo, para que lleges a ser una persona mas decisiva en la vida",
-            idVideo: 0,
-        },
-        {
-            idLeccion: 4,
-            nombre: "Leccion 4",
-            estatus: 1,
-            descripcion: "En esta leccion aprenderas las bases para poder gobernarte a ti mismo, para que lleges a ser una persona mas decisiva en la vida",
-            idVideo: 0,
-        },
-        {
-            idLeccion: 5,
-            nombre: "Leccion 5",
-            estatus: 1,
-            descripcion: "En esta leccion aprenderas las bases para poder gobernarte a ti mismo, para que lleges a ser una persona mas decisiva en la vida",
-            idVideo: 0,
-        },
+    lecciones: [],
 
-    ],
+    getLecciones: async () => {
+        const response = await axios.get(urlLecciones)
 
-    
+        if(response.status == 200){
+            set({ lecciones : response.data })
+        }
+        else{
+            set({ lecciones : [] })
+        }
+
+    },
+
     addLeccion: (
         idLeccion, nombre,estatus, descripcion, idVideo, 
         ) => set((state) => ({

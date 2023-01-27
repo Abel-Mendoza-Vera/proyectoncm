@@ -1,73 +1,27 @@
 import { create } from "zustand";
+import axios from "axios";
 
 export const useCursoStore = create((set) => ({
-    cursos: [
-        {
-            idCurso: 1,
-            nombre: "Curso 1",
-            precio: 550,
-            estatus: 1,
-            descripcion: "En este curso aprenderas las bases para poder gobernarte a ti mismo, para que lleges a ser una persona mas decisiva en la vida",
-            objetivos: "Crecer personalmente",
-            duracion: 5,
-            idVideo: 0,
-            idMiniatura: 0
-        },
-        {
-            idCurso: 2,
-            nombre: "Curso 2",
-            precio: 550,
-            estatus: 0,
-            descripcion: "En este curso aprenderas las bases para poder gobernarte a ti mismo, para que lleges a ser una persona mas decisiva en la vida",
-            objetivos: "Crecer personalmente",
-            duracion: 5,
-            idVideo: 0,
-            idMiniatura: 0
-        },
-        {
-            idCurso: 3,
-            nombre: "Curso 3",
-            precio: 550,
-            estatus: 1,
-            descripcion: "En este curso aprenderas las bases para poder gobernarte a ti mismo, para que lleges a ser una persona mas decisiva en la vida",
-            objetivos: "Crecer personalmente",
-            duracion: 5,
-            idVideo: 0,
-            idMiniatura: 0
-        },
-        {
-            idCurso: 4,
-            nombre: "Curso 4",
-            precio: 550,
-            estatus: 1,
-            descripcion: "En este curso aprenderas las bases para poder gobernarte a ti mismo, para que lleges a ser una persona mas decisiva en la vida",
-            objetivos: "Crecer personalmente",
-            duracion: 5,
-            idVideo: 0,
-            idMiniatura: 0
-        },
-        {
-            idCurso: 5,
-            nombre: "Curso 5",
-            precio: 550,
-            estatus: 1,
-            descripcion: "En este curso aprenderas las bases para poder gobernarte a ti mismo, para que lleges a ser una persona mas decisiva en la vida",
-            objetivos: "Crecer personalmente",
-            duracion: 5,
-            idVideo: 0,
-            idMiniatura: 0
-        },
 
-    ],
+    cursos: [],
 
+    getCursos: async () => {
+        const response = await axios.get("http://localhost:3000/api/curso")
+
+        if ( response.status == 200 ) {
+            set({ cursos : response.data })
+        }
+        else{
+            set({ cursos : [] })
+        }
+    },
     
     addCurso: (
-        idCurso, nombre, precio, estatus, descripcion, objetivos, duracion, idVideo, idMiniatura
+        nombre, precio, estatus, descripcion, objetivos, duracion, idVideo, idMiniatura
         ) => set((state) => ({
         cursos: [
             ...state.cursos,
             {
-                idCurso: idCurso,
                 nombre: nombre,
                 precio: precio,
                 estatus: estatus,
