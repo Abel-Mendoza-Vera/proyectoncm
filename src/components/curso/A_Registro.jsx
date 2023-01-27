@@ -28,7 +28,6 @@ const A_Registro = ({ curso }) => {
             if (result.isConfirmed) {
 
                 const status = await deleteCurso(curso.idCurso)
-                console.log(status);
 
                 if (status == 204) {
                     Swal.fire({
@@ -63,7 +62,6 @@ const A_Registro = ({ curso }) => {
 
     const alertaActivar = async () => {
         const status = await activeCurso(curso.idCurso)
-        console.log(status);
 
         if (status == 204) {
             Swal.fire({
