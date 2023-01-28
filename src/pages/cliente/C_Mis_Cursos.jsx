@@ -1,4 +1,5 @@
 import Mis_Cursos from "../../components/Mis_Cursos"
+import Tarjeta from "../../components/curso/Tarjeta"
 
 const C_Mis_Cursos = () => {
 
@@ -9,9 +10,12 @@ const C_Mis_Cursos = () => {
         {/** Primer fila para agregar o buscar un curso */}
         <div className="row">
           <div className="col">
-            <Mis_Cursos/>
+            <Mis_Cursos />
           </div>
         </div>
+
+        {/** Tarjeta 
+       <Tarjeta/>*/}
 
       </div>
     </>
