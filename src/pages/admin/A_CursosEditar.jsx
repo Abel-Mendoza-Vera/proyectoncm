@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useCursoStore } from "../../store/cursoStore"
 import FormularioModificarCurso from "../../components/curso/FormularioModificarCurso"
+import FormularioAgregarArchivoCurso from "../../components/archivo/FormularioAgregarArchivoCurso"
 
 const A_CursosEditar = () => {
 
@@ -35,7 +36,7 @@ const A_CursosEditar = () => {
               <div className="card">
                 <div className="card-body">
                   <p className='card-text'>No hay una <strong>imagen</strong> para el curso.</p>
-                  <button className='btn btn-primary' >Agregar imagen</button>
+                  <FormularioAgregarArchivoCurso tipo="imagen" idCurso={curso.idCurso} />
                 </div>
               </div>
             </div>
@@ -44,7 +45,7 @@ const A_CursosEditar = () => {
             <div className="card">
                 <div className="card-body">
                   <p className='card-text'>No hay un <strong>video</strong> introductorio para el curso.</p>
-                  <button className='btn btn-primary' >Agregar video</button>
+                  <FormularioAgregarArchivoCurso tipo="video" idCurso={curso.idCurso} />
                 </div>
               </div>
             </div>
