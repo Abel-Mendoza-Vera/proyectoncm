@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useCursoStore } from "../../store/cursoStore"
+import FormularioModificarCurso from "../../components/curso/FormularioModificarCurso"
 
 const A_CursosEditar = () => {
 
@@ -13,7 +14,7 @@ const A_CursosEditar = () => {
         {/** Botón editar curso */}
         <div className="row-1">
           {/** Abrira modal del fomulario del curso */}
-          <button className="btn btn-primary" ><span className="material-icons" >edit</span>Editar curso</button>
+          <FormularioModificarCurso curso={curso} />
         </div>
 
         {/** Información del curso */}

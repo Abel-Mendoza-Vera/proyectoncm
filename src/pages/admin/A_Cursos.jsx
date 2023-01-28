@@ -1,5 +1,5 @@
 import A_Tabla from "../../components/curso/A_Tabla"
-import Formulario from "../../components/curso/Formulario"
+import FormularioAgregarCurso from "../../components/curso/FormularioAgregarCurso"
 
 const A_Cursos = () => {
 
@@ -10,7 +10,7 @@ const A_Cursos = () => {
         {/** Primer fila para agregar o buscar un curso */}
         <div className="row">
           <div className="col">
-            <Formulario/>
+            <FormularioAgregarCurso/>
           </div>
         </div>
 

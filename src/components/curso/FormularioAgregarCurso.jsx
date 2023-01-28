@@ -1,6 +1,5 @@
 import { useState } from "react"
 import Swal from "sweetalert2"
-
 import { useCursoStore } from "../../store/cursoStore"
 
 const Formulario = () => {
@@ -58,6 +57,7 @@ const Formulario = () => {
 
             { /** Boton para mostrar el modal */}
             <button className='btn btn-outline-success' data-bs-toggle="modal" data-bs-target="#agregarCursoModal" ><span className="material-icons">add</span>Agregar</button>
+            
 
             {/** Modal - Formulario */}
             <div className="modal fade" id="agregarCursoModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -50,6 +50,26 @@ export const useCursoStore = create(persist(
                 precio: precio,
                 duracion: duracion
             })
+
+            if (response.status == 200) {
+                set((state) => ({
+                    cursos: state.cursos.map((curso) => {
+
+                        if (curso.idCurso == id) {
+
+                            curso.nombre = nombre
+                            curso.objetivos = objetivos
+                            curso.descripcion = descripcion
+                            curso.precio = precio
+                            curso.duracion = duracion
+
+                        }
+                        return curso
+                    })
+                }))
+            }
+
+            return response.status
         },
 
         deleteCurso: async (id) => {
