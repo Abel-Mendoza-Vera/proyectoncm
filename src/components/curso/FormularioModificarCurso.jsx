@@ -98,7 +98,7 @@ const Formulario = ({ curso }) => {
 
                             <div className="d-flex justify-content-evenly">
                                 <button type="button" className="btn btn-danger" data-bs-dismiss="modal"><span className='material-icons'>close</span>Cerrar</button>
-                                <button onClick={handleSave} type="submit" className="btn btn-success" data-bs-dismiss="modal"><span className='material-icons'>save</span>Guardar</button>
+                                <button onClick={handleSave} type="submit" className="btn btn-success"><span className='material-icons'>save</span>Guardar</button>
                             </div>
 
                         </div>

@@ -72,6 +72,44 @@ export const useCursoStore = create(persist(
             return response.status
         },
 
+        modifyCursoVideo: async (idCurso, idVideo) => {
+            const response = await axios.patch(`${urlCursos}/${idCurso}`, {
+                idVideo: idVideo
+            })
+
+            if (response.status == 200) {
+                set((state) => ({
+                    cursos: state.cursos.map((curso) => {
+
+                        if (curso.idCurso == idCurso) {
+                            curso.idVideo = idVideo
+                        }
+                        return curso
+                    })
+                }))
+            }
+            return response.status
+        },
+
+        modifyCursoImagen: async (idCurso, idMiniatura ) => {
+            const response = await axios.patch(`${urlCursos}/${idCurso}`, {
+                idMiniatura : idMiniatura 
+            })
+
+            if (response.status == 200) {
+                set((state) => ({
+                    cursos: state.cursos.map((curso) => {
+
+                        if (curso.idCurso == idCurso) {
+                            curso.idMiniatura = idMiniatura 
+                        }
+                        return curso
+                    })
+                }))
+            }
+            return response.status
+        },
+
         deleteCurso: async (id) => {
 
             const response = await axios.delete(`${urlCursos}/${id}/0`)

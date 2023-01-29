@@ -31,9 +31,40 @@ export const useArchivoStore = create(persist(
             })
 
             if (response.status != 500) {
-                set({ archivos: [...state, response.data] })
+                set((state) => ({ archivos: [...state.archivos, response.data] }))
+                return response.data.idArchivo
             }
-        }
+            else {
+                return 0;
+            }
+
+        },
+        modifyArchivo: async (id, nombre, extencion, url) => {
+
+            const response = await axios.patch(`${urlArchivos}/${id}`, {
+                nombre: nombre,
+                extencion: extencion,
+                url: url
+            })
+
+            if (response.status == 200) {
+                set((state) => ({
+                    archivos: state.archivos.map((archivo) => {
+
+                        if (archivo.idArchivo == id) {
+
+                            archivo.nombre = nombre
+                            archivo.extencion = extencion,
+                            archivo.url = url
+
+                        }
+                        return archivo
+                    })
+                }))
+            }
+
+            return response.status
+        },
 
 
     }),

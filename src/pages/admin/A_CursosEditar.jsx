@@ -1,13 +1,22 @@
 import { useParams } from "react-router-dom"
 import { useCursoStore } from "../../store/cursoStore"
+import { useArchivoStore } from "../../store/archivoStore"
+
+import imgDefault from '../../assets/curso.jpg'
+
 import FormularioModificarCurso from "../../components/curso/FormularioModificarCurso"
-import FormularioAgregarArchivoCurso from "../../components/archivo/FormularioAgregarArchivoCurso"
+import FormularioAgregarImagenCurso from "../../components/archivo/FormularioAgregarImagenCurso"
+import FormularioAgregarVideoCurso from '../../components/archivo/FormularioAgregarVideoCurso'
 
 const A_CursosEditar = () => {
 
   let { cursoId } = useParams()
   let cursos = useCursoStore((state) => state.cursos)
+  let archivos = useArchivoStore((state) => state.archivos)
+
   let curso = cursos.find((item) => item.idCurso == cursoId)
+  let imagenCurso = archivos.find((item) => item.idArchivo == curso.idMiniatura && item.extencion.includes("image"))
+  let videoCurso = archivos.find((item) => item.idArchivo == curso.idVideo && item.extencion.includes("video"))
 
   return (
     <>
@@ -19,8 +28,8 @@ const A_CursosEditar = () => {
         </div>
 
         {/** Información del curso */}
-        <div className="row mt-3">
-          <div className="col-8">
+        <div className="row row-2 mt-3">
+          <div className="col-12 col-md-8">
             <h3><strong>{curso.nombre}</strong></h3>
             <h5 className="text-end text-danger">$ {curso.precio} MXN</h5>
             <p><strong>Duración:</strong> {curso.duracion} horas</p>
@@ -28,26 +37,31 @@ const A_CursosEditar = () => {
             <p>{curso.objetivos}</p>
             <p><strong>Descripción:</strong></p>
             <p>{curso.descripcion}</p>
-
           </div>
-          <div className="col-4">
+
+          <div className="col">
 
             <div className="row">
-              <div className="card">
-                <div className="card-body">
-                  <p className='card-text'>No hay una <strong>imagen</strong> para el curso.</p>
-                  <FormularioAgregarArchivoCurso tipo="imagen" idCurso={curso.idCurso} />
-                </div>
-              </div>
+
+              {
+                curso.idMiniatura != 0 ?
+                  <img src={imagenCurso.url} alt="imagenCurso" className="img-fluid rounded mb-2" />
+                  :
+                  <img src={imgDefault} alt="imagenCurso" className="img-fluid rounded mb-2" />
+              }
+              <FormularioAgregarImagenCurso idCurso={curso.idCurso} idImagen={curso.idMiniatura} objImagen={imagenCurso} />
             </div>
 
             <div className="row mt-3">
-            <div className="card">
-                <div className="card-body">
-                  <p className='card-text'>No hay un <strong>video</strong> introductorio para el curso.</p>
-                  <FormularioAgregarArchivoCurso tipo="video" idCurso={curso.idCurso} />
-                </div>
-              </div>
+              {
+                curso.idVideo != 0 ?
+                  <video controls className="object-fit-fill mb-2">
+                    <source src={videoCurso.url} type={videoCurso.extencion} />
+                  </video>
+                  :
+                  <></>
+              }
+              <FormularioAgregarVideoCurso idCurso={curso.idCurso} idVideo={curso.idVideo} objVideo={videoCurso} />
             </div>
           </div>
         </div>
