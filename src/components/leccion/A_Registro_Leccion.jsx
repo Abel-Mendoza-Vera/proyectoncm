@@ -29,12 +29,12 @@ const A_Registro_Leccion = ({ leccion }) => {
         }).then( async (result) => {
             if (result.isConfirmed) {
 
-                const status = await deleteLeccion(curso.idLeccion)
+                const status = await deleteLeccion(leccion.idLeccion)
 
                 if (status == 204) {
                     Swal.fire({
-                        title: "Eliminar curso",
-                        text: "El curso ha sido eliminado correctamente",
+                        title: "Eliminar leccion",
+                        text: "La leccion ha sido eliminado correctamente",
                         icon: 'success',
                         timer: 1500,
                         timerProgressBar: true
@@ -63,7 +63,7 @@ const A_Registro_Leccion = ({ leccion }) => {
     }
 
     const alertaActivar = async () => {
-        const status = await activeLeccion(curso.idLeccion)
+        const status = await activeLeccion(leccion.idLeccion)
 
         if (status == 204) {
             Swal.fire({
@@ -95,7 +95,7 @@ const A_Registro_Leccion = ({ leccion }) => {
     }
 
     const editar_leccion = () => {
-        navigate(`/admin/lecciones/${curso.idLeccion}`)
+        navigate(`/admin/lecciones/${leccion.idLeccion}`)
     }
 
     return (
