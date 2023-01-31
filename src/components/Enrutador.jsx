@@ -6,6 +6,7 @@ import Home from'../pages/Home'
 import Contac from '../pages/Contac'
 import Us from '../pages/Us'
 import C_Mis_Cursos from '../pages/cliente/C_Mis_Cursos'
+import Footer from './Footer'
 
 const Enrutador = () => {
     return (
@@ -46,6 +47,7 @@ const Enrutador = () => {
                 </Route>
 
             </Routes>
+            <Footer/>
         </BrowserRouter>
     )
 }
