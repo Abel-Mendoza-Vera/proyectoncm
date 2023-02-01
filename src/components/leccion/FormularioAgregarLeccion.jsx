@@ -9,10 +9,10 @@ const FormularioAgregarLeccion = () => {
     // obtener datos del formulario
     const [FormularioAgregarLeccion, setFormularioLeccion] = useState({
         nombre: "",
-        descripcion: "",
+        informacion: "",
     })
 
-    const { nombre, descripcion } = FormularioAgregarLeccion
+    const { nombre, informacion } = FormularioAgregarLeccion
 
     const handleChange = (e) => {
         setFormularioLeccion({
@@ -22,7 +22,7 @@ const FormularioAgregarLeccion = () => {
     }
 
     const handleSave = async () => {
-        const status = await saveLeccion( nombre, descripcion  )
+        const status = await saveLeccion( nombre, informacion  )
         alerta(status)
     }
 
@@ -69,8 +69,8 @@ const FormularioAgregarLeccion = () => {
                             </div>
 
                             <div className="form-floating mb-3">
-                                <textarea className="form-control" onChange={(e) => handleChange(e)} value={descripcion} placeholder="" name="descripcion" rows='3' style={{ height: "100px" }} ></textarea>
-                                <label htmlFor="descripcion">Descripción</label>
+                                <textarea className="form-control" onChange={(e) => handleChange(e)} value={informacion} placeholder="" name="informacion" rows='3' style={{ height: "100px" }} ></textarea>
+                                <label htmlFor="informacion">Información</label>
                             </div>                          
 
 

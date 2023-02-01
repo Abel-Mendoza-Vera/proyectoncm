@@ -38,9 +38,10 @@ const A_Tabla_Leccion = () => {
                 <table id="datosLeccion" className='table table-hover mt-4'>
                     <thead style={{ backgroundColor: "#274A93", color: "white" }}>
                         <tr>
-                            <th>Id</th>
-                            <th>Lección</th>
-                            <th>Descripción</th>
+                            <th>Id Lección</th>
+                            <th>Id Curso</th>
+                            <th>Nombre</th>
+                            <th>Informacion</th>
                             <th>Estatus</th>
                             <th>Acciones</th>
                         </tr>

@@ -101,8 +101,9 @@ const A_Registro_Leccion = ({ leccion }) => {
     return (
         <tr >
             <td>{leccion.idLeccion}</td>
+            <td>{leccion.idCurso}</td>
             <td>{leccion.nombre}</td>
-            <td>{leccion.descripcion}</td>
+            <td>{leccion.informacion}</td>
             <td>
                 {
                     leccion.estatus == 1 ?

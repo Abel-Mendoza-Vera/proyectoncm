@@ -20,16 +20,16 @@ export const useLeccionStore = create(persist(
         },
 
         addLeccion: (
-            idLeccion, nombre, estatus, descripcion, idVideo,
+            idLeccion, idCurso, nombre, estatus, informacion
         ) => set((state) => ({
             lecciones: [
                 ...state.lecciones,
                 {
                     idLeccion: idLeccion,
+                    idCurso:idCurso,
                     nombre: nombre,
                     estatus: estatus,
-                    descripcion: descripcion,
-                    idVideo: idVideo,
+                    informacion: informacion,
                 }
             ]
         })),
