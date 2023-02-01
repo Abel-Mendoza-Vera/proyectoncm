@@ -4,9 +4,9 @@ const Us = () => {
 
   return (
     <>
-
-      <Nosotros />
-
+      <div className="container-fluid vh-100 mb-5">
+        <Nosotros />
+      </div>
     </>
   )
 }

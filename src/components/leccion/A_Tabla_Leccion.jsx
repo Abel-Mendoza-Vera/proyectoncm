@@ -1,15 +1,15 @@
 import { useState } from "react"
 import { useLeccionStore } from "../../store/leccionStore"
-import { shallow } from 'zustand/shallow'
 import A_Registro_Leccion from "./A_Registro_Leccion"
 
-const A_Tabla_Leccion = () => {
+const A_Tabla_Leccion = ({ cursoId }) => {
 
     const { lecciones } = useLeccionStore((state) => ({
         lecciones: state.lecciones
-    }), shallow)
+    }))
 
-    let listaLecciones = lecciones
+    let listaLecciones = lecciones.filter((leccion) => leccion.idCurso == cursoId)
+
     const [buscador, setBuscador] = useState("")
 
     const handleChange = (e) => {
@@ -17,10 +17,10 @@ const A_Tabla_Leccion = () => {
     }
 
     if (!buscador) {
-        listaLecciones = lecciones
+        listaLecciones = lecciones.filter((leccion) => leccion.idCurso == cursoId)
     }
     else {
-        listaLecciones = lecciones.filter((leccion) => leccion.nombre.toLowerCase().includes(buscador.toLowerCase()))
+        listaLecciones = lecciones.filter((leccion) => leccion.idCurso == cursoId && leccion.nombre.toLowerCase().includes(buscador.toLowerCase()))
     }
 
     return (
@@ -39,7 +39,6 @@ const A_Tabla_Leccion = () => {
                     <thead style={{ backgroundColor: "#274A93", color: "white" }}>
                         <tr>
                             <th>Id Lección</th>
-                            <th>Id Curso</th>
                             <th>Nombre</th>
                             <th>Informacion</th>
                             <th>Estatus</th>
@@ -52,7 +51,7 @@ const A_Tabla_Leccion = () => {
 
                             listaLecciones.length == 0 ?
 
-                                (<tr><td colSpan='8' ><h2 className="text-center" ><strong>No hay lecciones registrados</strong></h2></td></tr>) :
+                                (<tr><td colSpan='5' ><h2 className="text-center" ><strong>No hay lecciones registrados</strong></h2></td></tr>) :
 
                                 listaLecciones.map((leccion) => {
                                     return (

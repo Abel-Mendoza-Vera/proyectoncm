@@ -1,11 +1,17 @@
 
 const Footer = () => {
     return (
-        <div className="text-white mt-5 d-flex align-items-center justify-content-center" style={{ height: "60px", backgroundColor: "#294791" }}>
-                <div>
-                    <small>Creado por: Eduardo Solís & Abel Mendoza</small>
-                </div>
-        </div>
+        <footer style={{
+            //position: "sticky",
+            backgroundColor: "#274A93",
+            color: "white",
+            //bottom: "0",
+            //left: "0",
+            //right: "0",
+            marginTop: "auto",
+            padding: "8px",
+            textAlign: "center"
+        }} >{`Copyright © Upbeat Code AÑO`}</footer>
     )
 }
 

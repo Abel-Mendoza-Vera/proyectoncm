@@ -1,10 +1,12 @@
 import Enrutador from "./components/Enrutador"
+import Footer from "./components/Footer"
 
 function App() {
 
   return (
     <>
-    <Enrutador/>
+    <Enrutador className="pb-5"/>
+    <Footer/>
     </>
   )
 }

@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom"
 import { useCursoStore } from "../../store/cursoStore"
 import { useArchivoStore } from "../../store/archivoStore"
 
@@ -8,9 +7,8 @@ import FormularioModificarCurso from "../../components/curso/FormularioModificar
 import FormularioAgregarImagenCurso from "../../components/archivo/FormularioAgregarImagenCurso"
 import FormularioAgregarVideoCurso from '../../components/archivo/FormularioAgregarVideoCurso'
 
-const A_DetalleCurso = () => {
+const A_DetalleCurso = ({cursoId}) => {
 
-    let { cursoId } = useParams()
     let cursos = useCursoStore((state) => state.cursos)
     let archivos = useArchivoStore((state) => state.archivos)
 

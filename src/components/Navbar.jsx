@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 
 // Se realiza la carga de todo el store
+import { shallow } from 'zustand/shallow'
+
 import { useCursoStore } from '../store/cursoStore'
 import { useLeccionStore } from '../store/leccionStore'
 import { useArchivoStore } from '../store/archivoStore'
@@ -10,10 +12,10 @@ import { useCuestionarioStore } from '../store/cuestionarioStore'
 
 const Navbar = () => {
 
-    const { getCursos } = useCursoStore((state) => ({ getCursos: state.getCursos }))
-    const { getLecciones } = useLeccionStore((state) => ({ getLecciones: state.getLecciones }))
-    const { getArchivos } = useArchivoStore((state) => ({ getArchivos: state.getArchivos }))
-    const { getCuestionarios } = useCuestionarioStore((state) => ({ getCuestionarios: state.getCuestionarios }))
+    const { getCursos } = useCursoStore((state) => ({ getCursos: state.getCursos }), shallow)
+    const { getLecciones } = useLeccionStore((state) => ({ getLecciones: state.getLecciones }), shallow)
+    const { getArchivos } = useArchivoStore((state) => ({ getArchivos: state.getArchivos }), shallow)
+    const { getCuestionarios } = useCuestionarioStore((state) => ({ getCuestionarios: state.getCuestionarios }), shallow)
 
     useEffect(() => {
         getCursos()

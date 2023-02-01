@@ -15,7 +15,7 @@ const Nosotros = () => {
 
                 <div className="col-md-12 col-lg-6">
                     <div className="container text-justify">
-                        <div className="base_header"><span class="text-decoration-underline"><small className="bor_header_left"></small> <small className="bor_header_right"></small></span>
+                        <div className="base_header"><span className="text-decoration-underline"><small className="bor_header_left"></small> <small className="bor_header_right"></small></span>
                             <h3>ACERCA DE NOSOTROS</h3>
                         </div>
                         <div className="base_footer"></div>
@@ -69,9 +69,6 @@ const Nosotros = () => {
                     </div>
                 </div>
             </div>
-
-
-
 
         </div>
 

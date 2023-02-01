@@ -1,6 +1,6 @@
 import Swal from "sweetalert2"
 import { useLeccionStore } from "../../store/leccionStore"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const A_Registro_Leccion = ({ leccion }) => {
 
@@ -11,7 +11,7 @@ const A_Registro_Leccion = ({ leccion }) => {
         activeLeccion: state.activeLeccion
     }))
 
-    const alertaEliminar = () => {
+    const eliminarLeccion = () => {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success mx-2',
@@ -26,30 +26,32 @@ const A_Registro_Leccion = ({ leccion }) => {
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Si, eliminalo'
-        }).then( async (result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
 
-                const status = await deleteLeccion(leccion.idLeccion)
+                try {
+                    const status = await deleteLeccion(leccion.idLeccion)
 
-                if (status == 204) {
-                    Swal.fire({
-                        title: "Eliminar leccion",
-                        text: "La leccion ha sido eliminado correctamente",
-                        icon: 'success',
-                        timer: 1500,
-                        timerProgressBar: true
-                    })
-                }
-                if ( status == 400 ){
-                    Swal.fire({
-                        title: "Eliminar lección",
-                        text: "No se ha encontrado la lección",
-                        icon: 'warning',
-                        timer: 1500,
-                        timerProgressBar: true
-                    })
-                }
-                if (status == 500){
+                    if (status == 204) {
+                        Swal.fire({
+                            title: "Eliminar leccion",
+                            text: "La leccion ha sido eliminado correctamente",
+                            icon: 'success',
+                            timer: 1500,
+                            timerProgressBar: true
+                        })
+                    }
+                    else if (status == 400) {
+                        Swal.fire({
+                            title: "Eliminar lección",
+                            text: "No se ha encontrado la lección",
+                            icon: 'warning',
+                            timer: 1500,
+                            timerProgressBar: true
+                        })
+                    }
+
+                } catch (error) {
                     Swal.fire({
                         title: "Eliminar lección",
                         text: "Ha ocurrido un error al momento de eliminar la lección",
@@ -62,7 +64,7 @@ const A_Registro_Leccion = ({ leccion }) => {
         })
     }
 
-    const alertaActivar = async () => {
+    const activarLeccion = async () => {
         const status = await activeLeccion(leccion.idLeccion)
 
         if (status == 204) {
@@ -74,7 +76,7 @@ const A_Registro_Leccion = ({ leccion }) => {
                 timerProgressBar: true
             })
         }
-        if ( status == 400 ){
+        if (status == 400) {
             Swal.fire({
                 title: "Activar lección",
                 text: "No se ha encontrado la lección",
@@ -83,7 +85,7 @@ const A_Registro_Leccion = ({ leccion }) => {
                 timerProgressBar: true
             })
         }
-        if (status == 500){
+        if (status == 500) {
             Swal.fire({
                 title: "Activar lección",
                 text: "Ha ocurrido un error al momento de activar una lección",
@@ -101,7 +103,6 @@ const A_Registro_Leccion = ({ leccion }) => {
     return (
         <tr >
             <td>{leccion.idLeccion}</td>
-            <td>{leccion.idCurso}</td>
             <td>{leccion.nombre}</td>
             <td>{leccion.informacion}</td>
             <td>
@@ -116,9 +117,9 @@ const A_Registro_Leccion = ({ leccion }) => {
                 <button className='btn btn-primary btn-sm me-2' onClick={editar_leccion} ><span className='material-icons'>edit</span></button>
                 {
                     leccion.estatus == 1 ?
-                        <button className='btn btn-danger btn-sm' onClick={alertaEliminar}><span className='material-icons'>delete</span></button>
+                        <button className='btn btn-danger btn-sm' onClick={eliminarLeccion}><span className='material-icons'>delete</span></button>
                         :
-                        <button className='btn btn-success btn-sm' onClick={alertaActivar}><span className='material-icons'>power_settings_new</span></button>
+                        <button className='btn btn-success btn-sm' onClick={activarLeccion}><span className='material-icons'>power_settings_new</span></button>
                 }
             </td>
         </tr>
