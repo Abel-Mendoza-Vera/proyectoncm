@@ -70,9 +70,10 @@ const Formulario = () => {
                         <div className="modal-body">
 
                         <div className="form-floating mb-3">
-                                <input type="text"  className="form-control"  name='nombre' placeholder="" />
+                                <input type="text" onChange={(e) => handleChange(e)} value={nombre} className="form-control" name='nombre' placeholder="" />
                                 <label htmlFor="nombre">Nombre</label>
                             </div>
+                          
                             <div className="form-floating mb-3">
                                 <input type="number" onChange={(e) => handleChange(e)} value={precio} min='1' className="form-control" name='precio' placeholder="" />
                                 <label htmlFor="precio">Precio</label>

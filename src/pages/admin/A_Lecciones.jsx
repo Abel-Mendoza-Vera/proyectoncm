@@ -1,10 +1,15 @@
+import { useParams } from "react-router-dom"
+
+import A_DetalleLeccion from "../../components/leccion/A_DetalleLeccion"
 
 
 const A_Lecciones = () => {
+  let { leccionId } = useParams()
 
   return (
     <>
-      <div>Hola</div>
+      <A_DetalleLeccion leccionId={leccionId} />
+
     </>
   )
 }

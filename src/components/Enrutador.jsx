@@ -6,6 +6,7 @@ import Home from'../pages/Home'
 import Contac from '../pages/Contac'
 import Us from '../pages/Us'
 import C_Mis_Cursos from '../pages/cliente/C_Mis_Cursos'
+import A_Lecciones from '../pages/admin/A_Lecciones'
 
 const Enrutador = () => {
     return (
@@ -29,7 +30,7 @@ const Enrutador = () => {
                 <Route path='/admin/*' >
                     <Route path='cursos' element={ <A_Cursos/> } />
                     <Route path='cursos_editar/:cursoId' element={ <A_CursosEditar/> } />
-                    <Route path='lecciones' element={<h1>Lecciones</h1> } />
+                    <Route path='lecciones/:leccionId' element={ <A_Lecciones/> } />
                     <Route path='cuestionarios' element={ <h1>Cuestionarios</h1> } />
                     <Route path='preguntas' element={ <><h1>Preguntas</h1></> } />
                     <Route path='empleados' element={ <><h1>Empleados</h1></> } />
