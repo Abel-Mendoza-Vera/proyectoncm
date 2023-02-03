@@ -10,9 +10,9 @@ const FormularioModificarLeccion = ({ leccion }) => {
     const [formularioModificarLeccion, setFormularioModificarLeccion] = useState({
         nombre: leccion.nombre,
         informacion: leccion.informacion
-        })
+    })
 
-    const { nombre, informacion} = formularioModificarLeccion
+    const { nombre, informacion } = formularioModificarLeccion
 
     const handleChange = (e) => {
         setFormularioModificarLeccion({
@@ -22,12 +22,12 @@ const FormularioModificarLeccion = ({ leccion }) => {
     }
 
     const handleSave = async () => {
-        const status = await modifyLeccion( leccion.idLeccion, nombre, informacion )
+        const status = await modifyLeccion(leccion.idLeccion, nombre, informacion)
         alerta(status)
     }
 
     const alerta = (status) => {
-        if ( status == 200 ) {
+        if (status == 200) {
             Swal.fire({
                 title: "Guardar lección",
                 text: "La lección se ha guardado correctamente",
@@ -37,7 +37,7 @@ const FormularioModificarLeccion = ({ leccion }) => {
 
             })
         }
-        else{
+        else if (status != 200) {
             Swal.fire({
                 title: "Guardar lección",
                 text: "Ha ocurrio un error al momento de guardar una lección",
@@ -54,15 +54,15 @@ const FormularioModificarLeccion = ({ leccion }) => {
 
             { /** Boton para mostrar el modal */}
             <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#agregarLeccionModal" ><span className="material-icons">edit</span>Editar lección</button>
-            
-            
+
+
 
             {/** Modal - Formulario */}
             <div className="modal fade" id="agregarLeccionModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">Agregar lección</h1>
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Modificar lección</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
@@ -72,14 +72,14 @@ const FormularioModificarLeccion = ({ leccion }) => {
                                 <label htmlFor="nombre">Nombre</label>
                             </div>
 
-                           
+
 
                             <div className="form-floating mb-3">
                                 <textarea className="form-control" onChange={(e) => handleChange(e)} value={informacion} placeholder="" name="informacion" rows='3' style={{ height: "100px" }} ></textarea>
                                 <label htmlFor="informacion">Información</label>
                             </div>
 
-                     
+
 
 
                             <div className="d-flex justify-content-evenly">

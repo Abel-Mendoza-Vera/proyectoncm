@@ -57,7 +57,7 @@ const A_DetalleCurso = ({cursoId}) => {
                                         <source src={videoCurso.url} type={videoCurso.extencion} />
                                     </video>
                                     :
-                                    <></>
+                                    <div className="alert alert-warning" role="alert"><p>No se ha agregado un video para este curso.</p></div>
                             }
                             <FormularioAgregarVideoCurso idCurso={curso.idCurso} idVideo={curso.idVideo} objVideo={videoCurso} />
                         </div>

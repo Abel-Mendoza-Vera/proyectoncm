@@ -58,6 +58,27 @@ export const useLeccionStore = create(persist(
 
         },
 
+        modifyLeccionVideo: async ( idLeccion, idVideo ) => {
+
+            const response = await axios.patch(`${urlLecciones}/${idLeccion}`,{
+                idVideo: idVideo
+            })
+
+            if (response.status == 200){
+                set((state) => ({
+                    lecciones: state.lecciones.map((leccion) => {
+                        if (leccion.idLeccion == idLeccion){
+                            leccion.idVideo = idVideo
+                        }
+                        return leccion
+                    })
+                }))
+            }
+
+            return response.status
+
+        },
+
         deleteLeccion: async (idLeccion) => {
 
             const response = await axios.delete(`${urlLecciones}/${idLeccion}/0`)

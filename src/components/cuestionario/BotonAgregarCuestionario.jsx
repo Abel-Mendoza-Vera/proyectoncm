@@ -1,12 +1,14 @@
 import Swal from "sweetalert2"
 import { useCuestionarioStore } from "../../store/cuestionarioStore"
 
-const BotonAgregarCuestionario = ({ cuestionarioId }) => {
+const BotonAgregarCuestionario = ({ leccionId }) => {
 
     const {saveCuestionario, cuestionarios} = useCuestionarioStore((state) => ({
         saveCuestionario: state.saveCuestionario,
         cuestionarios: state.cuestionarios
     }))
+
+    let cuestionario = cuestionarios.find((item) => item.idLeccion == leccionId )
     
     const handleGuardarCuestionario = async () => {
 
