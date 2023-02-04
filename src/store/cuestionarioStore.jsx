@@ -20,17 +20,19 @@ export const useCuestionarioStore = create(persist(
         },
 
         saveCuestionario: async (
-            idCuestionario, nombre
+            idLeccion, nombre
         ) => {
 
             const response  = await axios.post(urlCuestionarios, {
-                idCuestionario: idCuestionario,
+                idLeccion: idLeccion,
                 nombre: nombre
                         })
 
             if (response.status != 500){
                 set((state) => ({ cuestionarios: [ ...state.cuestionarios, response.data ] }))
             }
+
+            return response.status
 
         },
 
@@ -43,7 +45,7 @@ export const useCuestionarioStore = create(persist(
             if (response.status == 200){
                 set((state) => ({
                     cuestionarios: state.cuestionarios.map((cuestionario) => {
-                        if (cuestionario.idCuestionario == idLeccion){
+                        if (cuestionario.idCuestionario == idCuestionario){
                             cuestionario.nombre = nombre
                         }
                         return cuestionario
@@ -57,7 +59,7 @@ export const useCuestionarioStore = create(persist(
 
         deleteCuestioonario: async (idCuestionario) => {
 
-            const response = await axios.delete(`${urlCuestionarios}/${idCuestionario}/0`)
+            const response = await axios.delete(`${urlCuestionarios}/${idCuestionario}`)
 
             if (response.status == 204) {
                 set((state) => ({

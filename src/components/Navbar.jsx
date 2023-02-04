@@ -9,6 +9,7 @@ import { useCursoStore } from '../store/cursoStore'
 import { useLeccionStore } from '../store/leccionStore'
 import { useArchivoStore } from '../store/archivoStore'
 import { useCuestionarioStore } from '../store/cuestionarioStore'
+import { usePreguntaStore } from '../store/preguntaStore'
 
 const Navbar = () => {
 
@@ -16,12 +17,14 @@ const Navbar = () => {
     const { getLecciones } = useLeccionStore((state) => ({ getLecciones: state.getLecciones }), shallow)
     const { getArchivos } = useArchivoStore((state) => ({ getArchivos: state.getArchivos }), shallow)
     const { getCuestionarios } = useCuestionarioStore((state) => ({ getCuestionarios: state.getCuestionarios }), shallow)
+    const { getPreguntas } = usePreguntaStore((state) => ({ getPreguntas: state.getPreguntas }), shallow)
 
     useEffect(() => {
         getCursos()
         getLecciones()
         getArchivos()
         getCuestionarios()
+        getPreguntas()
     }, [])
     
 
