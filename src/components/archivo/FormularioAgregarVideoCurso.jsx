@@ -6,11 +6,12 @@ import { storage } from '../../firebase'
 import { useArchivoStore } from '../../store/archivoStore'
 import { useCursoStore } from '../../store/cursoStore'
 
-const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo }) => {
+const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo, cursoNombre }) => {
 
-    const { saveArchivo, modifyArchivo } = useArchivoStore((state) => ({
+    const { saveArchivo, modifyArchivo, getArchivos } = useArchivoStore((state) => ({
         saveArchivo: state.saveArchivo,
-        modifyArchivo: state.modifyArchivo
+        modifyArchivo: state.modifyArchivo,
+        getArchivos: state.getArchivos
     }))
     const modifyCursoVideo = useCursoStore((state) => state.modifyCursoVideo)
 
@@ -35,7 +36,7 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo }) => {
             return;
         }
 
-        const storageRef = ref(storage, `/video/${file.name}`)
+        const storageRef = ref(storage, `/cursos/${cursoNombre}/video/${file.name}`)
         const uploadTask = uploadBytesResumable(storageRef, file)
 
         uploadTask.on("state_changed",
@@ -63,6 +64,7 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo }) => {
 
                         if (idArchivo != 0) {
                             const status = await modifyCursoVideo(idCurso, idArchivo)
+                            await getArchivos()
                             if (status == 200) {
                                 Swal.fire({
                                     title: `Guardar video`,
@@ -78,11 +80,12 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo }) => {
 
                         if (objVideo.nombre != file.name) {
 
-                            const deleteRef = ref(storage, `/video/${objVideo.nombre}`)
+                            const deleteRef = ref(storage, `/cursos/${cursoNombre}/video/${objVideo.nombre}`)
 
                             deleteObject(deleteRef).then(async () => {
                                 const estatus = await modifyArchivo(idVideo, file.name, file.type, videoUrl)
                                 if (estatus == 200) {
+                                    await getArchivos()
                                     Swal.fire({
                                         title: `Guardar video`,
                                         text: `El video se ha guardado correctamente`,
@@ -96,6 +99,7 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo }) => {
                         else {
                             const estatus = await modifyArchivo(idVideo, file.name, file.type, videoUrl)
                             if (estatus == 200) {
+                                await getArchivos()
                                 Swal.fire({
                                     title: `Guardar video`,
                                     text: `El video se ha guardado correctamente`,

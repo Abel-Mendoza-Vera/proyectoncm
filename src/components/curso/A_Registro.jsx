@@ -95,7 +95,7 @@ const A_Registro = ({ curso }) => {
     }
 
     const editar_curso = () => {
-        navigate(`/admin/cursos_editar/${curso.idCurso}`)
+        navigate(`/admin/cursos_editar/${curso.idCurso}/${curso.nombre}`)
     }
 
     return (

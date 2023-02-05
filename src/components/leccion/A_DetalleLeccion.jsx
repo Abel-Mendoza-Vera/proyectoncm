@@ -2,9 +2,9 @@ import { useLeccionStore } from "../../store/leccionStore"
 import { useArchivoStore } from "../../store/archivoStore"
 
 import FormularioModificarLeccion from "../../components/leccion/FormularioModificarLeccion"
-import FormularioAgregarArchivoLeccion from '../archivo/FormularioAgregarVideoLeccion'
+import FormularioAgregarVideoLeccion from '../archivo/FormularioAgregarVideoLeccion'
 
-const A_DetalleLeccion = ({ leccionId }) => {
+const A_DetalleLeccion = ({ leccionId, cursoNombre }) => {
 
     let lecciones = useLeccionStore((state) => state.lecciones)
     let archivos = useArchivoStore((state) => state.archivos)
@@ -39,7 +39,7 @@ const A_DetalleLeccion = ({ leccionId }) => {
                                         :
                                         <div className="alert alert-warning" role="alert"><p>No se ha agregado un video para esta lección.</p></div>
                                 }
-                                <FormularioAgregarArchivoLeccion idLeccion={leccionId} idVideo={leccion.idVideo} objVideo={videoLeccion} />
+                                <FormularioAgregarVideoLeccion idLeccion={leccionId} idVideo={leccion.idVideo} objVideo={videoLeccion} cursoNombre={cursoNombre} leccionNombre={leccion.nombre} />
                             </div>
                         </div>
 

@@ -6,7 +6,7 @@ import { storage } from '../../firebase'
 import { useArchivoStore } from '../../store/archivoStore'
 import { useLeccionStore } from '../../store/leccionStore'
 
-const FormularioAgregarArchivoLeccion = ({ idLeccion, idVideo, objVideo }) => {
+const FormularioAgregarVideoLeccion = ({ idLeccion, idVideo, objVideo, cursoNombre, leccionNombre }) => {
 
     const { saveArchivo, modifyArchivo } = useArchivoStore((state) => ({
         saveArchivo: state.saveArchivo,
@@ -35,7 +35,7 @@ const FormularioAgregarArchivoLeccion = ({ idLeccion, idVideo, objVideo }) => {
             return;
         }
 
-        const storageRef = ref(storage, `/video/${file.name}`)
+        const storageRef = ref(storage, `/cursos/${cursoNombre}/lecciones/${leccionNombre}/video/${file.name}`)
         const uploadTask = uploadBytesResumable(storageRef, file)
 
         uploadTask.on("state_changed",
@@ -78,7 +78,7 @@ const FormularioAgregarArchivoLeccion = ({ idLeccion, idVideo, objVideo }) => {
 
                         if (objVideo.nombre != file.name) {
 
-                            const deleteRef = ref(storage, `/video/${objVideo.nombre}`)
+                            const deleteRef = ref(storage, `/cursos/${cursoNombre}/lecciones/${leccionNombre}/video/${objVideo.nombre}`)
 
                             deleteObject(deleteRef).then(async () => {
                                 const estatus = await modifyArchivo(idVideo, file.name, file.type, videoUrl)
@@ -160,4 +160,4 @@ const FormularioAgregarArchivoLeccion = ({ idLeccion, idVideo, objVideo }) => {
     )
 }
 
-export default FormularioAgregarArchivoLeccion
+export default FormularioAgregarVideoLeccion

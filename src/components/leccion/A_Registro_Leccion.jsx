@@ -2,7 +2,7 @@ import Swal from "sweetalert2"
 import { useLeccionStore } from "../../store/leccionStore"
 import { useNavigate } from "react-router-dom"
 
-const A_Registro_Leccion = ({ leccion }) => {
+const A_Registro_Leccion = ({ leccion, cursoNombre }) => {
 
     const navigate = useNavigate()
 
@@ -97,7 +97,7 @@ const A_Registro_Leccion = ({ leccion }) => {
     }
 
     const editar_leccion = () => {
-        navigate(`/admin/lecciones/${leccion.idLeccion}`)
+        navigate(`/admin/lecciones/${cursoNombre}/${leccion.nombre}/${leccion.idLeccion}`) 
     }
 
     return (

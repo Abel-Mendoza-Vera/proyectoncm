@@ -6,7 +6,7 @@ import { storage } from '../../firebase'
 import { useArchivoStore } from '../../store/archivoStore'
 import { useCursoStore } from '../../store/cursoStore'
 
-const FormularioAgregarArchivoCurso = ({ idCurso, idImagen, objImagen }) => {
+const FormularioAgregarArchivoCurso = ({ idCurso, idImagen, objImagen, cursoNombre }) => {
 
     const { saveArchivo, modifyArchivo } = useArchivoStore((state) => ({
         saveArchivo: state.saveArchivo,
@@ -35,7 +35,7 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idImagen, objImagen }) => {
             return;
         }
 
-        const storageRef = ref(storage, `/imagen/${file.name}`)
+        const storageRef = ref(storage, `/cursos/${cursoNombre}/imagen/${file.name}`)
         const uploadTask = uploadBytesResumable(storageRef, file)
 
         uploadTask.on("state_changed",
@@ -78,7 +78,7 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idImagen, objImagen }) => {
 
                         if (objImagen.nombre != file.name) {
 
-                            const deleteRef = ref(storage, `/imagen/${objImagen.nombre}`)
+                            const deleteRef = ref(storage, `/cursos/${cursoNombre}/imagen/${objImagen.nombre}`)
 
                             deleteObject(deleteRef).then(async () => {
                                 const estatus = await modifyArchivo(idImagen, file.name, file.type, imagenUrl)

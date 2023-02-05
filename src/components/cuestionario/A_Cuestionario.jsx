@@ -11,20 +11,6 @@ const A_Cuestionario = ({ leccionId }) => {
 
     let cuestionario = cuestionarios.find((item) => item.idLeccion == leccionId)
 
-    /**
-         * Pasos por seguir:
-         * 0- Crear el diseño de todo lo de abajo, despues dar la funcionalidad
-         * 1- Validar si hay o no 1 cuestionario para la lección
-         * 2- Tener su alerta
-         * 3- Agregar boton modal para agregar el cuestionario
-         * 3.1 - Ocultar el boton
-         * 4- Crear un "card" del cuestionario vacio
-         * 5- Agregar un boton modal para agrega una pregunta al cuestionario
-         * 6- Mostrar la lista de preguntas en el "card" del cuestionario
-         * 7- Modificar una pregunta
-         * 8- Eliminar una pregunta
-         */
-
     return (
         <>
             <hr />

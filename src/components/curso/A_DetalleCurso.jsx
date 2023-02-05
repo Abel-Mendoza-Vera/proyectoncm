@@ -7,7 +7,7 @@ import FormularioModificarCurso from "../../components/curso/FormularioModificar
 import FormularioAgregarImagenCurso from "../../components/archivo/FormularioAgregarImagenCurso"
 import FormularioAgregarVideoCurso from '../../components/archivo/FormularioAgregarVideoCurso'
 
-const A_DetalleCurso = ({cursoId}) => {
+const A_DetalleCurso = ({cursoId, cursoNombre}) => {
 
     let cursos = useCursoStore((state) => state.cursos)
     let archivos = useArchivoStore((state) => state.archivos)
@@ -47,7 +47,7 @@ const A_DetalleCurso = ({cursoId}) => {
                                     :
                                     <img src={imgDefault} alt="imagenCurso" className="img-fluid rounded mb-2" />
                             }
-                            <FormularioAgregarImagenCurso idCurso={curso.idCurso} idImagen={curso.idMiniatura} objImagen={imagenCurso} />
+                            <FormularioAgregarImagenCurso idCurso={curso.idCurso} cursoNombre={cursoNombre} idImagen={curso.idMiniatura} objImagen={imagenCurso} />
                         </div>
 
                         <div className="row mt-3">
@@ -59,7 +59,7 @@ const A_DetalleCurso = ({cursoId}) => {
                                     :
                                     <div className="alert alert-warning" role="alert"><p>No se ha agregado un video para este curso.</p></div>
                             }
-                            <FormularioAgregarVideoCurso idCurso={curso.idCurso} idVideo={curso.idVideo} objVideo={videoCurso} />
+                            <FormularioAgregarVideoCurso idCurso={curso.idCurso} cursoNombre={cursoNombre} idVideo={curso.idVideo} objVideo={videoCurso} />
                         </div>
                     </div>
                 </div>

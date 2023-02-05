@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useLeccionStore } from "../../store/leccionStore"
 import A_Registro_Leccion from "./A_Registro_Leccion"
 
-const A_Tabla_Leccion = ({ cursoId }) => {
+const A_Tabla_Leccion = ({ cursoId, cursoNombre }) => {
 
     const { lecciones } = useLeccionStore((state) => ({
         lecciones: state.lecciones
@@ -55,7 +55,7 @@ const A_Tabla_Leccion = ({ cursoId }) => {
 
                                 listaLecciones.map((leccion) => {
                                     return (
-                                        <A_Registro_Leccion key={leccion.idLeccion} leccion={leccion} />
+                                        <A_Registro_Leccion key={leccion.idLeccion} leccion={leccion} cursoNombre={cursoNombre} />
                                     )
                                 })
 
