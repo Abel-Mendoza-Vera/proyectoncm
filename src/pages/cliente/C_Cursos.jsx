@@ -1,6 +1,6 @@
-import Mis_Cursos from "../../components/Mis_Cursos"
+import Cursos from "../../components/Cursos"
 
-const C_Mis_Cursos = () => {
+const C_Cursos = () => {
 
   return (
     <>
@@ -9,16 +9,12 @@ const C_Mis_Cursos = () => {
         {/** Primer fila para agregar o buscar un curso */}
         <div className="row">
           <div className="col">
-            <Mis_Cursos />
+            <Cursos />
           </div>
-        </div>
-
-        {/** Tarjeta 
-       <Tarjeta/>*/}
-
+        </div>  
       </div>
     </>
   )
 }
 
-export default C_Mis_Cursos
+export default C_Cursos

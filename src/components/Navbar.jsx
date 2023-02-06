@@ -44,6 +44,12 @@ const Navbar = () => {
                             <Link to="/" className="nav-link" >Inicio</Link>
                         </li>
                         <li className="nav-item">
+                            <Link to="/cliente/cursos" className="nav-link" >Catalogo de Cursos</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/cliente/mis_cursos" className="nav-link" >Mis Cursos</Link>
+                        </li>
+                        <li className="nav-item">
                             <Link to="/admin/cursos" className="nav-link" >Cursos</Link>
                         </li>
                         <li className="nav-item">
