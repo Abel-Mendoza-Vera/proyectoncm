@@ -10,6 +10,8 @@ import A_Lecciones from '../pages/admin/A_Lecciones'
 import C_Cursos from '../pages/cliente/C_Cursos'
 import C_CursoPlantilla from '../pages/cliente/C_CursoPlantilla'
 import C_Leccion from '../pages/cliente/C_Leccion'
+import C_Examen from '../pages/cliente/C_Examen'
+
 
 
 const Enrutador = () => {
@@ -46,6 +48,8 @@ const Enrutador = () => {
                     <Route path='mis_cursos' element={ <C_Mis_Cursos/> } />
                     <Route path='cursos_plantilla' element={ <C_CursoPlantilla/> } />
                     <Route path='leccion' element={ <C_Leccion/> } />
+                    <Route path='examen' element={ <C_Examen/> } />
+
 
                     <Route path='cursos' element={ <C_Cursos/> } />
                     <Route path='perfil' element={ <><h1>Perfil</h1></> } />
