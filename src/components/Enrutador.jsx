@@ -9,6 +9,8 @@ import C_Mis_Cursos from '../pages/cliente/C_Mis_Cursos'
 import A_Lecciones from '../pages/admin/A_Lecciones'
 import C_Cursos from '../pages/cliente/C_Cursos'
 import C_CursoPlantilla from '../pages/cliente/C_CursoPlantilla'
+import C_Leccion from '../pages/cliente/C_Leccion'
+
 
 const Enrutador = () => {
     return (
@@ -43,6 +45,8 @@ const Enrutador = () => {
                 <Route path='/cliente/*' >
                     <Route path='mis_cursos' element={ <C_Mis_Cursos/> } />
                     <Route path='cursos_plantilla' element={ <C_CursoPlantilla/> } />
+                    <Route path='leccion' element={ <C_Leccion/> } />
+
                     <Route path='cursos' element={ <C_Cursos/> } />
                     <Route path='perfil' element={ <><h1>Perfil</h1></> } />
                     <Route path='comprar' element={ <><h1>Comprar</h1></> } />

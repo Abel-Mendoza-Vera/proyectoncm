@@ -1,9 +1,12 @@
-import imagen from '../assets/Nosotros1.png'
-import Mision from '../assets/Mision.jpg'
-import Vision from '../assets/Vision.jpg'
-import Valores from '../assets/Valores.jpg'
+import { Link, useNavigate } from "react-router-dom"
 
 const CursosPlantilla = () => {
+    const navigate = useNavigate()
+
+    const leccion = () => {
+        navigate(`/cliente/leccion`)
+    }
+
     return (
         <div className="container">
             <div className="row">
@@ -26,7 +29,7 @@ const CursosPlantilla = () => {
                 </div>
             </div>
             <div className='text-center'>
-                <button className='btn btn-outline-primary'>Continuar</button>
+                <button className='btn btn-outline-primary' onClick={leccion}>Continuar</button>
             </div>
 
         </div>
