@@ -16,13 +16,9 @@ const CursosPlantilla = () => {
             </div>
             <div class="card-body">
                 <p className='text-justify'>Descripción del Curso Descripción del Curso Descripción del CursoDescripción del CursoDescripción del CursoDescripción del CursoDescripción del CursoDescripción del CursoDescripción del CursoDescripción del Curso</p>
-                <p class="nav-link active" href="#">Objetivo de este curso es aprender sobre los corridos tumbados y porque son buenos en las fiestas</p>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="embed-responsive embed-responsive-16by9 text-center">
-                            <iframe width="1000" height="400" src="https://www.youtube.com/embed/NAVzjKNa6ro" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                    </div>
-                    </div>
-                </div>
+                <p class="nav-link active" href="#">Objetivo de este curso es aprender</p>
+                <video width="1000" height="400" src="https://firebasestorage.googleapis.com/v0/b/test-firebase-react-19c01.appspot.com/o/cursos%2FCurso%201%2Fvideo%2Fvideo.mp4?alt=media&token=60684037-2283-4fcf-bdbd-17588edf320a" poster="presentacion.jpg" controls></video>
+
             </div>
             <div class="card-footer text-muted">
                 <div className='text-center'>

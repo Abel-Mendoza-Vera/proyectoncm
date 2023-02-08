@@ -49,12 +49,8 @@ const Leccion = () => {
                 </div>
                 <div class="card-body">
                     <p className='text-justify'>Información de la lección</p>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="embed-responsive embed-responsive-16by9 text-center">
-                                <iframe width="1000" height="400" src="https://www.youtube.com/embed/NAVzjKNa6ro" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                    </div>
-                        </div>
-                    </div>
+                    <video width="1000" height="400" src="https://firebasestorage.googleapis.com/v0/b/test-firebase-react-19c01.appspot.com/o/cursos%2FCurso%201%2Fvideo%2Fvideo.mp4?alt=media&token=60684037-2283-4fcf-bdbd-17588edf320a" poster="presentacion.jpg" controls></video>
+
 
                 </div>
                 <div class="card-footer text-muted">
