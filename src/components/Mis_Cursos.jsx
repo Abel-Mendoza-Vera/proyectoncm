@@ -7,6 +7,15 @@ const Mis_Cursos = () => {
 
     const navigate = useNavigate()
 
+    const Cursos = () => {
+        navigate(`/cliente/cursos`)
+    }
+
+    const MisCursos = () => {
+        navigate(`/cliente/mis_cursos`)
+    }
+
+
     const continuar_curso = () => {
         navigate(`/cliente/cursos_plantilla`)
     }
@@ -20,8 +29,19 @@ const Mis_Cursos = () => {
                         <span className='input-group-text material-icons'>search</span>
                     </div>
                 </div>
-            </div><br />
-            
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" onClick={Cursos}>Cursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" onClick={MisCursos}>Mis Cursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Cursos Terminados</a>
+                    </li>
+                </ul>
+            </div>
+
             <div className="row row-cols-1 row-cols-md-3 g-4 mb-5">
                 <div className="col mb-5">
                     <div className='card' style={{ width: "20rem" }}>
@@ -30,6 +50,10 @@ const Mis_Cursos = () => {
                             <h5 className="card-title text-center">Nombre del Curso</h5>
                             <p className="card-text">Descripción del Curso</p>
                             <button className='btn btn-outline-success' onClick={continuar_curso}>Continuar</button>
+                            <br /><br />
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style={{ width: "25%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -40,6 +64,10 @@ const Mis_Cursos = () => {
                             <h5 className="card-title text-center">Nombre del Curso</h5>
                             <p className="card-text ">Descripción del Curso</p>
                             <button className='btn btn-outline-success' onClick={continuar_curso}>Continuar</button>
+                            <br /><br />
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style={{ width: "25%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -50,11 +78,15 @@ const Mis_Cursos = () => {
                             <h5 className="card-title text-center">Nombre del Curso</h5>
                             <p className="card-text">Descripción del Curso</p>
                             <button className='btn btn-outline-success' onClick={continuar_curso}>Continuar</button>
+                            <br /><br />
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style={{ width: "25%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     )
 }

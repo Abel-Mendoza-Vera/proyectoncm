@@ -50,7 +50,6 @@ const Enrutador = () => {
                     <Route path='leccion' element={ <C_Leccion/> } />
                     <Route path='examen' element={ <C_Examen/> } />
 
-
                     <Route path='cursos' element={ <C_Cursos/> } />
                     <Route path='perfil' element={ <><h1>Perfil</h1></> } />
                     <Route path='comprar' element={ <><h1>Comprar</h1></> } />

@@ -41,8 +41,9 @@ const Inicio = () => {
               <img src={img} className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title text-center">Nombre del Curso</h5>
-                <p className="card-text">Descripción del Curso</p>
-                <a href="" className="btn btn-outline-primary">Comprar</a>
+                <div><p className="card-text">Descripción del Curso</p>
+                  <h5 className="text-end text-danger">$100 MXN</h5>
+                </div>                <a href="" className="btn btn-outline-primary">Comprar</a>
               </div>
             </div>
           </div>
@@ -51,8 +52,9 @@ const Inicio = () => {
               <img src={img} className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title text-center">Nombre del Curso</h5>
-                <p className="card-text ">Descripción del Curso</p>
-                <a href="" className="btn btn-outline-primary">Comprar</a>
+                <div><p className="card-text">Descripción del Curso</p>
+                  <h5 className="text-end text-danger">$100 MXN</h5>
+                </div>                <a href="" className="btn btn-outline-primary">Comprar</a>
               </div>
             </div>
           </div>
@@ -61,8 +63,9 @@ const Inicio = () => {
               <img src={img} className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title text-center">Nombre del Curso</h5>
-                <p className="card-text">Descripción del Curso</p>
-                <a href="" className="btn btn-outline-primary">Comprar</a>
+                <div><p className="card-text">Descripción del Curso</p>
+                  <h5 className="text-end text-danger">$100 MXN</h5>
+                </div>                <a href="" className="btn btn-outline-primary">Comprar</a>
               </div>
             </div>
           </div>
