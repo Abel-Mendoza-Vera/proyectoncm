@@ -35,10 +35,17 @@ const CursosPlantilla = () => {
                         </li>
                     </ul>
                 </div>
+                
                 <div class="card-body">
-                    <h5 class="card-title"><h3 className='text-center'>Nombre del Curso</h3></h5>
-                    <p className='text-justify'>Descripción del Curso</p>
-                    <p className='text-justify'>Objetivo de este curso es aprender</p>
+                    <h3 class="card-title">Nombre del Curso</h3>
+
+                    <p class="text-start">Descripción del Curso</p>
+
+                    <div class="text-start">
+                   <ul>
+                        <li>Objetivo de este curso es aprender</li>
+                    </ul>
+                    </div>
                     <video width="500" height="300" src="https://firebasestorage.googleapis.com/v0/b/test-firebase-react-19c01.appspot.com/o/cursos%2FCurso%201%2Fvideo%2Fvideo.mp4?alt=media&token=60684037-2283-4fcf-bdbd-17588edf320a" poster="presentacion.jpg" controls></video>
 
 

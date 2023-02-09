@@ -39,7 +39,7 @@ const Leccion = () => {
                 </div>
                 <div class="card-body">
                     <h5 class="card-title"><h3 className='text-center'>Nombre de la leccion</h3></h5>
-                    <p className='text-justify'>Información de la lección</p>
+                    <p class="text-start">Información de la lección</p>
                     <video width="500" height="300" src="https://firebasestorage.googleapis.com/v0/b/test-firebase-react-19c01.appspot.com/o/cursos%2FCurso%201%2Fvideo%2Fvideo.mp4?alt=media&token=60684037-2283-4fcf-bdbd-17588edf320a" poster="presentacion.jpg" controls></video>
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <button className='btn btn-outline-primary' onClick={Curso}>Regresar</button>
