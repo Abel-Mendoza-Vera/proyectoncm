@@ -1,3 +1,5 @@
+import '../components/login.css'
+
 import React from "react";
 import { Link, useNavigate } from "react-router-dom"
 
@@ -9,6 +11,8 @@ const Login = () => {
   }
 
   return (
+    <div className="bg"><br /><br /> <br />
+
 
     <div class="col d-flex justify-content-center">
       <div class="row">
@@ -55,6 +59,7 @@ const Login = () => {
 
       </div>
 
+    </div>
     </div>
 
 
