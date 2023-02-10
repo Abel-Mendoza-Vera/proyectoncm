@@ -55,12 +55,13 @@ const Navbar = () => {
                         <li className="nav-item">
                             <Link to="/pages/Contac" className="nav-link" >Contactanos</Link>
                         </li>
-                        {/**
-                        <li className="nav-item">
-                            <Link to="/cliente/mis_cursos" className="nav-link" >Mis Cursos</Link>
-                        </li>
-                         */}
+                        
                     </ul>
+                    <span className="nav-item text-primary" >
+                            <Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link>
+                    </span> 
+                        
+                 
                 </div>
             </div>
         </nav>

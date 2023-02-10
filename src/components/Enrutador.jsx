@@ -11,6 +11,10 @@ import C_Cursos from '../pages/cliente/C_Cursos'
 import C_CursoPlantilla from '../pages/cliente/C_CursoPlantilla'
 import C_Leccion from '../pages/cliente/C_Leccion'
 import C_Examen from '../pages/cliente/C_Examen'
+import U_Login from '../pages/usuario/U_Login'
+import U_Register from '../pages/usuario/U_Register'
+
+
 
 
 
@@ -29,8 +33,8 @@ const Enrutador = () => {
 
 
                 {/* Ruta para el inicio de sesion */}
-                <Route path='/iniciar_sesion' element={ <><h1>Login</h1></> } />
-                <Route path='/registrar' element={ <><h1>Regitrar cliente</h1></> } />
+                <Route path='/iniciar_sesion' element={ <U_Login/> } />
+                <Route path='/registrar' element={ <U_Register/> } />
 
                 {/* Rutas administrativas */}
                 <Route path='/admin/*' >
@@ -49,6 +53,7 @@ const Enrutador = () => {
                     <Route path='cursos_plantilla' element={ <C_CursoPlantilla/> } />
                     <Route path='leccion' element={ <C_Leccion/> } />
                     <Route path='examen' element={ <C_Examen/> } />
+
 
                     <Route path='cursos' element={ <C_Cursos/> } />
                     <Route path='perfil' element={ <><h1>Perfil</h1></> } />
