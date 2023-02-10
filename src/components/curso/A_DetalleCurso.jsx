@@ -29,7 +29,7 @@ const A_DetalleCurso = ({cursoId, cursoNombre}) => {
                 <div className="row row-2 mt-3">
                     <div className="col-12 col-md-8">
                         <h3><strong>{curso.nombre}</strong></h3>
-                        <h5 className="text-end text-danger">$ {curso.precio} MXN</h5>
+                        <h5 className="text-end">$ {curso.precio} MXN</h5>
                         <p><strong>Duración:</strong> {curso.duracion} horas</p>
                         <p><strong>Objetivo:</strong></p>
                         <p>{curso.objetivos}</p>

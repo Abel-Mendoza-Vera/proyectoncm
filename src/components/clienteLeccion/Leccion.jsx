@@ -7,7 +7,7 @@ const Leccion = () => {
         navigate(`/cliente/cursos_plantilla`)
     }
 
-    
+
 
     const leccion = () => {
         navigate(`/cliente/leccion`)
@@ -18,8 +18,8 @@ const Leccion = () => {
     }
 
     return (
-        <div>
 
+        <div>
             <div class="card text-center">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
@@ -37,18 +37,42 @@ const Leccion = () => {
                         </li>
                     </ul>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title"><h3 className='text-center'>Nombre de la leccion</h3></h5>
-                    <p class="text-start">Información de la lección</p>
-                    <video width="500" height="300" src="https://firebasestorage.googleapis.com/v0/b/test-firebase-react-19c01.appspot.com/o/cursos%2FCurso%201%2Fvideo%2Fvideo.mp4?alt=media&token=60684037-2283-4fcf-bdbd-17588edf320a" poster="presentacion.jpg" controls></video>
-                    <div class="card-body d-flex justify-content-between align-items-center">
-                        <button className='btn btn-outline-primary' onClick={Curso}>Regresar</button>
+                <section class="jumbotron text-center">
+                    <div class="container">
+                        <h1 class="jumbotron-heading">Nombre de la lección</h1>
+                        <p class="lead text-muted">Información de la lección.</p>
 
-                        <button className='btn btn-outline-primary' onClick={examen}>Continuar</button>
+                        <p>
+
+                        </p>
                     </div>
-                 </div>
+                </section>
+
+                <div class="album py-5 bg-light">
+                    <div class="container">
+
+                        <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="https://firebasestorage.googleapis.com/v0/b/test-firebase-react-19c01.appspot.com/o/cursos%2FCurso%201%2Fvideo%2Fvideo.mp4?alt=media&token=60684037-2283-4fcf-bdbd-17588edf320a" poster="presentacion.jpg" controls allowfullscreen></iframe>
+                        </div>
+
+                    </div>
+                </div>
+                <section class="jumbotron text-center">
+                    <div class="container">
+
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <button className='btn btn-outline-primary' onClick={Curso}>Regresar</button>
+
+                            <button className='btn btn-outline-primary' onClick={examen}>Continuar</button>
+                        </div>
+                    </div>
+                </section>
             </div>
+
+
         </div>
+
+
 
     )
 }

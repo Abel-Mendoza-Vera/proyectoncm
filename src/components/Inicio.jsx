@@ -42,7 +42,7 @@ const Inicio = () => {
               <div className="card-body">
                 <h5 className="card-title text-center">Nombre del Curso</h5>
                 <div><p className="card-text">Descripción del Curso</p>
-                  <h5 className="text-end text-danger">$100 MXN</h5>
+                  <h5 className="text-end">$100 MXN</h5>
                 </div>                <a href="" className="btn btn-outline-primary">Comprar</a>
               </div>
             </div>
@@ -53,7 +53,7 @@ const Inicio = () => {
               <div className="card-body">
                 <h5 className="card-title text-center">Nombre del Curso</h5>
                 <div><p className="card-text">Descripción del Curso</p>
-                  <h5 className="text-end text-danger">$100 MXN</h5>
+                  <h5 className="text-end">$100 MXN</h5>
                 </div>                <a href="" className="btn btn-outline-primary">Comprar</a>
               </div>
             </div>
@@ -64,7 +64,7 @@ const Inicio = () => {
               <div className="card-body">
                 <h5 className="card-title text-center">Nombre del Curso</h5>
                 <div><p className="card-text">Descripción del Curso</p>
-                  <h5 className="text-end text-danger">$100 MXN</h5>
+                  <h5 className="text-end">$100 MXN</h5>
                 </div>                <a href="" className="btn btn-outline-primary">Comprar</a>
               </div>
             </div>
