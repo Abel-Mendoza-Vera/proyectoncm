@@ -14,23 +14,23 @@ const Login = () => {
     <div className="bgl"><br /><br /> <br />
 
 
-    <div class="col d-flex justify-content-center">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="card">
-            <div class="card-body">
+    <div className="col d-flex justify-content-center">
+      <div className="row">
+        <div className="col-sm-12">
+          <div className="card">
+            <div className="card-body">
               <form>
                 <div>
                   <h3 className="text-center">Iniciar Sesión</h3>
                 </div> <br />
-                <div class="form-outline mb-4">
-                  <input type="email" id="form2Example1" class="form-control" />
-                  <label class="form-label" for="form2Example1">Correo</label>
+                <div className="form-outline mb-4">
+                  <input type="email" id="form2Example1" className="form-control" />
+                  <label className="form-label" for="form2Example1">Correo</label>
                 </div>
 
-                <div class="form-outline mb-4">
-                  <input type="password" id="form2Example2" class="form-control" />
-                  <label class="form-label" for="form2Example2">Contraseña</label>
+                <div className="form-outline mb-4">
+                  <input type="password" id="form2Example2" className="form-control" />
+                  <label className="form-label" for="form2Example2">Contraseña</label>
                 </div>
 
                 <div class="row mb-4">

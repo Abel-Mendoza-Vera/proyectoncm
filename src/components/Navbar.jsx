@@ -50,6 +50,9 @@ const Navbar = () => {
                             <Link to="/admin/cursos" className="nav-link" >Cursos Admin</Link>
                         </li>
                         <li className="nav-item">
+                            <Link to="/admin/usuarios" className="nav-link" >Usuarios</Link>
+                        </li>
+                        <li className="nav-item">
                             <Link to="/pages/Us" className="nav-link" >Nosotros</Link>
                         </li>
                         <li className="nav-item">
@@ -61,7 +64,7 @@ const Navbar = () => {
                             <Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link>
                     </span> 
                         
-                 
+                
                 </div>
             </div>
         </nav>
