@@ -14,6 +14,10 @@ const Cursos = () => {
         navigate(`/cliente/cursos`)
     }
 
+    const Certificaciones = () => {
+        navigate(`/cliente/certificaciones`)
+    }
+
     return (
         <div className="mb-5">
             <div className="row mt-3 justify-content-end mb-5">
@@ -31,7 +35,7 @@ const Cursos = () => {
                         <a class="nav-link" onClick={MisCursos}>Mis Cursos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Cursos Terminados</a>
+                        <a class="nav-link" onClick={Certificaciones}>Cursos Terminados</a>
                     </li>
                 </ul>
             </div>
