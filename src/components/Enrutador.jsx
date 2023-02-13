@@ -14,6 +14,7 @@ import C_Examen from '../pages/cliente/C_Examen'
 import U_Login from '../pages/usuario/U_Login'
 import U_Register from '../pages/usuario/U_Register'
 import A_Usuarios from '../pages/admin/A_Usuarios'
+import U_Perfil from '../pages/usuario/U_Perfil'
 
 
 
@@ -36,6 +37,8 @@ const Enrutador = () => {
                 {/* Ruta para el inicio de sesion */}
                 <Route path='/iniciar_sesion' element={ <U_Login/> } />
                 <Route path='/registrar' element={ <U_Register/> } />
+                <Route path='/perfil' element={ <U_Perfil/> } />
+
 
                 {/* Rutas administrativas */}
                 <Route path='/admin/*' >

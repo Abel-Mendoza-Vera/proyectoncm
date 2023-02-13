@@ -22,6 +22,10 @@ export const useAccesoStore = create( persist(
 
             return result.data;
 
+        },
+
+        logout: () => {
+            set( (state) => ({ token: null, acceso: false }) )
         }
 
 

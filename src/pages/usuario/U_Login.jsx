@@ -1,15 +1,27 @@
-//import Login from "../../components/Login"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MdEmail, MdPassword } from 'react-icons/all'
 import { FaUserCircle } from 'react-icons/fa'
 import Swal from 'sweetalert2'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { shallow } from 'zustand/shallow'
 
 import { useAccesoStore } from '../../store/accesoStore'
 
 const U_Login = () => {
 
-  const login = useAccesoStore(state => state.login)
+  const navigate = useNavigate();
+
+  const { acceso, login} = useAccesoStore(state => ({
+    acceso: state.acceso,
+    login: state.login
+  }), shallow)
+
+  useEffect(() => {
+    if(acceso) {
+      navigate("/")
+    }
+  }, [acceso])
+  
 
   const [formularioIniciarSesion, setFormularioIniciarSesion] = useState({
     correo: "",
@@ -40,6 +52,8 @@ const U_Login = () => {
         timer: 1500,
         timerProgressBar: true
       })
+
+      navigate("/");
 
     } catch (error) {
       Swal.fire({
