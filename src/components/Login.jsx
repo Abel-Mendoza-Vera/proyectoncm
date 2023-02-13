@@ -11,7 +11,7 @@ const Login = () => {
   }
 
   return (
-    <div className="bg"><br /><br /> <br />
+    <div className="bgl"><br /><br /> <br />
 
 
     <div class="col d-flex justify-content-center">
