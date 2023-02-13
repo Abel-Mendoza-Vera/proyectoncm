@@ -13,6 +13,7 @@ import C_Leccion from '../pages/cliente/C_Leccion'
 import C_Examen from '../pages/cliente/C_Examen'
 import U_Login from '../pages/usuario/U_Login'
 import U_Register from '../pages/usuario/U_Register'
+import A_Usuarios from '../pages/admin/A_Usuarios'
 
 
 
@@ -44,7 +45,7 @@ const Enrutador = () => {
                     <Route path='cuestionarios' element={ <h1>Cuestionarios</h1> } />
                     <Route path='preguntas' element={ <><h1>Preguntas</h1></> } />
                     <Route path='empleados' element={ <><h1>Empleados</h1></> } />
-                    <Route path='usuarios' element={ <><h1>Usuarios</h1></> } />
+                    <Route path='usuarios' element={ <A_Usuarios/> } />
                 </Route>
  
                 {/* Rutas del cliente */}

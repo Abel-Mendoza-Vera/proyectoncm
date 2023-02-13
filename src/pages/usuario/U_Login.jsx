@@ -1,17 +1,108 @@
-import Login from "../../components/Login"
+//import Login from "../../components/Login"
+import { useState } from 'react'
+import { MdEmail, MdPassword } from 'react-icons/all'
+import { FaUserCircle } from 'react-icons/fa'
+import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom'
+
+import { useAccesoStore } from '../../store/accesoStore'
 
 const U_Login = () => {
 
+  const login = useAccesoStore(state => state.login)
+
+  const [formularioIniciarSesion, setFormularioIniciarSesion] = useState({
+    correo: "",
+    contrasenia: ""
+  })
+
+  const { correo, contrasenia } = formularioIniciarSesion;
+
+  const handlerChangeFormIniciarSesion = (e) => {
+
+    setFormularioIniciarSesion({
+      ...formularioIniciarSesion,
+      [e.target.name]: e.target.value
+    })
+
+  }
+
+  const submitHandler = async (e) => {
+
+    e.preventDefault();
+    try {
+      const { acceso } = await login(correo, contrasenia)
+
+      Swal.fire({
+        title: "Iniciar sesión",
+        text: "Usuario autenticado",
+        icon: "success",
+        timer: 1500,
+        timerProgressBar: true
+      })
+
+    } catch (error) {
+      Swal.fire({
+        title: "Iniciar sesión",
+        text: "Usuario o contraseña incorrectos, intentelo de nuevo",
+        icon: "error",
+        timer: 1500,
+        timerProgressBar: true
+      })
+    }
+
+
+  }
+
   return (
     <>
-      <div className='container-fluid mt-3 vh-100'>
+      <div className="container-fluid w-100 h-100 my-5">
+        <div id="FormularioLogin" className="row d-flex justify-content-center">
 
-        {/** Primer fila para agregar o buscar un curso */}
-        <div className="row">
-          <div className="col">
-            <Login/>
+          <div className="col-5 border p-5 rounded bg-primary bg-opacity-25">
+
+            <div className="row">
+
+              <div className="text-center">
+
+                <FaUserCircle size="3em" />
+                <h3 className='display-6'><strong>Inicar Sesión</strong></h3>
+                <p className='mb-5 text-center'>Nos da gusto verte de nuevo</p>
+              </div>
+
+              <form onSubmit={submitHandler}>
+
+                <div className="input-group mb-3">
+                  <span className='input-group-text'><MdEmail size="2em" /></span>
+                  <div className="form-floating">
+                    <input name='correo' onChange={handlerChangeFormIniciarSesion} value={correo} type="email" className="form-control" placeholder="" required />
+                    <label className='text-dark'>Correo</label>
+                  </div>
+                </div>
+
+                <div className="input-group mb-3">
+                  <span className='input-group-text'><MdPassword size="2em" /></span>
+                  <div className="form-floating">
+                    <input name='contrasenia' onChange={handlerChangeFormIniciarSesion} value={contrasenia} type="password" className="form-control" placeholder="" required />
+                    <label className='text-dark'>Contraseña</label>
+                  </div>
+                </div>
+
+
+                <div className="row mt-4">
+                  <button className='btn btn-primary' type="submit">Iniciar sesión</button>
+                </div>
+
+              </form>
+            </div>
+
+            <div className="row my-3 text-center">
+              <p>¿ No tienes una cuenta ?, no te preocupes.</p>
+              <Link to="/registrar">Registrate ahora!</Link>
+            </div>
+
           </div>
-        </div>  
+        </div>
       </div>
     </>
   )
