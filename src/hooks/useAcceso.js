@@ -43,13 +43,13 @@ const perfil = async ( token ) => {
 }
 
 export const useRegistrarse = (usuario) => {
-    return useQuery(['signup', usuario], registrarUsuario(usuario))
+    return useQuery(['signup', usuario], () => registrarUsuario(usuario))
 }
 
 export const useIniciarSesion = (usuario) => {
-    return useQuery(['signin', usuario], iniciarSesion(usuario))
+    return useQuery(['signin', usuario], () => iniciarSesion(usuario))
 }
 
 export const usePerfil = (token) => {
-    return useQuery(["perfil", token], perfil(token))
+    return useQuery(["perfil", token], () => perfil(token))
 }

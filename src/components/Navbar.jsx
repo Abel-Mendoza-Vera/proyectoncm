@@ -1,32 +1,19 @@
-import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.png'
 
-// Se realiza la carga de todo el store
 import { shallow } from 'zustand/shallow'
-
-import { useCursoStore } from '../store/cursoStore'
-import { useLeccionStore } from '../store/leccionStore'
-import { useArchivoStore } from '../store/archivoStore'
-import { useCuestionarioStore } from '../store/cuestionarioStore'
-import { usePreguntaStore } from '../store/preguntaStore'
+import { useAccesoStore } from '../store/accesoStore'
 
 const Navbar = () => {
 
-    const { getCursos } = useCursoStore((state) => ({ getCursos: state.getCursos }), shallow)
-    const { getLecciones } = useLeccionStore((state) => ({ getLecciones: state.getLecciones }), shallow)
-    const { getArchivos } = useArchivoStore((state) => ({ getArchivos: state.getArchivos }), shallow)
-    const { getCuestionarios } = useCuestionarioStore((state) => ({ getCuestionarios: state.getCuestionarios }), shallow)
-    const { getPreguntas } = usePreguntaStore((state) => ({ getPreguntas: state.getPreguntas }), shallow)
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        getCursos()
-        getLecciones()
-        getArchivos()
-        getCuestionarios()
-        getPreguntas()
-    }, [])
-    
+    const { acceso, logout } = useAccesoStore((state) => ({ acceso: state.acceso, logout: state.logout }), shallow)
+
+    const cerrarSesion = () => {
+        logout();
+        navigate( "/" );
+    }
 
     return (
         <nav className="navbar navbar-expand-lg  bg-ligth">
@@ -58,12 +45,20 @@ const Navbar = () => {
                         <li className="nav-item">
                             <Link to="/pages/Contac" className="nav-link" >Contactanos</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link to="/perfil" className="nav-link" >Perfil</Link>
+                        </li>
                         
                     </ul>
+
+
                     <span className="nav-item text-primary" >
-                            <Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link>
+                        { acceso ?
+                        <a className="nav-link" onClick={cerrarSesion} >Cerrar sesion</a>
+                        :
+                        <Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link>
+                        }
                     </span> 
-                        
                 
                 </div>
             </div>
