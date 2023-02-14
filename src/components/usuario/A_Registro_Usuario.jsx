@@ -1,6 +1,8 @@
 import { BsToggleOn, BsToggleOff } from 'react-icons/bs'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 
+import Swal from 'sweetalert2';
+
 import { useAccesoStore } from '../../store/accesoStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { cambiarEstatusUsuario } from '../../hooks/useUsuario';
