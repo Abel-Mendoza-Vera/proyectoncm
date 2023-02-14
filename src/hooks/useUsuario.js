@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { api } from "../api/novatec";
 
 const obtenerUsuarios = async (token) => {
@@ -16,7 +16,8 @@ const obtenerUsuarioPorId = async (token, id) => {
     return result.data;
 }
 
-const crearUsuario = async (token, usuario) => {
+export const crearUsuario = async ({token, usuario}) => {
+
     const result = await api.post("/usuario", {
         nombre: usuario.nombre,
         primerApellido: usuario.primerApellido,
@@ -34,10 +35,10 @@ const crearUsuario = async (token, usuario) => {
         headers: { "x-access-token": token }
     });
 
-    return result.data;
+    return result;
 }
 
-const modificarUsuario = async (token, id, usuario) => {
+export const modificarUsuario = async (token, id, usuario) => {
     const result = await api.patch(`/usuario/${id}`, {
         nombre: usuario.nombre,
         primerApellido: usuario.primerApellido,
@@ -55,13 +56,14 @@ const modificarUsuario = async (token, id, usuario) => {
         headers: { "x-access-token": token }
     });
 
-    return result.data;
+    return result;
 }
 
-const cambiarEstatusUsuario = async (token, id) => {
+export const cambiarEstatusUsuario = async ({token, id}) => {
     const result = await api.delete(`/usuario/${id}`, {
         headers: { "x-access-token": token }
     })
+    return result;
 }
 
 export const useObtenerUsuarios = (token) => {
@@ -70,16 +72,4 @@ export const useObtenerUsuarios = (token) => {
 
 export const useObtenerUsuarioPorId = (token, id) => {
     return useQuery(['getUsuarioId', token, id], () => obtenerUsuarioPorId(token, id))
-}
-
-export const useCrearUsuario = (token, usuario) => {
-    return useQuery(['createUsuario', token, usuario], () => crearUsuario(token, usuario))
-}
-
-export const useModificarUsuario = (token, id, usuario) => {
-    return useQuery(['updateUsuario', token, id, usuario], () => modificarUsuario(token, id, usuario))
-}
-
-export const useCambiarEstatusUsuario = (token, id) => {
-    return useQuery(['deleteUsuario', token, id], () => cambiarEstatusUsuario(token, id))
 }

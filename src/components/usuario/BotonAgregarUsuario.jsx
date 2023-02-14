@@ -2,7 +2,25 @@ import { useState } from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 import Swal from "sweetalert2"
 
+import { useAccesoStore } from '../../store/accesoStore';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { crearUsuario } from '../../hooks/useUsuario';
+
 const BotonAgregarUsuario = () => {
+
+    const token = useAccesoStore((state) => state.token)
+    const queryClient = useQueryClient()
+    const useCrearUsuario = useMutation({
+        mutationFn: crearUsuario,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar usuario", text: "El usuario se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getUsuarios")
+            limpiar();
+        },
+        onError: () => { Swal.fire({ title: "Guardar usuario", text: "El usuario no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
 
     const [formularioUsuario, setFormularioUsuario] = useState({
         nombre: "",
@@ -62,13 +80,36 @@ const BotonAgregarUsuario = () => {
         })
     }
 
-    const handlerSubmitFormUsuario = (e) => {
+    const limpiar = () => {
+
+
+        setFormularioUsuario({
+            ...formularioUsuario,
+            nombre: "",
+            primerApellido: "",
+            segundoApellido: "",
+            fechaNac: "",
+            curp: "",
+            correo: "",
+            contrasenia: "",
+            ultimoGradoEstudio: "",
+            genero: "",
+            telefono: "",
+            roles: []
+        })
+
+        let btnCancelarUsuario = document.getElementById("btnCancelarUsuario");
+        btnCancelarUsuario.click();
+    }
+
+    const handlerSubmitFormUsuario = async (e) => {
         e.preventDefault();
         handlerRolesUsuario();
 
-        if(roles.length == 0) return Swal.fire({ title: "Guardar usuario", text: "Es necesario seleccionar por lo menos 1 tipo de rol para el usuario", icon: "warning" }) ;
+        if (roles.length == 0) return Swal.fire({ title: "Guardar usuario", text: "Es necesario seleccionar por lo menos 1 tipo de rol para el usuario", icon: "warning" });
 
-        
+        const usuario = formularioUsuario
+        useCrearUsuario.mutate({ token, usuario })
     }
 
 
@@ -131,13 +172,14 @@ const BotonAgregarUsuario = () => {
                                 </div>
 
                                 <div className="form-floating mb-3">
-                                    <input type="date" onChange={(e) => handlerChangeFormUsuario(e)} name="fechaNac" className="form-control" />
+                                    <input type="date" onChange={(e) => handlerChangeFormUsuario(e)} name="fechaNac" id="fechaNac" className="form-control" />
                                     <label>Fecha de nacimiento</label>
                                 </div>
 
                                 <div className="mb-3">
                                     <label>Genero</label>
                                     <select name="genero" value={genero} onChange={(e) => handlerChangeFormUsuario(e)} id="genero" className="form-select">
+                                        <option value="">Selecciona una de las opciones</option>
                                         <option value="Hombre">Hombre</option>
                                         <option value="Mujer">Mujer</option>
                                         <option value="Otro">Otro</option>
@@ -181,8 +223,8 @@ const BotonAgregarUsuario = () => {
 
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" form="agregarUsuarioForm" className="btn btn-success">Guardar</button>
+                            <button type="reset" className="btn btn-danger" id="btnCancelarUsuario" data-bs-dismiss="modal" form="agregarUsuarioForm" >Cancelar</button>
+                            <button type="submit" id="btnGuardarUsuario" form="agregarUsuarioForm" className="btn btn-success">Guardar</button>
                         </div>
                     </div>
                 </div>
