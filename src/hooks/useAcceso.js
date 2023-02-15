@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../api/novatec';
 
-export const registrarUsuario = async ({token, usuario}) => {
-    const result = await api.post("/registrar", {
+export const registrarCliente = async ({usuario}) => {
+    const result = await api.post("/registro", {
         nombre: usuario.nombre,
         primerApellido: usuario.primerApellido,
         segundoApellido: usuario.segundoApellido,
@@ -14,9 +14,7 @@ export const registrarUsuario = async ({token, usuario}) => {
         imagen: usuario.imagen,
         correo: usuario.correo,
         contrasenia: usuario.contrasenia,
-    }, {
-        headers: { "x-access-token": token }
-    });
+    }  );
 
     return result;
 }
