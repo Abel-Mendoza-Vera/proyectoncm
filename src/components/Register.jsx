@@ -3,66 +3,120 @@ import React from "react";
 const Register = () => {
 
   return (
-    <section class="vh-100" style={{ backgroundcolor: "eee" }}>
-      <div class="container h-100">
+    <section class="h-100 bg-dark">
+      <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-lg-12 col-xl-11">
-            <div class="card text-black" style={{ borderradius: "25px" }}>
-              <div class="card-body p-md-5">
-                <div class="row justify-content-center">
-                  <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+          <div class="col">
+            <div class="card card-registration my-4">
+              <div class="row g-0">
+                <div class="col-xl-6 d-none d-xl-block">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                    alt="Sample photo" class="img-fluid"
+                    style={{ bordertopleftradius: ".25rem", borderbottomleftradius: ".25rem" }} />
+                </div>
+                <div class="col-xl-6">
+                  <div class="card-body p-md-5 text-black">
+                    <h3 class="mb-5 text-uppercase text-center">Registrarse</h3>
 
-                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Registrarse</p>
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div className="form-floating mb-3">
+                          <input type="text" name='nombre' class="form-control" placeholder=""/>
+                          <label htmlFor="nombre">Nombre</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                      <div className="form-floating mb-3">
+                      <input type="text" name='apellidoPaterno' class="form-control" placeholder=""/>
+                          <label htmlFor="apellidoPaterno">Apellido Paterno</label>
+                        </div>
+                      </div>
+                    </div>
 
-                    <form class="mx-1 mx-md-4">
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                      <div className="form-floating mb-3">
+                        <input type="text" name='apellidoMaterno' class="form-control" placeholder=""/>
+                          <label htmlFor="apellidoMaterno">Apellido Materno</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <select name="ultimoGradoEstudio" id="ultimoGradoEstudio" className="form-select">
+                          <option value="">Selecciona una opción</option>
+                          <option value="Preescolar">Preescolar</option>
+                          <option value="Primaria">Primaria</option>
+                          <option value="Secundaria">Secundaria</option>
+                          <option value="Tecnólogo">Tecnólogo</option>
+                          <option value="Bachillerato General">Bachillerato General</option>
+                          <option value="Bachillerato Tecnológico">Bachillerato Tecnológico</option>
+                          <option value="Profesional Técnico">Profesional Técnico</option>
+                          <option value="Técnico Superior Universitario">Técnico Superior Universitario</option>
+                          <option value="Licenciatura">Licenciatura</option>
+                          <option value="Especialización">Especialización</option>
+                          <option value="Maestría">Maestría</option>
+                          <option value="Doctorado">Doctorado</option>
+                        </select>
+                        <label>Ultimo Grado de Estudios</label>
 
-                      <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                        <div class="form-outline flex-fill mb-0">
-                          <input type="text" className="form-control" name='nombre' placeholder="Nombre" />
+                      </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <input type="date" name="fechaNac" id="fechaNac" className="form-control" />
+                      <label>Fecha de nacimiento</label>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <select name="genero" id="genero" className="form-select">
+                          <option value="">Selecciona una opción</option>
+                          <option value="Hombre">Hombre</option>
+                          <option value="Mujer">Mujer</option>
+                          <option value="Otro">Otro</option>
+                        </select>
+                        <label>Genero</label>
+                      </div>
+                      </div>
+                     
+                      <div class="row">
+                      <div class="col-md-6 mb-4">
+                      <div className="form-floating mb-3">
+                      <input type="text" name='curp' class="form-control" placeholder=""/>
+                          <label htmlFor="curp">Curp</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                      <div className="form-floating mb-3">
+                      <input type="number" name='telefono' class="form-control" placeholder=""/>
+                      <label htmlFor="telefono">Teléfono</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12 mb-4">
+                    <div className="form-floating mb-3">
+                      <input type="text" name='imagen' class="form-control" placeholder=""/>
+                      <label htmlFor="imagen">Imagen</label>
                         </div>
                       </div>
 
-                      <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                        <div class="form-outline flex-fill mb-0">
-                        <input type="email" className="form-control" name='nombre' placeholder="Correo" />
+                      <div class="row">
+                      <div class="col-md-6 mb-4">
+                      <div className="form-floating mb-3">
+                      <input type="email" name='correo' class="form-control" placeholder=""/>
+                      <label htmlFor="correo">Correo</label>
                         </div>
                       </div>
-
-                      <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                        <div class="form-outline flex-fill mb-0">
-                        <input type="password" className="form-control" name='nombre' placeholder="Contraseña" />
-
+                      <div class="col-md-6 mb-4">
+                      <div className="form-floating mb-3">
+                      <input type="password" name='contraseña' class="form-control" placeholder=""/>
+                      <label htmlFor="contraseña">Contraseña</label>
                         </div>
                       </div>
+                    </div>
 
-                      <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                        <div class="form-outline flex-fill mb-0">
-                          <input type="password" className="form-control" name='nombre' placeholder="Repetir Contraseña" />
-                        </div>
-                      </div>
-
-                      <div class="form-check d-flex justify-content-center mb-5">
-                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                        <label class="form-check-label" for="form2Example3">
-                          Acepto todos los terminos y condiciones <a href="#!">Terminos</a>
-                        </label>
-                      </div>
-
-                      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <button type="button" class="btn btn-primary">Registrarse</button>
-                      </div>
-
-                    </form>
-
-                  </div>
-                  <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                      class="img-fluid" alt="Sample image" />
+                    <div class="d-flex justify-content-end pt-3">
+                      <button type="button" class="btn btn-warning btn-lg ms-2">Registrarse</button>
+                    </div>
 
                   </div>
                 </div>

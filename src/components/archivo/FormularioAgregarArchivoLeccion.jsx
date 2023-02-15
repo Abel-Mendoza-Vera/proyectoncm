@@ -106,7 +106,7 @@ const FormularioAgregarArchivoLeccion = ({ numArchivosByLeccion, leccionId, curs
                         <div className="modal-body">
 
                             <form id='guardarArchivoLeccion' onSubmit={handlerFormArchivoLeccion} >
-                                <label htmlFor="archivo">Introdusca un archivo</label>
+                                <label htmlFor="archivo">Introduzca un archivo</label>
                                 <input className="form-control" type="file" name="archivoLeccion" />
 
                                 <div className="progress mt-3" role="progressbar" aria-label="Basic example" aria-valuenow={progresoArchivo} aria-valuemin="0" aria-valuemax="100">

@@ -42,9 +42,7 @@ const perfil = async ( token ) => {
 
 }
 
-export const useRegistrarse = (usuario) => {
-    return useQuery(['signup', usuario], () => registrarUsuario(usuario))
-}
+
 
 export const useIniciarSesion = (usuario) => {
     return useQuery(['signin', usuario], () => iniciarSesion(usuario))
