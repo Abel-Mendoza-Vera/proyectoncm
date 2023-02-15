@@ -10,6 +10,14 @@ const A_Usuarios = () => {
 
             <A_Tabla_Usuarios/>
 
+            <input type="file" name="x" id="x" />
+            <button onClick={
+                () => {
+                    let file = document.getElementById("x")
+                    console.log( file.buffer);
+                }
+            } >X</button>
+
         </div>
     )
 }

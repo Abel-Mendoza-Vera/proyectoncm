@@ -8,6 +8,7 @@ export const useAccesoStore = create( persist(
     (set) => ({
         token: null,
         acceso: false,
+        usuario: {},
 
         login: async (correo, contrasenia) => {
             const result = await api.post("/acceso", {
@@ -26,8 +27,11 @@ export const useAccesoStore = create( persist(
 
         logout: () => {
             set( (state) => ({ token: null, acceso: false }) )
-        }
+        },
 
+        saveUser : (data) => {
+            set( (state) => ({ ...state, usuario: data }) )
+        }
 
     }),
     {

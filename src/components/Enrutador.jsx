@@ -15,12 +15,14 @@ import U_Login from '../pages/usuario/U_Login'
 import U_Register from '../pages/usuario/U_Register'
 import A_Usuarios from '../pages/admin/A_Usuarios'
 import U_Perfil from '../pages/usuario/U_Perfil'
+import U_Catalogo from '../pages/usuario/U_Catalogo'
 
-
+import { ProtectedRoute } from './ProtectedRoute'
 
 
 
 const Enrutador = () => {
+
     return (
         <BrowserRouter>
 
@@ -38,10 +40,11 @@ const Enrutador = () => {
                 <Route path='/iniciar_sesion' element={ <U_Login/> } />
                 <Route path='/registrar' element={ <U_Register/> } />
                 <Route path='/perfil' element={ <U_Perfil/> } />
+                <Route path='/catalogo_cursos' element={ <U_Catalogo/> } />
 
 
                 {/* Rutas administrativas */}
-                <Route path='/admin/*' >
+                <Route path='/admin/*' element={<ProtectedRoute rol="empleado" />} >
                     <Route path='cursos' element={ <A_Cursos/> } />
                     <Route path='cursos_editar/:cursoId/:cursoNombre' element={ <A_CursosEditar/> } />
                     <Route path='lecciones/:cursoNombre/:leccionNombre/:leccionId' element={ <A_Lecciones/> } />

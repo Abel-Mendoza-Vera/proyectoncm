@@ -53,7 +53,7 @@ const U_Login = () => {
         timerProgressBar: true
       })
 
-      navigate("/");
+      navigate("/perfil");
 
     } catch (error) {
       Swal.fire({
