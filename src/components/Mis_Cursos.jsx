@@ -19,6 +19,10 @@ const Mis_Cursos = () => {
     const continuar_curso = () => {
         navigate(`/cliente/cursos_plantilla`)
     }
+    
+    const Certificaciones = () => {
+        navigate(`/cliente/certificaciones`)
+    }
 
     return (
         <div className="mb-5">
@@ -37,7 +41,7 @@ const Mis_Cursos = () => {
                         <a class="nav-link active" aria-current="page" onClick={MisCursos}>Mis Cursos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Cursos Terminados</a>
+                        <a class="nav-link" onClick={Certificaciones}>Cursos Terminados</a>
                     </li>
                 </ul>
             </div>

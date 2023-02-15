@@ -80,7 +80,7 @@ const U_Login = () => {
               <div className="text-center">
 
                 <FaUserCircle size="3em" />
-                <h3 className='display-6'><strong>Inicar Sesión</strong></h3>
+                <h3 className='display-6'><strong>Iniciar Sesión</strong></h3>
                 <p className='mb-5 text-center'>Nos da gusto verte de nuevo</p>
               </div>
 
