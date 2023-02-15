@@ -8,7 +8,7 @@ const Contactanos = () => {
 
         <div className="jumbotron text-center">
             <section class="intro">
-                <div class="mask d-flex align-items-center h-60 gradient-custom">
+                <div class="mask d-flex align-items-center h-60 ">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-12 col-xl-9">
