@@ -26,7 +26,7 @@ export const useAccesoStore = create( persist(
         },
 
         logout: () => {
-            set( (state) => ({ token: null, acceso: false }) )
+            set( (state) => ({ token: null, acceso: false, usuario: {} }) )
         },
 
         saveUser : (data) => {

@@ -1,15 +1,27 @@
 import Swal from "sweetalert2"
-import { useCursoStore } from "../../store/cursoStore"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+
+import { useAccesoStore } from "../../store/accesoStore"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { cambiarEstadoCurso } from '../../hooks/useCurso'
 
 const A_Registro = ({ curso }) => {
 
     const navigate = useNavigate()
 
-    const { deleteCurso, activeCurso } = useCursoStore((state) => ({
-        deleteCurso: state.deleteCurso,
-        activeCurso: state.activeCurso
-    }))
+    const token = useAccesoStore((state) => state.token)
+
+    const queryClient = useQueryClient();
+    const useCambiarEstadoCurso = useMutation({
+        mutationFn: cambiarEstadoCurso,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Eliminar curso", text: "Se ha cambiado el estatus del curso correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getCursos")
+        },
+        onError: () => { Swal.fire({ title: "Eliminar curso", text: "No se ha cambiado el estatus del curso correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
 
     const alertaEliminar = () => {
         const swalWithBootstrapButtons = Swal.mixin({
@@ -28,70 +40,15 @@ const A_Registro = ({ curso }) => {
             confirmButtonText: 'Si, eliminalo'
         }).then( async (result) => {
             if (result.isConfirmed) {
-
-                const status = await deleteCurso(curso.idCurso)
-
-                if (status == 204) {
-                    Swal.fire({
-                        title: "Eliminar curso",
-                        text: "El curso ha sido eliminado correctamente",
-                        icon: 'success',
-                        timer: 1500,
-                        timerProgressBar: true
-                    })
-                }
-                if ( status == 400 ){
-                    Swal.fire({
-                        title: "Eliminar curso",
-                        text: "No se ha encontrado el curso",
-                        icon: 'warning',
-                        timer: 1500,
-                        timerProgressBar: true
-                    })
-                }
-                if (status == 500){
-                    Swal.fire({
-                        title: "Eliminar curso",
-                        text: "Ha ocurrido un error al momento de eliminar un curso",
-                        icon: 'error',
-                        timer: 1500,
-                        timerProgressBar: true
-                    })
-                }
+                let id = curso.idCurso
+                useCambiarEstadoCurso.mutate({token, id, operacion: 0})
             }
         })
     }
 
     const alertaActivar = async () => {
-        const status = await activeCurso(curso.idCurso)
-
-        if (status == 204) {
-            Swal.fire({
-                title: "Activar curso",
-                text: "El curso ha sido activado correctamente",
-                icon: 'success',
-                timer: 1500,
-                timerProgressBar: true
-            })
-        }
-        if ( status == 400 ){
-            Swal.fire({
-                title: "Activar curso",
-                text: "No se ha encontrado el curso",
-                icon: 'warning',
-                timer: 1500,
-                timerProgressBar: true
-            })
-        }
-        if (status == 500){
-            Swal.fire({
-                title: "Activar curso",
-                text: "Ha ocurrido un error al momento de activar un curso",
-                icon: 'error',
-                timer: 1500,
-                timerProgressBar: true
-            })
-        }
+        let id = curso.idCurso
+        useCambiarEstadoCurso.mutate({token, id, operacion: 1})
     }
 
     const editar_curso = () => {

@@ -1,26 +1,30 @@
 import { useState } from "react"
-import { useCursoStore } from "../../store/cursoStore"
-import { shallow } from 'zustand/shallow'
 import A_Registro from "./A_Registro"
+
+import { useObtenerCursos } from '../../hooks/useCurso'
+import { useAccesoStore } from "../../store/accesoStore"
 
 const A_Tabla = () => {
 
-    const { cursos } = useCursoStore((state) => ({
-        cursos: state.cursos
-    }), shallow)
-
-    let listaCursos = cursos
+    const token = useAccesoStore(state => state.token)
+    const { data, isLoading, status } = useObtenerCursos(token)
     const [buscador, setBuscador] = useState("")
 
+    if (isLoading) return <div className="spinner-border text-primary" role="status">
+        <span className="visually-hidden">Loading...</span>
+    </div>
+
+    let listaCursos = data
+    
     const handleChange = (e) => {
         setBuscador(e.target.value)
     }
 
     if ( !buscador ){
-        listaCursos = cursos
+        listaCursos = data
     }
     else{
-        listaCursos = cursos.filter( ( curso ) => curso.nombre.toLowerCase().includes(buscador.toLowerCase()) )
+        listaCursos = data.filter( ( curso ) => curso.nombre.toLowerCase().includes(buscador.toLowerCase()) )
     }
 
     return (

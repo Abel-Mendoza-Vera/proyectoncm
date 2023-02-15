@@ -7,15 +7,19 @@ import { useEffect } from 'react';
 const U_Perfil = () => {
 
     const navigate = useNavigate();
-    const token = useAccesoStore((state) => state.token)
+    const { token, saveUser } = useAccesoStore((state) => ({ token: state.token, saveUser: state.saveUser }))
     const { data, isLoading } = usePerfil(token)
+
 
     useEffect(() => {
         if (!token) {
             navigate("/")
         }
+        if(!isLoading){
+            saveUser(data);
+        }
 
-    }, [token])
+    }, [token, data])
 
     if (isLoading) return <div>Cargando la información del perfil ...</div>
 
