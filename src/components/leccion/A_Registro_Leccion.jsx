@@ -2,14 +2,26 @@ import Swal from "sweetalert2"
 import { useLeccionStore } from "../../store/leccionStore"
 import { useNavigate } from "react-router-dom"
 
+import { useAccesoStore } from "../../store/accesoStore"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { cambiarEstadoLeccion } from "../../hooks/useLeccion"
+
 const A_Registro_Leccion = ({ leccion, cursoNombre }) => {
 
     const navigate = useNavigate()
-
-    const { deleteLeccion, activeLeccion } = useLeccionStore((state) => ({
-        deleteLeccion: state.deleteLeccion,
-        activeLeccion: state.activeLeccion
-    }))
+    const token = useAccesoStore((state) => state.token)
+    const queryClient = useQueryClient()
+    const useCambiarEstadoLeccion = useMutation({
+        mutationFn: cambiarEstadoLeccion,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar lección", text: "La lección se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getLecciones")
+            queryClient.invalidateQueries("getLeccionesCurso")
+        },
+        onError: () => { Swal.fire({ title: "Guardar lección", text: "La lección no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
 
     const eliminarLeccion = () => {
         const swalWithBootstrapButtons = Swal.mixin({
@@ -28,72 +40,14 @@ const A_Registro_Leccion = ({ leccion, cursoNombre }) => {
             confirmButtonText: 'Si, eliminalo'
         }).then(async (result) => {
             if (result.isConfirmed) {
-
-                try {
-                    const status = await deleteLeccion(leccion.idLeccion)
-
-                    if (status == 204) {
-                        Swal.fire({
-                            title: "Eliminar leccion",
-                            text: "La leccion ha sido eliminado correctamente",
-                            icon: 'success',
-                            timer: 1500,
-                            timerProgressBar: true
-                        })
-                    }
-                    else if (status == 400) {
-                        Swal.fire({
-                            title: "Eliminar lección",
-                            text: "No se ha encontrado la lección",
-                            icon: 'warning',
-                            timer: 1500,
-                            timerProgressBar: true
-                        })
-                    }
-
-                } catch (error) {
-                    Swal.fire({
-                        title: "Eliminar lección",
-                        text: "Ha ocurrido un error al momento de eliminar la lección",
-                        icon: 'error',
-                        timer: 1500,
-                        timerProgressBar: true
-                    })
-                }
+                useCambiarEstadoLeccion({ token, idLeccion: leccion.idLeccion, operacion: 0 })
             }
         })
     }
 
     const activarLeccion = async () => {
-        const status = await activeLeccion(leccion.idLeccion)
-
-        if (status == 204) {
-            Swal.fire({
-                title: "Activar lección",
-                text: "La lección ha sido activado correctamente",
-                icon: 'success',
-                timer: 1500,
-                timerProgressBar: true
-            })
-        }
-        if (status == 400) {
-            Swal.fire({
-                title: "Activar lección",
-                text: "No se ha encontrado la lección",
-                icon: 'warning',
-                timer: 1500,
-                timerProgressBar: true
-            })
-        }
-        if (status == 500) {
-            Swal.fire({
-                title: "Activar lección",
-                text: "Ha ocurrido un error al momento de activar una lección",
-                icon: 'error',
-                timer: 1500,
-                timerProgressBar: true
-            })
-        }
+        useCambiarEstadoLeccion({ token, idLeccion: leccion.idLeccion, operacion: 1 })
+         
     }
 
     const editar_leccion = () => {

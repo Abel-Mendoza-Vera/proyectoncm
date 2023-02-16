@@ -6,7 +6,7 @@ function App() {
   return (
     <>
     <Enrutador className="pb-5"/>
-    <Footer/>
+    {/**<Footer/>*/}
     </>
   )
 }

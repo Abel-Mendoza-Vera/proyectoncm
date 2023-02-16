@@ -36,13 +36,14 @@ export const useArchivoStore = create(persist(
 
         },
 
-        saveArchivo: async (nombre, extencion, url) => {
+        saveArchivo: async (nombre, extencion, url, token) => {
 
             const response = await axios.post(urlArchivos, {
                 nombre: nombre,
                 extencion: extencion,
                 url: url
-            })
+            },
+            { headers: { "x-access-token": token } })
 
             if (response.status != 500) {
                 set((state) => ({ archivos: [...state.archivos, response.data] }))

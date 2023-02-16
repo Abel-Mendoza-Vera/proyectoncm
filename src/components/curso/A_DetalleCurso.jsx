@@ -1,6 +1,9 @@
 import { useCursoStore } from "../../store/cursoStore"
 import { useArchivoStore } from "../../store/archivoStore"
 
+import { useObtenerCursoPorId } from "../../hooks/useCurso"
+import { useObtenerArchivos } from "../../hooks/useArchivo"
+
 import imgDefault from '../../assets/curso.jpg'
 
 import FormularioModificarCurso from "../../components/curso/FormularioModificarCurso"
@@ -9,10 +12,17 @@ import FormularioAgregarVideoCurso from '../../components/archivo/FormularioAgre
 
 const A_DetalleCurso = ({cursoId, cursoNombre}) => {
 
-    let cursos = useCursoStore((state) => state.cursos)
-    let archivos = useArchivoStore((state) => state.archivos)
+    let id = cursoId
+    const cursoData = useObtenerCursoPorId(id);
+    const archivosData = useObtenerArchivos();
 
-    let curso = cursos.find((item) => item.idCurso == cursoId)
+    if(cursoData.isLoading || archivosData.isLoading) return <div className="spinner-border text-primary" role="status">
+    <span className="visually-hidden">Loading...</span>
+</div>
+
+    let curso = cursoData.data
+    let archivos = archivosData.data
+
     let imagenCurso = archivos.find((item) => item.idArchivo == curso.idMiniatura && item.extencion.includes("image"))
     let videoCurso = archivos.find((item) => item.idArchivo == curso.idVideo && item.extencion.includes("video"))
 

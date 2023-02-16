@@ -1,26 +1,29 @@
 import { useState } from "react"
-import { useLeccionStore } from "../../store/leccionStore"
 import A_Registro_Leccion from "./A_Registro_Leccion"
+
+import { useObtenerLeccionesPorCurso } from "../../hooks/useLeccion"
 
 const A_Tabla_Leccion = ({ cursoId, cursoNombre }) => {
 
-    const { lecciones } = useLeccionStore((state) => ({
-        lecciones: state.lecciones
-    }))
-
-    let listaLecciones = lecciones.filter((leccion) => leccion.idCurso == cursoId)
+    const { data ,isLoading } = useObtenerLeccionesPorCurso(cursoId)
 
     const [buscador, setBuscador] = useState("")
+
+    if (isLoading) return <div className="spinner-border text-primary" role="status">
+        <span className="visually-hidden">Loading...</span>
+    </div>
+
+    let listaLecciones = data
 
     const handleChange = (e) => {
         setBuscador(e.target.value)
     }
 
     if (!buscador) {
-        listaLecciones = lecciones.filter((leccion) => leccion.idCurso == cursoId)
+        listaLecciones = data
     }
     else {
-        listaLecciones = lecciones.filter((leccion) => leccion.idCurso == cursoId && leccion.nombre.toLowerCase().includes(buscador.toLowerCase()))
+        listaLecciones = data.filter((leccion) => leccion.nombre.toLowerCase().includes(buscador.toLowerCase()))
     }
 
     return (

@@ -51,6 +51,6 @@ export const useObtenerArchivos = () => {
     return useQuery(["getArchivos"], () => obtenerArchivos())
 }
 
-export const useObtenerArchivoPorLeccion = () => {
+export const useObtenerArchivoPorLeccion = (idLeccion) => {
     return useQuery(["getArchivoLeccion", idLeccion], () => obtenerArchivoPorLeccion(idLeccion))
 }

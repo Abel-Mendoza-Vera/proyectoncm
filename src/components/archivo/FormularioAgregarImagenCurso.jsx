@@ -4,15 +4,59 @@ import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebas
 import { storage } from '../../firebase'
 
 import { useArchivoStore } from '../../store/archivoStore'
-import { useCursoStore } from '../../store/cursoStore'
+
+import { useAccesoStore } from '../../store/accesoStore'
+
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { modificarCursoImagen } from '../../hooks/useCurso'
+import { crearArchivo, modificarArchivo } from '../../hooks/useArchivo'
 
 const FormularioAgregarArchivoCurso = ({ idCurso, idImagen, objImagen, cursoNombre }) => {
 
-    const { saveArchivo, modifyArchivo } = useArchivoStore((state) => ({
-        saveArchivo: state.saveArchivo,
-        modifyArchivo: state.modifyArchivo
+    const queryClient = useQueryClient();
+    const token = useAccesoStore((state) => state.token)
+
+    const useCrearArchivo = useMutation({
+        mutationFn: crearArchivo,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar archivo", text: "El archvio se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getArchivos")
+            //limpiar();
+        },
+        onError: () => { Swal.fire({ title: "Guardar archivo", text: "El archivo no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
+
+    const useModificarArchivo = useMutation({
+        mutationFn: modificarArchivo,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar archivo", text: "El archvio se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getArchivos")
+            //limpiar();
+        },
+        onError: () => { Swal.fire({ title: "Guardar archivo", text: "El archivo no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
+
+    const useModificarCursoImagen = useMutation({
+        mutationFn: modificarCursoImagen,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar archivo", text: "El archvio se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getArchivos")
+            queryClient.invalidateQueries("getCursos")
+            queryClient.invalidateQueries("getCurso")
+            //limpiar();
+        },
+        onError: () => { Swal.fire({ title: "Guardar archivo", text: "El archivo no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
+
+    const { saveArchivo } = useArchivoStore((state) => ({
+        saveArchivo: state.saveArchivo
     }))
-    const modifyCursoImagen = useCursoStore((state) => state.modifyCursoImagen)
 
     const [progreso, setProgreso] = useState(0)
 
@@ -59,20 +103,8 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idImagen, objImagen, cursoNomb
                     let imagenUrl = url
 
                     if (idImagen == 0) {// Agrega por primera vez
-                        const idArchivo = await saveArchivo(file.name, file.type, imagenUrl)
-
-                        if (idArchivo != 0) {
-                            const status = await modifyCursoImagen(idCurso, idArchivo)
-                            if (status == 200) {
-                                Swal.fire({
-                                    title: `Guardar imagen`,
-                                    text: `La imagen se ha guardado correctamente`,
-                                    icon: "success",
-                                    timer: 1500,
-                                    timerProgressBar: true
-                                })
-                            }
-                        }
+                        const idArchivo = await saveArchivo(file.name, file.type, imagenUrl, token)
+                        useModificarCursoImagen.mutate({ token, idCurso, idImagen: idArchivo })
                     }
                     else { // Esta modificando la imagen
 
@@ -81,30 +113,21 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idImagen, objImagen, cursoNomb
                             const deleteRef = ref(storage, `/cursos/${cursoNombre}/imagen/${objImagen.nombre}`)
 
                             deleteObject(deleteRef).then(async () => {
-                                const estatus = await modifyArchivo(idImagen, file.name, file.type, imagenUrl)
-                                if (estatus == 200) {
-                                    Swal.fire({
-                                        title: `Guardar imagen`,
-                                        text: `La imagen se ha guardado correctamente`,
-                                        icon: "success",
-                                        timer: 1500,
-                                        timerProgressBar: true
-                                    })
+                                let archivo = {
+                                    nombre: file.name,
+                                    extencion: file.type,
+                                    url: imagenUrl
                                 }
+                                useModificarArchivo.mutate({ token, id: idImagen, archivo})
                             })
                         }
                         else {
-                            const estatus = await modifyArchivo(idImagen, file.name, file.type, imagenUrl)
-                            if (estatus == 200) {
-                                Swal.fire({
-                                    title: `Guardar imagen`,
-                                    text: `La imagen se ha guardado correctamente`,
-                                    icon: "success",
-                                    timer: 1500,
-                                    timerProgressBar: true
-                                })
+                            let archivo = {
+                                nombre: file.name,
+                                extencion: file.type,
+                                url: imagenUrl
                             }
-
+                            useModificarArchivo.mutate({ token, id: idImagen, archivo})
                         }
 
                     }

@@ -8,11 +8,11 @@ const U_Catalogo = () => {
     if(isLoading) return <h1>Cargando ...</h1>
 
     return (
-        <div className="container-fluid mt-3">
+        <div className="container-fluid mt-3 justify-content-center">
 
-            <div className='row mt-3 row-cols-auto g-3 mx-auto justify-content-center' >
+            <div className='row mt-3 row-cols-auto g-3 mx-auto justify-content-start' >
                 {
-                    cursos.lenght ? 
+                    cursos.length ? 
                     cursos.map((curso) => <Tarjeta key={curso.idCurso} curso={curso}/>)
                     :
                     <h1 className="my-5">Aun no se cuenta con cursos</h1>
