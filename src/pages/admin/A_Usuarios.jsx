@@ -9,7 +9,6 @@ const A_Usuarios = () => {
             <BotonAgregarUsuario/>
 
             <A_Tabla_Usuarios/>
-
         </div>
     )
 }

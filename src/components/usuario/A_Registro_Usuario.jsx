@@ -1,9 +1,12 @@
 import { BsToggleOn, BsToggleOff } from 'react-icons/bs'
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
+import { AiFillDelete, AiOutlinePoweroff } from 'react-icons/ai'
+
+import Swal from 'sweetalert2';
 
 import { useAccesoStore } from '../../store/accesoStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { cambiarEstatusUsuario } from '../../hooks/useUsuario';
+import BotonModificarUsuario from './BotonModificarUsuario';
 
 const A_Registro_Usuario = ({ usuario }) => {
 
@@ -40,8 +43,8 @@ const A_Registro_Usuario = ({ usuario }) => {
             </td>
             <td className="text-primary" >{usuario.estatus ? <BsToggleOn /> : <BsToggleOff />}</td>
             <td>
-                <button className="btn btn-primary btn-sm me-2"><AiFillEdit /></button>
-                <button onClick={handlerCambiarEstatusUsuario} className="btn btn-danger btn-sm"><AiFillDelete /></button>
+                <BotonModificarUsuario id={usuario.idUsuario} usuario={usuario} />
+                <button onClick={handlerCambiarEstatusUsuario} className={usuario.estatus ? "btn btn-danger btn-sm" : "btn btn-success btn-sm"}>{ usuario.estatus ? <AiFillDelete /> : <AiOutlinePoweroff/> }</button>
             </td>
         </tr>
     )

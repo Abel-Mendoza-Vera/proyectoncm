@@ -1,10 +1,25 @@
 import { useState } from "react"
 import Swal from "sweetalert2"
-import { useCursoStore } from "../../store/cursoStore"
+
+import { useAccesoStore } from "../../store/accesoStore"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { crearCurso } from '../../hooks/useCurso'
 
 const Formulario = () => {
 
-    const saveCurso = useCursoStore((state) => state.saveCurso)
+    const token = useAccesoStore((state) => state.token)
+    const queryClient = useQueryClient()
+    const useCrearCurso = useMutation({
+        mutationFn: crearCurso,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar curso", text: "El curso se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getCursos")
+            limpiar();
+        },
+        onError: () => { Swal.fire({ title: "Guardar curso", text: "El curso no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
 
     // obtener datos del formulario
     const [formulario, setFormulario] = useState({
@@ -24,31 +39,23 @@ const Formulario = () => {
         })
     }
 
-    const handleSave = async () => {
-        const status = await saveCurso( nombre, precio, descripcion, objetivos, duracion )
-        alerta(status)
+    const limpiar = () => {
+
+        setFormulario({
+            ...formulario,
+            nombre: "",
+            precio: 1,
+            objetivos: "",
+            descripcion: "",
+            duracion: 1
+        })
+
+        let btnCancelarCurso = document.getElementById("btnCerrarCurso");
+        btnCancelarCurso.click();
     }
 
-    const alerta = (status) => {
-        if ( status == 200 ) {
-            Swal.fire({
-                title: "Guardar curso",
-                text: "El curso se ha guardado correctamente",
-                icon: "success",
-                timer: 1500,
-                timerProgressBar: true,
-
-            })
-        }
-        else{
-            Swal.fire({
-                title: "Guardar curso",
-                text: "Ha ocurrio un error al momento de guardar un curso",
-                icon: "error",
-                timer: 1500,
-                timerProgressBar: true,
-            })
-        }
+    const handleSave = async () => {
+        useCrearCurso.mutate({ token, curso: formulario })
     }
 
 
@@ -73,7 +80,7 @@ const Formulario = () => {
                                 <input type="text" onChange={(e) => handleChange(e)} value={nombre} className="form-control" name='nombre' placeholder="" />
                                 <label htmlFor="nombre">Nombre</label>
                             </div>
-                          
+                            
                             <div className="form-floating mb-3">
                                 <input type="number" onChange={(e) => handleChange(e)} value={precio} min='1' className="form-control" name='precio' placeholder="" />
                                 <label htmlFor="precio">Precio</label>
@@ -96,7 +103,7 @@ const Formulario = () => {
 
 
                             <div className="d-flex justify-content-evenly">
-                                <button type="button" className="btn btn-danger" data-bs-dismiss="modal"><span className='material-icons'>close</span>Cerrar</button>
+                                <button type="button" className="btn btn-danger" id="btnCerrarCurso" data-bs-dismiss="modal"><span className='material-icons'>close</span>Cerrar</button>
                                 <button onClick={handleSave} type="submit" className="btn btn-success" data-bs-dismiss="modal"><span className='material-icons'>save</span>Guardar</button>
                             </div>
 

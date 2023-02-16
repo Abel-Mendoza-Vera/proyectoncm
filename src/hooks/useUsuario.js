@@ -38,7 +38,7 @@ export const crearUsuario = async ({token, usuario}) => {
     return result;
 }
 
-export const modificarUsuario = async (token, id, usuario) => {
+export const modificarUsuario = async ({token, id, usuario}) => {
     const result = await api.patch(`/usuario/${id}`, {
         nombre: usuario.nombre,
         primerApellido: usuario.primerApellido,
