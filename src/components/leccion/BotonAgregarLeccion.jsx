@@ -1,39 +1,41 @@
 import Swal from "sweetalert2"
-import { useLeccionStore } from "../../store/leccionStore"
+
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useAccesoStore } from "../../store/accesoStore"
+import { useObtenerLeccionesPorCurso, crearLeccion } from "../../hooks/useLeccion"
 
 const BotonAgregarLeccion = ({ cursoId }) => {
 
-    const {saveLeccion, lecciones} = useLeccionStore((state) => ({
-        saveLeccion: state.saveLeccion,
-        lecciones: state.lecciones
-    }))
+    const { data } = useObtenerLeccionesPorCurso(cursoId)
+
+    const token = useAccesoStore((state) => state.token)
+    const queryClient = useQueryClient()
+
+    const useCrearLeccion = useMutation({
+        mutationFn: crearLeccion,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar lección", text: "El lección se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getLecciones")
+            queryClient.invalidateQueries("getLeccionesCurso")
+        },
+        onError: () => { Swal.fire({ title: "Guardar lección", text: "El lección no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
     
     const handleGuardarLeccion = async () => {
 
-        let leccionesDelCurso = lecciones.filter((leccion) => leccion.idCurso == cursoId)
+        let leccionesDelCurso = data
         
         let nombreLeccion = `Lección ${leccionesDelCurso.length + 1}`
-        
-        const estatus = await saveLeccion(cursoId, nombreLeccion, `Información de la ${nombreLeccion}`)
 
-        if (estatus != 500){
-            Swal.fire({
-                title: "Agregar lección",
-                text: "Se ha guardado la lección correctamente",
-                icon: "success",
-                timer: 1500,
-                timerProgressBar: true
-            })
+        let leccion = {
+            idCurso: cursoId,
+            nombre: nombreLeccion,
+            informacion: `Información de la ${nombreLeccion}`
         }
-        else{
-            Swal.fire({
-                title: "Agregar lección",
-                text: "Ha ocurrido un error al momento de guardar la lección",
-                icon: "error",
-                timer: 1500,
-                timerProgressBar: true
-            })
-        }
+        
+        useCrearLeccion.mutate({ token, leccion })
     }
 
     return (

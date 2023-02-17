@@ -4,16 +4,59 @@ import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebas
 import { storage } from '../../firebase'
 
 import { useArchivoStore } from '../../store/archivoStore'
-import { useCursoStore } from '../../store/cursoStore'
+import { useAccesoStore } from '../../store/accesoStore'
+
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { modificarCursoVideo } from '../../hooks/useCurso'
+import { crearArchivo, modificarArchivo } from '../../hooks/useArchivo'
+
 
 const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo, cursoNombre }) => {
 
-    const { saveArchivo, modifyArchivo, getArchivos } = useArchivoStore((state) => ({
-        saveArchivo: state.saveArchivo,
-        modifyArchivo: state.modifyArchivo,
-        getArchivos: state.getArchivos
+    const queryClient = useQueryClient();
+    const token = useAccesoStore((state) => state.token)
+
+    const useCrearArchivo = useMutation({
+        mutationFn: crearArchivo,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar archivo", text: "El archvio se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getArchivos")
+            //limpiar();
+        },
+        onError: () => { Swal.fire({ title: "Guardar archivo", text: "El archivo no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
+
+    const useModificarArchivo = useMutation({
+        mutationFn: modificarArchivo,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar archivo", text: "El archvio se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getArchivos")
+            //limpiar();
+        },
+        onError: () => { Swal.fire({ title: "Guardar archivo", text: "El archivo no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
+
+    const useModificarCursoVideo = useMutation({
+        mutationFn: modificarCursoVideo,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar archivo", text: "El archvio se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getArchivos")
+            queryClient.invalidateQueries("getCursos")
+            queryClient.invalidateQueries("getCurso")
+            //limpiar();
+        },
+        onError: () => { Swal.fire({ title: "Guardar archivo", text: "El archivo no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
+
+    const { saveArchivo } = useArchivoStore((state) => ({
+        saveArchivo: state.saveArchivo
     }))
-    const modifyCursoVideo = useCursoStore((state) => state.modifyCursoVideo)
 
     const [progresoVideo, setProgresoVideo] = useState(0)
 
@@ -54,27 +97,14 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo, cursoNombre
                 })
             },
             () => {
-                getDownloadURL(uploadTask.snapshot.ref).then( async (url) => {
+                getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
 
                     // Capturando la url del archivo
                     let videoUrl = url
 
                     if (idVideo == 0) {// Agrega por primera vez
-                        const idArchivo = await saveArchivo(file.name, file.type, videoUrl)
-
-                        if (idArchivo != 0) {
-                            const status = await modifyCursoVideo(idCurso, idArchivo)
-                            await getArchivos()
-                            if (status == 200) {
-                                Swal.fire({
-                                    title: `Guardar video`,
-                                    text: `El video se ha guardado correctamente`,
-                                    icon: "success",
-                                    timer: 1500,
-                                    timerProgressBar: true
-                                })
-                            }
-                        }
+                        const idArchivo = await saveArchivo(file.name, file.type, videoUrl, token)
+                        useModificarCursoVideo.mutate({ token, idCurso, idVideo: idArchivo })
                     }
                     else { // Esta modificando el video
 
@@ -83,36 +113,26 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo, cursoNombre
                             const deleteRef = ref(storage, `/cursos/${cursoNombre}/video/${objVideo.nombre}`)
 
                             deleteObject(deleteRef).then(async () => {
-                                const estatus = await modifyArchivo(idVideo, file.name, file.type, videoUrl)
-                                if (estatus == 200) {
-                                    await getArchivos()
-                                    Swal.fire({
-                                        title: `Guardar video`,
-                                        text: `El video se ha guardado correctamente`,
-                                        icon: "success",
-                                        timer: 1500,
-                                        timerProgressBar: true
-                                    })
+                                let archivo = {
+                                    nombre: file.name,
+                                    extencion: file.type,
+                                    url: videoUrl
                                 }
+                                useModificarArchivo.mutate({ token, id: idVideo, archivo })
                             })
                         }
                         else {
-                            const estatus = await modifyArchivo(idVideo, file.name, file.type, videoUrl)
-                            if (estatus == 200) {
-                                await getArchivos()
-                                Swal.fire({
-                                    title: `Guardar video`,
-                                    text: `El video se ha guardado correctamente`,
-                                    icon: "success",
-                                    timer: 1500,
-                                    timerProgressBar: true
-                                })
+                            let archivo = {
+                                nombre: file.name,
+                                extencion: file.type,
+                                url: videoUrl
                             }
+                            useModificarArchivo.mutate({ token, id: idVideo, archivo })
 
                         }
 
                     }
-                    
+
                 })
             }
         )
@@ -126,9 +146,9 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo, cursoNombre
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#videoModal">
                 {
                     idVideo == 0 ?
-                    <><span className='material-icons'>add</span>Agregar video</>
-                    :
-                    <><span className='material-icons'>edit</span>Editar video</>
+                        <><span className='material-icons'>add</span>Agregar video</>
+                        :
+                        <><span className='material-icons'>edit</span>Editar video</>
                 }
             </button>
 

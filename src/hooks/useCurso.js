@@ -15,7 +15,7 @@ const obtenerCursoPorId = async (id) => {
     return result.data;
 }
 
-export const useObtenerCursoPorId = () => {
+export const useObtenerCursoPorId = (id) => {
     return useQuery(["getCurso", id], () => obtenerCursoPorId(id))
 }
 
