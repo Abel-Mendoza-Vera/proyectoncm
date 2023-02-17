@@ -50,14 +50,11 @@ const Enrutador = () => {
                     <Route path='cursos' element={ <A_Cursos/> } />
                     <Route path='cursos_editar/:cursoId/:cursoNombre' element={ <A_CursosEditar/> } />
                     <Route path='lecciones/:cursoNombre/:leccionNombre/:leccionId' element={ <A_Lecciones/> } />
-                    <Route path='cuestionarios' element={ <h1>Cuestionarios</h1> } />
-                    <Route path='preguntas' element={ <><h1>Preguntas</h1></> } />
-                    <Route path='empleados' element={ <><h1>Empleados</h1></> } />
                     <Route path='usuarios' element={ <A_Usuarios/> } />
                 </Route>
  
                 {/* Rutas del cliente */}
-                <Route path='/cliente/*' >
+                <Route path='/cliente/*' element={ <ProtectedRoute rol="cliente" /> } >
                     <Route path='mis_cursos' element={ <C_Mis_Cursos/> } />
                     <Route path='cursos_plantilla' element={ <C_CursoPlantilla/> } />
                     <Route path='certificaciones' element={ <C_Certificaciones/> } />
