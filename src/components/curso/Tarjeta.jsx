@@ -4,10 +4,25 @@ import imgCurso from '../../assets/curso.jpg'
 
 const Tarjeta = ({curso, archivo}) => {
 
+    const mouseOver = () => {
+        let divSeleccionado = document.getElementById(`curso${curso.idCurso}`)
+        divSeleccionado.setAttribute("class", "col shadow-lg p-1 bg-primary bg-opacity-75 rounded")
+    }
+
+    const mouseOut = () => {
+        let divSeleccionado = document.getElementById(`curso${curso.idCurso}`)
+        divSeleccionado.removeAttribute("class")
+        divSeleccionado.setAttribute("class", "col")
+    }
+    
+    const irAlCurso = () => {
+        alert("Llendo al curso")
+    }
+
     return (
-        < div className='col' >
+        < div id={`curso${curso.idCurso}`} onMouseOver={mouseOver} onMouseOut={mouseOut} className='col' >
             <div className="card" style={{ width: "18rem" }}>
-                <img src={curso.idMiniatura != 0 ? archivo.url : imgCurso} height="190px" className="card-img-top" alt="..." />
+                <img src={curso.idMiniatura != 0 ? archivo.url : imgCurso} onClick={irAlCurso} style={{ cursor: "pointer" }} height="190px" className="card-img-top" alt="..." />
                 <div className="card-body">
                     <h5 className="card-title">{curso.nombre}</h5>
                     <p className="card-text text-end"><strong>$ {curso.precio} MXN</strong></p>                    

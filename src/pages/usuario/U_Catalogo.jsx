@@ -8,6 +8,7 @@ const U_Catalogo = () => {
     const { data: archivos } = useObtenerArchivos();
 
     if(isLoading) return <h1>Cargando ...</h1>
+    
 
     return (
         <div className="container-fluid mt-3 justify-content-center">
