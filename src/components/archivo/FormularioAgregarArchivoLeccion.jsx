@@ -2,16 +2,31 @@ import { useState } from 'react'
 import Swal from 'sweetalert2'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { storage } from '../../firebase'
-import { shallow } from 'zustand/shallow'
 import { useArchivoStore } from '../../store/archivoStore'
+
+import { useAccesoStore } from '../../store/accesoStore'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { crearArchivoLeccion } from '../../hooks/useArchivo'
 
 const FormularioAgregarArchivoLeccion = ({ numArchivosByLeccion, leccionId, cursoNombre, leccionNombre }) => {
 
-    const { saveArchivo, saveArchivoLeccion, getArchivosByLeccion } = useArchivoStore((state) => ({
-        saveArchivo: state.saveArchivo,
-        saveArchivoLeccion: state.saveArchivoLeccion,
-        getArchivosByLeccion: state.getArchivosByLeccion
-    }), shallow)
+    const token = useAccesoStore((state) => state.token)
+    const queryClient = useQueryClient()
+    const useCrearArchivoLeccion = useMutation({
+        mutationFn: crearArchivoLeccion,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar archivo", text: "El archivo se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getArchivos")
+            queryClient.invalidateQueries("getArchivoLeccion")
+        },
+        onError: () => { Swal.fire({ title: "Guardar archivo", text: "El archivo no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
+
+    const { saveArchivo } = useArchivoStore((state) => ({
+        saveArchivo: state.saveArchivo
+    }))
 
     const [progresoArchivo, setProgresoArchivo] = useState(0)
 
@@ -57,22 +72,9 @@ const FormularioAgregarArchivoLeccion = ({ numArchivosByLeccion, leccionId, curs
                     // Capturando la url del archivo
                     let archivoUrl = url
 
-                    const idArchivo = await saveArchivo(file.name, file.type, archivoUrl)
+                    const idArchivo = await saveArchivo(file.name, file.type, archivoUrl, token)
 
-                    if (idArchivo != 0) {
-                        const status = await saveArchivoLeccion(idArchivo, leccionId)
-                        
-                        if (status == 204) {
-                            await getArchivosByLeccion(leccionId)
-                            Swal.fire({
-                                title: `Guardar archivo`,
-                                text: `El archivo se ha guardado correctamente`,
-                                icon: "success",
-                                timer: 1500,
-                                timerProgressBar: true
-                            })
-                        }
-                    }
+                    useCrearArchivoLeccion.mutate({ token, idArchivo, idLeccion: leccionId})
 
                 })
             }

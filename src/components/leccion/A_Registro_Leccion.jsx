@@ -1,5 +1,4 @@
 import Swal from "sweetalert2"
-import { useLeccionStore } from "../../store/leccionStore"
 import { useNavigate } from "react-router-dom"
 
 import { useAccesoStore } from "../../store/accesoStore"
@@ -40,13 +39,15 @@ const A_Registro_Leccion = ({ leccion, cursoNombre }) => {
             confirmButtonText: 'Si, eliminalo'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                useCambiarEstadoLeccion({ token, idLeccion: leccion.idLeccion, operacion: 0 })
+                let idLeccion = leccion.idLeccion
+                useCambiarEstadoLeccion.mutate({ token, idLeccion, operacion: 0 })
             }
         })
     }
 
     const activarLeccion = async () => {
-        useCambiarEstadoLeccion({ token, idLeccion: leccion.idLeccion, operacion: 1 })
+        let idLeccion = leccion.idLeccion
+        useCambiarEstadoLeccion.mutate({ token, idLeccion, operacion: 1 })
          
     }
 

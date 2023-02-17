@@ -3,12 +3,24 @@ import { usePreguntaStore } from "../../store/preguntaStore"
 
 import FormularioModificarPregunta from "./FormularioModificarPregunta"
 
+import { useAccesoStore } from "../../store/accesoStore"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { eliminarPregunta } from "../../hooks/usePregunta"
+
 const ItemPregunta = ({ pregunta }) => {
 
-    const {deletePregunta, getPreguntas} = usePreguntaStore((state) => ({
-        deletePregunta: state.deletePregunta,
-        getPreguntas: state.getPreguntas
-    }))
+    const token = useAccesoStore((state) => state.token)
+    const queryClient = useQueryClient()
+    const useEliminarPregunta = useMutation({
+        mutationFn: eliminarPregunta,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Eliminar pregunta", text: "La pregunta se ha eliminado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getPreguntas")
+        },
+        onError: () => { Swal.fire({ title: "Eliminar pregunta", text: "La pregunta no se ha eliminado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
 
     const handlerDeletePregunta = () => {
 
@@ -31,27 +43,7 @@ const ItemPregunta = ({ pregunta }) => {
             cancelButtonText: "Cancelar"
         }).then( async (result) => {
             if (result.isConfirmed) {
-                const status = await deletePregunta(pregunta.idPregunta)
-
-                if (status == 204) {
-                    getPreguntas()
-                    Swal.fire({
-                        title: "Eliminar pregunta",
-                        text: "La pregunta se ha eliminado correctamente",
-                        icon: "success",
-                        timer: 1500,
-                        timerProgressBar: true
-                    })
-                }
-                else {
-                    Swal.fire({
-                        title: "Eliminar pregunta",
-                        text: "La pregunta no se ha podido eliminar correctamente",
-                        icon: "error",
-                        timer: 1500,
-                        timerProgressBar: true
-                    })
-                }
+                useEliminarPregunta.mutate({ token, idPregunta: pregunta.idPregunta })
             }
         })
 

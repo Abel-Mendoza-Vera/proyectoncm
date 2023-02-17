@@ -6,13 +6,39 @@ import { ref, deleteObject } from 'firebase/storage'
 
 import axios from 'axios'
 
+import { useAccesoStore } from '../../store/accesoStore'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { eliminarArchivo, eliminarArchivoLeccion } from '../../hooks/useArchivo'
+
 const ItemArchivoByLeccion = ({ archivo, leccionId, cursoNombre, leccionNombre }) => {
 
-    const { getArchivosByLeccion, deleteArchivoLeccion, deleteArchivo } = useArchivoStore((state) => ({
-        getArchivosByLeccion: state.getArchivosByLeccion,
-        deleteArchivoLeccion: state.deleteArchivoLeccion,
-        deleteArchivo: state.deleteArchivo
-    }))
+    const token = useAccesoStore((state) => state.token)
+    const queryClient = useQueryClient()
+
+    const useEliminarArchivoLeccion = useMutation({
+        mutationFn: eliminarArchivoLeccion,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Eliminar archivo", text: "El archivo se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getLecciones")
+            queryClient.invalidateQueries("getLeccionesCurso")
+            queryClient.invalidateQueries("getArchivoLeccion")
+        },
+        onError: () => { Swal.fire({ title: "Eliminar archivo", text: "El archivo no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
+
+    const useEliminarArchivo = useMutation({
+        mutationFn: eliminarArchivo,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Eliminar archivo", text: "El archivo se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getArchivos")
+            queryClient.invalidateQueries("getArchivoLeccion")
+        },
+        onError: () => { Swal.fire({ title: "Eliminar archivo", text: "El archivo no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
 
     const handlerDeteleArchivo = () => {
 
@@ -40,42 +66,8 @@ const ItemArchivoByLeccion = ({ archivo, leccionId, cursoNombre, leccionNombre }
             if (result.isConfirmed) {
 
                 deleteObject(desertRef).then(async () => {
-                    const statusArchivoLeccion = await deleteArchivoLeccion(archivo.idArchivo)
-
-                    if (statusArchivoLeccion == 204) {
-
-                        const statusArchivo = await deleteArchivo(archivo.idArchivo)
-
-                        if (statusArchivo == 204) {
-                            await getArchivosByLeccion(leccionId)
-                            Swal.fire({
-                                title: "Eliminar archivo",
-                                text: "El archivo se ha eliminado correctamente",
-                                icon: "success",
-                                timer: 1500,
-                                timerProgressBar: true
-                            })
-                        }
-                        else {
-                            Swal.fire({
-                                title: "Eliminar archivo",
-                                text: "El archivo no se ha podido eliminar correctamente",
-                                icon: "error",
-                                timer: 1500,
-                                timerProgressBar: true
-                            })
-                        }
-
-                    }
-                    else {
-                        Swal.fire({
-                            title: "Eliminar archivo",
-                            text: "El archivo no se ha podido eliminar correctamente",
-                            icon: "error",
-                            timer: 1500,
-                            timerProgressBar: true
-                        })
-                    }
+                    useEliminarArchivoLeccion.mutate({ token, id: archivo.idArchivo })
+                    useEliminarArchivo.mutate({ token, id: archivo.idArchivo })
                 })
                     .catch((error) => {
                         Swal.fire({

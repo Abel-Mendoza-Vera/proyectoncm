@@ -1,13 +1,37 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { useCuestionarioStore } from "../../store/cuestionarioStore";
+
+import { useAccesoStore } from "../../store/accesoStore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { crearCuestionario, modificarCuestionario } from "../../hooks/useCuestionario";
 
 function FormularioCuestionario({ leccionId = 0, cuestionarioId = 0, nombre = "" }) {
 
-    const { saveCuestionario, modifyCuestionario } = useCuestionarioStore((state) => ({
-        saveCuestionario: state.saveCuestionario,
-        modifyCuestionario: state.modifyCuestionario
-    }))
+    const token = useAccesoStore((state) =>  state.token)
+    const queryClient = useQueryClient()
+
+    const useCrearCuestionario = useMutation({
+        mutationFn: crearCuestionario,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar cuestionario", text: "El cuestionario se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getCuestionarios")
+        },
+        onError: () => { Swal.fire({ title: "Guardar cuestionario", text: "El cuestionario no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
+
+    const useModificarCuestionario = useMutation({
+        mutationFn: modificarCuestionario,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar cuestionario", text: "El cuestionario se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getCuestionarios")
+        },
+        onError: () => { Swal.fire({ title: "Guardar cuestionario", text: "El cuestionario no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
+
 
     const [nombreCuestionario, setNombreCuestionario] = useState(nombre)
     const handlerChangeNombre = (e) => {
@@ -15,8 +39,6 @@ function FormularioCuestionario({ leccionId = 0, cuestionarioId = 0, nombre = ""
     }
 
     const handlerGuardarCuestionario = async () => {
-
-        let status = 500
 
         if (nombreCuestionario.length == 0) {
             Swal.fire({
@@ -28,35 +50,19 @@ function FormularioCuestionario({ leccionId = 0, cuestionarioId = 0, nombre = ""
             })
         }
         else {
-            if (cuestionarioId == 0) { // Se va a guardar por primera vez
-                status = await saveCuestionario(leccionId, nombreCuestionario)
-            }
-            else {
-                status = await modifyCuestionario(cuestionarioId, nombreCuestionario)
+            
+            let cuestionario = {
+                idLeccion: leccionId,
+                nombre: nombreCuestionario
             }
 
-            if (status == 200) {
-                Swal.fire({
-                    title: "Guardar cuestionario",
-                    text: "El cuestionario se ha guardado correctamente",
-                    icon: "success",
-                    timer: 1500,
-                    timerProgressBar: true,
-                })
+            if (cuestionarioId == 0) { // Se va a guardar por primera vez    
+                useCrearCuestionario.mutate({ token, cuestionario })
             }
             else {
-                Swal.fire({
-                    title: "Guardar cuestionario",
-                    text: "El cuestionario no se ha podido guardar correctamente",
-                    icon: "error",
-                    timer: 1500,
-                    timerProgressBar: true,
-                })
+                useModificarCuestionario.mutate({ token, idCuestionario: cuestionarioId, cuestionario })
             }
         }
-
-
-
     }
 
     return (

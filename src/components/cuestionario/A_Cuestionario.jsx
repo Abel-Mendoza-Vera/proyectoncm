@@ -1,15 +1,19 @@
-import { useCuestionarioStore } from '../../store/cuestionarioStore'
-
 import FormularioCuestionario from './FormularioCuestionario'
 import ListaPreguntas from './ListaPreguntas'
 
+import { useAccesoStore } from '../../store/accesoStore'
+import { useObtenerCuestionarios } from '../../hooks/useCuestionario'
+
 const A_Cuestionario = ({ leccionId }) => {
 
-    const { cuestionarios } = useCuestionarioStore((state) => ({
-        cuestionarios: state.cuestionarios
-    }))
+    const token = useAccesoStore((state) => state.token)
+    const { data, isLoading } = useObtenerCuestionarios(token)
 
-    let cuestionario = cuestionarios.find((item) => item.idLeccion == leccionId)
+    if (isLoading) return <div className="spinner-border text-primary" role="status">
+        <span className="visually-hidden">Loading...</span>
+    </div>
+
+    let cuestionario = data.find((item) => item.idLeccion == leccionId)
 
     return (
         <>

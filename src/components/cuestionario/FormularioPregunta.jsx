@@ -2,11 +2,25 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import { usePreguntaStore } from "../../store/preguntaStore";
 
+import { useAccesoStore } from "../../store/accesoStore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { crearPregunta } from "../../hooks/usePregunta";
+
 function FormularioPregunta({ cuestionarioId }) {
 
-    const { savePregunta } = usePreguntaStore((state) => ({
-        savePregunta: state.savePregunta
-    }))
+    const token = useAccesoStore((state) => state.token)
+    const queryClient = useQueryClient()
+
+    const useCrearPregunta = useMutation({
+        mutationFn: crearPregunta,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar pregunta", text: "La pregunta se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getPreguntas")
+        },
+        onError: () => { Swal.fire({ title: "Guardar pregunta", text: "La pregunta no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
 
     const [formPregunta, setFormPregunta] = useState({
         enunciado: "",
@@ -40,27 +54,8 @@ function FormularioPregunta({ cuestionarioId }) {
             })
         }
         else {
-
-            status = await savePregunta(cuestionarioId, enunciado, respuesta_correcta, respuesta1, respuesta2, respuesta3, respuesta4)
-
-            if (status == 200) {
-                Swal.fire({
-                    title: "Guardar pregunta",
-                    text: "La pregunta se ha guardado correctamente",
-                    icon: "success",
-                    timer: 1500,
-                    timerProgressBar: true,
-                })
-            }
-            else {
-                Swal.fire({
-                    title: "Guardar pregunta",
-                    text: "La pregunta no se ha podido guardar correctamente",
-                    icon: "error",
-                    timer: 1500,
-                    timerProgressBar: true,
-                })
-            }
+            useCrearPregunta.mutate({ token, pregunta: { ...formPregunta, idCuestionario: cuestionarioId } })
+            
             setFormPregunta({
                 enunciado: "",
                 respuesta_correcta: "",

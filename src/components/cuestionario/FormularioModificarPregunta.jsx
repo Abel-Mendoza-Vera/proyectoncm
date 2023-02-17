@@ -3,11 +3,24 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import { usePreguntaStore } from "../../store/preguntaStore";
 
+import { useAccesoStore } from "../../store/accesoStore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { modificarPregunta } from "../../hooks/usePregunta";
+
 function FormularioModificarPregunta({ pregunta }) {
 
-    const { modifyPregunta } = usePreguntaStore((state) => ({
-        modifyPregunta: state.modifyPregunta
-    }))
+    const token = useAccesoStore((state) => state.token)
+    const queryClient = useQueryClient();
+    const useModificarPruegunta = useMutation({
+        mutationFn: modificarPregunta,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar pregunta", text: "La pregunta se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getPreguntas")
+        },
+        onError: () => { Swal.fire({ title: "Guardar pregunta", text: "La pregunta no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
 
     const [formModificarPregunta, setFormModificarPregunta] = useState({
         enunciado: pregunta.enunciado,
@@ -29,8 +42,6 @@ function FormularioModificarPregunta({ pregunta }) {
 
     const handlerGuardarPregunta = async () => {
 
-        let status = 500
-
         if (enunciado.length == 0 || respuesta_correcta.length == 0 || respuesta1.length == 0 || respuesta2.length == 0 || respuesta3.length == 0 || respuesta4.length == 0) {
             Swal.fire({
                 title: "Guardar pregunta",
@@ -41,28 +52,7 @@ function FormularioModificarPregunta({ pregunta }) {
             })
         }
         else {
-
-            status = await modifyPregunta(pregunta.idPregunta, enunciado, respuesta_correcta, respuesta1, respuesta2, respuesta3, respuesta4)
-
-
-            if (status == 200) {
-                Swal.fire({
-                    title: "Guardar pregunta",
-                    text: "La pregunta se ha guardado correctamente",
-                    icon: "success",
-                    timer: 1500,
-                    timerProgressBar: true,
-                })
-            }
-            else {
-                Swal.fire({
-                    title: "Guardar pregunta",
-                    text: "La pregunta no se ha podido guardar correctamente",
-                    icon: "error",
-                    timer: 1500,
-                    timerProgressBar: true,
-                })
-            }
+            useModificarPruegunta.mutate({ token, idPregunta: pregunta.idPregunta, pregunta: formModificarPregunta })
         }
 
         setFormModificarPregunta({
