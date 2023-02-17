@@ -1,17 +1,20 @@
-import { useLeccionStore } from "../../store/leccionStore"
-import { useArchivoStore } from "../../store/archivoStore"
-
 import FormularioModificarLeccion from "../../components/leccion/FormularioModificarLeccion"
 import FormularioAgregarVideoLeccion from '../archivo/FormularioAgregarVideoLeccion'
 
-const A_DetalleLeccion = ({ leccionId, cursoNombre }) => {
+import { useObtenerArchivos } from "../../hooks/useArchivo"
 
-    let lecciones = useLeccionStore((state) => state.lecciones)
-    let archivos = useArchivoStore((state) => state.archivos)
+const A_DetalleLeccion = ({ leccion, cursoNombre }) => {
 
-    let leccion = lecciones.find((item) => item.idLeccion == leccionId)
-    let videoLeccion = archivos.find((item) => item.idArchivo == leccion.idVideo)
 
+    const { data, isLoading } = useObtenerArchivos()
+
+    if (isLoading) return <div className="spinner-border text-primary" role="status">
+        <span className="visually-hidden">Loading...</span>
+    </div>
+
+    let videoLeccion = data.find((item) => item.idArchivo == leccion.idVideo)
+
+    console.log(videoLeccion);
     return (
         <>
             <div className='container mt-3'>
@@ -39,7 +42,7 @@ const A_DetalleLeccion = ({ leccionId, cursoNombre }) => {
                                         :
                                         <div className="alert alert-warning" role="alert"><p>No se ha agregado un video para esta lección.</p></div>
                                 }
-                                <FormularioAgregarVideoLeccion idLeccion={leccionId} idVideo={leccion.idVideo} objVideo={videoLeccion} cursoNombre={cursoNombre} leccionNombre={leccion.nombre} />
+                                <FormularioAgregarVideoLeccion idLeccion={leccion.idLeccion} idVideo={leccion.idVideo} objVideo={videoLeccion} cursoNombre={cursoNombre} leccionNombre={leccion.nombre} />
                             </div>
                         </div>
 

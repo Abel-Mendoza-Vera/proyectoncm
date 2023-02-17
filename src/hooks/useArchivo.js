@@ -43,8 +43,11 @@ export const crearArchivoLeccion = async ({ token, idArchivo, idLeccion }) => {
         })
 }
 
-export const cambiarEstadoArchivo = async ({ token, id, operacion }) => {
-    return await api.delete(`/archivo/${id}/${operacion}`, { headers: { "x-access-token": token } })
+export const eliminarArchivo = async ({ token, id }) => {
+    return await api.delete(`/archivo/${id}`, { headers: { "x-access-token": token } })
+}
+export const eliminarArchivoLeccion = async ({ token, id }) => {
+    return await api.delete(`/archivo_leccion/${id}`, { headers: { "x-access-token": token } })
 }
 
 export const useObtenerArchivos = () => {
@@ -54,3 +57,4 @@ export const useObtenerArchivos = () => {
 export const useObtenerArchivoPorLeccion = (idLeccion) => {
     return useQuery(["getArchivoLeccion", idLeccion], () => obtenerArchivoPorLeccion(idLeccion))
 }
+ 

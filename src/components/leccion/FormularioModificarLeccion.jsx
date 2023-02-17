@@ -1,10 +1,25 @@
 import { useState } from "react"
 import Swal from "sweetalert2"
-import { useLeccionStore } from "../../store/leccionStore"
+
+import { useAccesoStore } from '../../store/accesoStore'
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { modificarLeccion } from "../../hooks/useLeccion"
 
 const FormularioModificarLeccion = ({ leccion }) => {
 
-    const modifyLeccion = useLeccionStore((state) => state.modifyLeccion)
+    const token = useAccesoStore((state) => state.token)
+    const queryClient = useQueryClient()
+    const useModificarLeccion = useMutation({
+        mutationFn: modificarLeccion,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Guardar lección", text: "La lección se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getLecciones")
+            queryClient.invalidateQueries("getLeccionesCurso")
+        },
+        onError: () => { Swal.fire({ title: "Guardar lección", text: "La lección no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
 
     // obtener datos del formularioModificarLeccion
     const [formularioModificarLeccion, setFormularioModificarLeccion] = useState({
@@ -22,31 +37,9 @@ const FormularioModificarLeccion = ({ leccion }) => {
     }
 
     const handleSave = async () => {
-        const status = await modifyLeccion(leccion.idLeccion, nombre, informacion)
-        alerta(status)
+        useModificarLeccion.mutate({ token, idLeccion: leccion.idLeccion, leccion: formularioModificarLeccion })
     }
 
-    const alerta = (status) => {
-        if (status == 200) {
-            Swal.fire({
-                title: "Guardar lección",
-                text: "La lección se ha guardado correctamente",
-                icon: "success",
-                timer: 1500,
-                timerProgressBar: true,
-
-            })
-        }
-        else if (status != 200) {
-            Swal.fire({
-                title: "Guardar lección",
-                text: "Ha ocurrio un error al momento de guardar una lección",
-                icon: "error",
-                timer: 1500,
-                timerProgressBar: true,
-            })
-        }
-    }
 
 
     return (
