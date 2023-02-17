@@ -9,6 +9,12 @@ import { useEffect } from 'react';
 
 const U_Perfil = () => {
 
+
+    const U_PerfilEdit = () => {
+        navigate(`/cliente/perfilEdit`)
+    }
+
+
     const navigate = useNavigate();
     const { token, saveUser } = useAccesoStore((state) => ({ token: state.token, saveUser: state.saveUser }))
     const { data, isLoading } = usePerfil(token)
@@ -73,7 +79,7 @@ const U_Perfil = () => {
 
                                                 </div>
                                                 <div className="d-flex justify-content-center">
-                                                <button className='btn btn-primary btn-sm me-2' onClick={""} ><span className='material-icons'>edit</span></button>
+                                                <button className='btn btn-primary btn-sm me-2' onClick={U_PerfilEdit} ><span className='material-icons'>edit</span></button>
                                                 </div>
                                             </div>
                                         </div>
