@@ -4,10 +4,10 @@ import { useObtenerArchivos } from "../../hooks/useArchivo"
 
 const U_Catalogo = () => {
 
-    const { data: cursos, isLoading } = useObtenerCursos()
-    const { data: archivos } = useObtenerArchivos();
+    const { data: cursos, isLoading: isLoadingCursos } = useObtenerCursos()
+    const { data: archivos, isLoading: isLoadingArchivos } = useObtenerArchivos();
 
-    if(isLoading) return <h1>Cargando ...</h1>
+    if(isLoadingCursos || isLoadingArchivos) return <h1>Cargando ...</h1>
     
 
     return (
