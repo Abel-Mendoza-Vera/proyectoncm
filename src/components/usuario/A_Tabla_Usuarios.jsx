@@ -12,8 +12,11 @@ const A_Tabla_Usuarios = () => {
     const { data, isLoading, status } = useObtenerUsuarios(token)
 
     let listaUsuarios = data
+    let listaClientes = data.filter((usuario) => usuario.roles.includes("cliente"))
+    let listaStaff = data.filter((usuario) => usuario.roles.includes("staff"))
 
     const [buscadorUsuario, setBuscadorUsuario] = useState("")
+    const [tipoUsuario, setTipoUsuario] = useState("todo")
 
     const handlerBuscadorUsuario = (e) => {
         setBuscadorUsuario(e.target.value)
@@ -25,9 +28,15 @@ const A_Tabla_Usuarios = () => {
 
     if (!buscadorUsuario) {
         listaUsuarios = data
+        listaClientes = data.filter((usuario) => usuario.roles.includes("cliente"))
+        listaStaff = data.filter((usuario) => usuario.roles.includes("staff"))
     }
     else {
         listaUsuarios = data.filter((usuario) => usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.segundoApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()))
+
+        listaClientes = data.filter((usuario) => (usuario.roles.includes("cliente")) && (usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.segundoApellido.toLowerCase().includes(buscadorUsuario.toLowerCase())) )
+
+        listaStaff = data.filter((usuario) => usuario.roles.includes("staff") && (usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.segundoApellido.toLowerCase().includes(buscadorUsuario.toLowerCase())))
     }
 
 
@@ -43,17 +52,17 @@ const A_Tabla_Usuarios = () => {
                 </div>
             </div>
 
-            {/**
-            <div className="row mt-3 justify-content-end">
-                <div className='col-3'>
-                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
-                        <button type="button" className="btn btn-outline-primary" onClick={() => console.log("Falta por agregar este feature")} >Todos</button>
-                        <button type="button" className="btn btn-outline-primary" onClick={() => console.log("Falta por agregar este feature")} >Empleados</button>
-                        <button type="button" className="btn btn-outline-primary" onClick={() => console.log("Falta por agregar este feature")} >Clientes</button>
-                    </div>
+
+            <div className=" mt-3 d-flex justify-content-end">
+
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("todo") } > <strong>Todos</strong></button>
+                    <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("cliente")} > <strong>Staff</strong></button>
+                    <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("staff")} > <strong>Clientes</strong></button>
                 </div>
+
             </div>
-             */}
+
 
 
             <div className="overflow-y-auto" style={{ height: "500px" }} >
@@ -74,14 +83,23 @@ const A_Tabla_Usuarios = () => {
                     <tbody className='table-group-divider' >
                         {
 
-                            listaUsuarios.length == 0 ?
+                            data.length == 0 ?
 
-                                (<tr><td colSpan='8' ><h2 className="text-center" ><strong>No hay usuarios registrados</strong></h2></td></tr>) :
-
+                                (<tr><td colSpan='8' ><h2 className="text-center" ><strong>No hay usuarios registrados</strong></h2></td></tr>)
+                                :
+                                tipoUsuario == "todo" ?
                                 listaUsuarios.map((usuario) => {
                                     return (<A_Registro_Usuario usuario={usuario} key={usuario.idUsuario} />)
                                 })
-
+                                :
+                                tipoUsuario == "cliente" ?
+                                listaClientes.map((usuario) => {
+                                    return (<A_Registro_Usuario usuario={usuario} key={usuario.idUsuario} />)
+                                })
+                                :
+                                listaStaff.map((usuario) => {
+                                    return (<A_Registro_Usuario usuario={usuario} key={usuario.idUsuario} />)
+                                })
                         }
                     </tbody>
                 </table>
