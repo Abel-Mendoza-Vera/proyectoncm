@@ -9,14 +9,7 @@
     background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
     }
 
-    body {
-        margin: 0;
-        padding-top: 40px;
-        color: #2e323c;
-        background: #f5f6fa;
-        position: relative;
-        height: 100%;
-    }
+     
     .account-settings .user-profile {
         margin: 0 0 1rem 0;
         padding-bottom: 1rem;

@@ -99,7 +99,7 @@ const Navbar = () => {
 
                     {
                         acceso ? 
-                        <small className='me-1' >{usuario.correo}</small>
+                        <small className='me-1' >{usuario.nombre} {usuario.primerApellido} {usuario.segundoApellido}</small>
                         :
                         <></>
                     }
