@@ -96,9 +96,19 @@ const Navbar = () => {
                         }
 
                     </ul>
+
+                    {
+                        acceso ? 
+                        <small className='me-1' >{usuario.correo}</small>
+                        :
+                        <></>
+                    }
+
                     <span className="nav-item text-primary" >
                         {acceso ?
+                            <>
                             <a className="nav-link" onClick={cerrarSesion} >Cerrar sesion</a>
+                            </>
                             :
                             <Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link>
                         }

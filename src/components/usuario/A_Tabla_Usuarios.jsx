@@ -9,22 +9,22 @@ import A_Registro_Usuario from "../../components/usuario/A_Registro_Usuario"
 const A_Tabla_Usuarios = () => {
 
     const token = useAccesoStore(state => state.token)
-    const { data, isLoading, status } = useObtenerUsuarios(token)
+    const { data, isLoading } = useObtenerUsuarios(token)
+
+    const [buscadorUsuario, setBuscadorUsuario] = useState("")
+    const [tipoUsuario, setTipoUsuario] = useState("todo")
+
+    if (isLoading) return <div className="spinner-border text-primary" role="status">
+        <span className="visually-hidden">Loading...</span>
+    </div>
 
     let listaUsuarios = data
     let listaClientes = data.filter((usuario) => usuario.roles.includes("cliente"))
     let listaStaff = data.filter((usuario) => usuario.roles.includes("staff"))
 
-    const [buscadorUsuario, setBuscadorUsuario] = useState("")
-    const [tipoUsuario, setTipoUsuario] = useState("todo")
-
     const handlerBuscadorUsuario = (e) => {
         setBuscadorUsuario(e.target.value)
     }
-
-    if (isLoading) return <div className="spinner-border text-primary" role="status">
-        <span className="visually-hidden">Loading...</span>
-    </div>
 
     if (!buscadorUsuario) {
         listaUsuarios = data
@@ -34,7 +34,7 @@ const A_Tabla_Usuarios = () => {
     else {
         listaUsuarios = data.filter((usuario) => usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.segundoApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()))
 
-        listaClientes = data.filter((usuario) => (usuario.roles.includes("cliente")) && (usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.segundoApellido.toLowerCase().includes(buscadorUsuario.toLowerCase())) )
+        listaClientes = data.filter((usuario) => (usuario.roles.includes("cliente")) && (usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.segundoApellido.toLowerCase().includes(buscadorUsuario.toLowerCase())))
 
         listaStaff = data.filter((usuario) => usuario.roles.includes("staff") && (usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.segundoApellido.toLowerCase().includes(buscadorUsuario.toLowerCase())))
     }
@@ -56,7 +56,7 @@ const A_Tabla_Usuarios = () => {
             <div className=" mt-3 d-flex justify-content-end">
 
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
-                    <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("todo") } > <strong>Todos</strong></button>
+                    <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("todo")} > <strong>Todos</strong></button>
                     <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("cliente")} > <strong>Staff</strong></button>
                     <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("staff")} > <strong>Clientes</strong></button>
                 </div>
@@ -88,18 +88,18 @@ const A_Tabla_Usuarios = () => {
                                 (<tr><td colSpan='8' ><h2 className="text-center" ><strong>No hay usuarios registrados</strong></h2></td></tr>)
                                 :
                                 tipoUsuario == "todo" ?
-                                listaUsuarios.map((usuario) => {
-                                    return (<A_Registro_Usuario usuario={usuario} key={usuario.idUsuario} />)
-                                })
-                                :
-                                tipoUsuario == "cliente" ?
-                                listaClientes.map((usuario) => {
-                                    return (<A_Registro_Usuario usuario={usuario} key={usuario.idUsuario} />)
-                                })
-                                :
-                                listaStaff.map((usuario) => {
-                                    return (<A_Registro_Usuario usuario={usuario} key={usuario.idUsuario} />)
-                                })
+                                    listaUsuarios.map((usuario) => {
+                                        return (<A_Registro_Usuario usuario={usuario} key={usuario.idUsuario} />)
+                                    })
+                                    :
+                                    tipoUsuario == "cliente" ?
+                                        listaClientes.map((usuario) => {
+                                            return (<A_Registro_Usuario usuario={usuario} key={usuario.idUsuario} />)
+                                        })
+                                        :
+                                        listaStaff.map((usuario) => {
+                                            return (<A_Registro_Usuario usuario={usuario} key={usuario.idUsuario} />)
+                                        })
                         }
                     </tbody>
                 </table>

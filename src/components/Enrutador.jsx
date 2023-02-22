@@ -20,6 +20,7 @@ import U_Perfil from '../pages/usuario/U_Perfil'
 import U_Catalogo from '../pages/usuario/U_Catalogo'
 
 import { ProtectedRoute } from './ProtectedRoute'
+import U_Curso from '../pages/usuario/U_Curso'
 
 
 
@@ -35,6 +36,7 @@ const Enrutador = () => {
                 <Route path='/' element={ <Home/> } />
                 <Route path='/pages/Contac' element={ <Contac/> } />
                 <Route path='/pages/Us' element={ <Us/> } />
+                <Route path='/curso/:idCurso' element={ <U_Curso/> } />
 
 
 
