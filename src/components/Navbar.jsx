@@ -60,33 +60,11 @@ const Navbar = () => {
                                                     </ul>
                                                 </li>
 
-                                                <li className="nav-item dropdown">
-                                                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Mi cuenta
-                                                    </a>
-                                                    <ul className="dropdown-menu">
-                                                        <li className="nav-item">
-                                                            <Link to="/perfil" className="nav-link" >Perfil</Link>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+                          
                                             </>
                                             :
                                             <>
-                                                <li className="nav-item dropdown">
-                                                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Mi cuenta
-                                                    </a>
-                                                    <ul className="dropdown-menu">
-                                                        <li className="nav-item">
-                                                            <Link to="/perfil" className="nav-link" >Perfil</Link>
-                                                        </li>
-                                                        <li><hr className="dropdown-divider" /></li>
-                                                        <li className="nav-item">
-                                                            <Link to="/cliente/cursos" className="nav-link" >Mis cursos</Link>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+                                                 
                                             </>
                                     }
                                 </>
@@ -97,26 +75,63 @@ const Navbar = () => {
 
                     </ul>
 
-                    {
-                        acceso ? 
-                        <small className='me-1' >{usuario.nombre} {usuario.primerApellido} {usuario.segundoApellido}</small>
-                        :
-                        <></>
-                    }
 
 
                     <span className="nav-item text-primary" >
-                        
                         {acceso ?
                             <>
-                            <a className="nav-link" onClick={cerrarSesion} >Cerrar sesion</a>
+                                <div className="nav-item dropdown">
+                                    <a
+                                        class="nav-link dropdown-toggle d-flex align-items-center hidden-arrow"
+                                        href="#"
+                                        id="navbarDropdownMenuAvatar"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <img
+                                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                                            class="rounded-circle"
+                                            height="25"
+                                            alt="Black and White Portrait of a Man"
+                                            loading="lazy"
+                                        />
+                                    </a>
+                                    <ul className="dropdown-menu">
+
+                                        <li className="nav-item">
+                                            <Link to="/perfil" className="nav-link" >Perfil</Link>
+                                        </li>
+                                        <li><hr className="dropdown-divider" /></li>
+                                        <li className="nav-item">
+                                            <Link to="/cliente/cursos" className="nav-link" >Mis cursos</Link>
+
+                                        </li>
+                                        <li><hr className="dropdown-divider" /></li>
+
+                                        <li className="nav-item">
+                                            {acceso ?
+                                                <>
+                                                    <Link className="nav-link" onClick={cerrarSesion} > Cerrar sesion</Link>
+                                                </>
+                                                :
+                                                <Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link>
+                                            }
+                                        </li>
+                                    </ul>
+
+                                </div>
                             </>
                             :
                             <Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link>
                         }
                     </span>
-                    
-
+                    {
+                        acceso ?
+                            <small className='me-1' >{usuario.nombre} {usuario.primerApellido} {usuario.segundoApellido}</small>
+                            :
+                            <></>
+                    }
                 </div>
             </div>
         </nav>
