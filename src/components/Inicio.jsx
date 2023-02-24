@@ -34,87 +34,87 @@ const Inicio = () => {
         </div>
       </div>
 
-      <div class="container">
-        <section class="text-center text-md-start">
-          <h4 class="mb-5"><strong> </strong></h4>
+      <div className="container">
+        <section className="text-center text-md-start">
+          <h4 className="mb-5"><strong> </strong></h4>
 
-          <div class="row">
-            <div class="col-md-4 mb-4">
-              <div class="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" class="img-fluid" />
+          <div className="row">
+            <div className="col-md-4 mb-4">
+              <div className="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light">
+                <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" className="img-fluid" />
                 <a href="#!">
-                  <div class="mask" style={{ backgroundcolor: "rgba(251, 251, 251, 0.15)" }}></div>
+                  <div className="mask" style={{ backgroundcolor: "rgba(251, 251, 251, 0.15)" }}></div>
                 </a>
               </div>
             </div>
 
-            <div class="col-md-8 mb-4">
+            <div className="col-md-8 mb-4">
               <h5>Liderazgo</h5>
               <p>
                 Dentro del curso se verán conceptos diversos como la autoestima, la comunicación asertiva, tipos de comunicación no verbal y como emplearla, toma de decisiones y aspectos importantes sobre la empatía. Por otro lado, se verán diversas prácticas que puedes realizar en cualquier parte para desarrollar cada una de las habilidades que te darán la seguridad para mejorar cada día.
               </p>
 
-              <button type="button" class="btn btn-primary">Añadir al Carrito</button>
+              <button type="button" className="btn btn-primary">Añadir al Carrito</button>
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-md-4 mb-4">
-              <div class="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/002.jpg" class="img-fluid" />
+          <div className="row">
+            <div className="col-md-4 mb-4">
+              <div className="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light">
+                <img src="https://mdbootstrap.com/img/new/standard/nature/002.jpg" className="img-fluid" />
                 <a href="#!">
-                  <div class="mask" style={{ backgroundcolor: "rgba(251, 251, 251, 0.15)" }}></div>
+                  <div className="mask" style={{ backgroundcolor: "rgba(251, 251, 251, 0.15)" }}></div>
                 </a>
               </div>
             </div>
 
-            <div class="col-md-8 mb-4">
+            <div className="col-md-8 mb-4">
               <h5>Desarrollo Sustentable</h5>
               <p>
                 Dentro del curso se verán conceptos diversos como la autoestima, la comunicación asertiva, tipos de comunicación no verbal y como emplearla, toma de decisiones y aspectos importantes sobre la empatía. Por otro lado, se verán diversas prácticas que puedes realizar en cualquier parte para desarrollar cada una de las habilidades que te darán la seguridad para mejorar cada día.
               </p>
 
-              <button type="button" class="btn btn-primary">Añadir al Carrito</button>
+              <button type="button" className="btn btn-primary">Añadir al Carrito</button>
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-md-4 mb-4">
-              <div class="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/023.jpg" class="img-fluid" />
+          <div className="row">
+            <div className="col-md-4 mb-4">
+              <div className="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light">
+                <img src="https://mdbootstrap.com/img/new/standard/nature/023.jpg" className="img-fluid" />
                 <a href="#!">
-                  <div class="mask" style={{ backgroundcolor: "rgba(251, 251, 251, 0.15)" }}></div>
+                  <div className="mask" style={{ backgroundcolor: "rgba(251, 251, 251, 0.15)" }}></div>
                 </a>
               </div>
             </div>
 
-            <div class="col-md-8 mb-4">
+            <div className="col-md-8 mb-4">
               <h5>Asistencia Técnica</h5>
               <p>
               Dentro del curso se verán conceptos diversos como la autoestima, la comunicación asertiva, tipos de comunicación no verbal y como emplearla, toma de decisiones y aspectos importantes sobre la empatía. Por otro lado, se verán diversas prácticas que puedes realizar en cualquier parte para desarrollar cada una de las habilidades que te darán la seguridad para mejorar cada día.
               </p>
 
-              <button type="button" class="btn btn-primary">Añadir al Carrito</button>
+              <button type="button" className="btn btn-primary">Añadir al Carrito</button>
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-md-4 mb-4">
-              <div class="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="img-fluid" />
+          <div className="row">
+            <div className="col-md-4 mb-4">
+              <div className="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light">
+                <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" className="img-fluid" />
                 <a href="#!">
-                  <div class="mask" style={{ backgroundcolor: "rgba(251, 251, 251, 0.15)" }}></div>
+                  <div className="mask" style={{ backgroundcolor: "rgba(251, 251, 251, 0.15)" }}></div>
                 </a>
               </div>
             </div>
 
-            <div class="col-md-8 mb-4">
+            <div className="col-md-8 mb-4">
               <h5>Inovación Empresarial</h5>
               <p>
               Dentro del curso se verán conceptos diversos como la autoestima, la comunicación asertiva, tipos de comunicación no verbal y como emplearla, toma de decisiones y aspectos importantes sobre la empatía. Por otro lado, se verán diversas prácticas que puedes realizar en cualquier parte para desarrollar cada una de las habilidades que te darán la seguridad para mejorar cada día.
               </p>
 
-              <button type="button" class="btn btn-primary">Añadir al Carrito</button>
+              <button type="button" className="btn btn-primary">Añadir al Carrito</button>
             </div>
           </div>
         </section>

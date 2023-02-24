@@ -104,7 +104,9 @@ const Navbar = () => {
                         <></>
                     }
 
+
                     <span className="nav-item text-primary" >
+                        
                         {acceso ?
                             <>
                             <a className="nav-link" onClick={cerrarSesion} >Cerrar sesion</a>
@@ -113,6 +115,7 @@ const Navbar = () => {
                             <Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link>
                         }
                     </span>
+                    
 
                 </div>
             </div>
