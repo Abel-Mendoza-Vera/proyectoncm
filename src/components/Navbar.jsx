@@ -76,6 +76,7 @@ const Navbar = () => {
                     </ul>
 
 
+                    <ul className="navbar-nav">
 
                     <span className="nav-item text-primary" >
                         {acceso ?
@@ -121,11 +122,13 @@ const Navbar = () => {
                                     </ul>
 
                                 </div>
+                                
                             </>
                             :
-                            <Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link>
+                            <Link to="/iniciar_sesion" className="nav-link text-primary" >Iniciar Sesión</Link>
                         }
                     </span>
+                    </ul>
                     {
                         acceso ?
                             <small className='me-1' >{usuario.nombre} {usuario.primerApellido} {usuario.segundoApellido}</small>
