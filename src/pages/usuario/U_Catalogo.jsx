@@ -15,28 +15,32 @@ const U_Catalogo = () => {
     if (isLoadingCursos || isLoadingArchivos) return < Cargando />
 
     const onChangeBuscadorCurso = (e) => {
-        setBuscadorCurso( e.target.value )
+        setBuscadorCurso(e.target.value)
     }
 
     let listaCursos = cursos
 
-    if(!buscadorCurso){
+    if (!buscadorCurso) {
         listaCursos = cursos
     }
-    else{
-        listaCursos = cursos.filter((curso) => curso.nombre.toLowerCase().includes( buscadorCurso.toLowerCase() ))
+    else {
+        listaCursos = cursos.filter((curso) => curso.nombre.toLowerCase().includes(buscadorCurso.toLowerCase()))
     }
 
-
     return (
-        <div className="container-fluid">
+        <div className="container-fluid" >
 
-            <h3 className="display-2 text-center my-5">¡ Checa nuestro catálogo !</h3>
+            <span id="hero" className="d-flex flex-column justify-content-center align-items-center">
+                <div className="hero-container" data-aos="fade-in">
+                    <h1>¡ Checa nuestro catálogo !</h1>
+                </div>
+            </span>
+
 
             <div className="row mt-3 justify-content-end">
                 <div className='col-6'>
                     <div className="input-group">
-                        <input value={buscadorCurso} onChange={ (e) => onChangeBuscadorCurso(e) } className='form-control' placeholder='Buscar' type="search" name="buscadorUsuario" />
+                        <input value={buscadorCurso} onChange={(e) => onChangeBuscadorCurso(e)} className='form-control' placeholder='Buscar' type="search" name="buscadorUsuario" />
                         <span className='input-group-text'><BiSearch size="2em" /></span>
                     </div>
                 </div>
@@ -51,7 +55,7 @@ const U_Catalogo = () => {
                                 return <Tarjeta key={curso.idCurso} curso={curso} archivo={archivo} />
                             })
                             :
-                            <h1 className="my-5">Aun no se cuenta con cursos</h1>
+                            <h1 className="my-5">No Se Ha Encontrado Dicho Curso</h1>
                     }
                 </div>
             </div>
