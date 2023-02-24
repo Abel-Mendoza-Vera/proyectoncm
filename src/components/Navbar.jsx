@@ -82,7 +82,7 @@ const Navbar = () => {
                             <>
                                 <div className="nav-item dropdown">
                                     <a
-                                        class="nav-link dropdown-toggle d-flex align-items-center hidden-arrow"
+                                        className="nav-link dropdown-toggle d-flex align-items-center hidden-arrow"
                                         href="#"
                                         id="navbarDropdownMenuAvatar"
                                         role="button"
@@ -91,7 +91,7 @@ const Navbar = () => {
                                     >
                                         <img
                                             src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                                            class="rounded-circle"
+                                            className="rounded-circle"
                                             height="25"
                                             alt="Black and White Portrait of a Man"
                                             loading="lazy"
