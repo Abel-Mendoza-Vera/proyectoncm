@@ -30,7 +30,7 @@ const Certificaciones = () => {
                 </div>
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" onClick={Cursos}>Cursos</a>
+                        <a class="nav-link" onClick={Cursos}>Carrito</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" onClick={MisCursos}>Mis Cursos</a>

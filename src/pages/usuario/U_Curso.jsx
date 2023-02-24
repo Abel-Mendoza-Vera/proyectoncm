@@ -25,7 +25,7 @@ const U_Curso = () => {
             {/** Detalle del curso */}
             <div className="row text-white py-5 px-5" style={{ backgroundColor: "#274a93", /*height: "35vh" */ }}>
 
-                <h3 className="text-center display-3 mb-5">{curso.nombre}</h3>
+                <h3 className="text-center display-3 mb-5"><strong>{curso.nombre}</strong></h3>
 
                 <div className="col-6" style={{ fontSize: "1.3rem" }}>
                     <div className="row">

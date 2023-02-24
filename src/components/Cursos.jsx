@@ -29,7 +29,7 @@ const Cursos = () => {
                 </div>
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" onClick={Cursos}>Cursos</a>
+                        <a class="nav-link active" aria-current="page" onClick={Cursos}>Carrito</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" onClick={MisCursos}>Mis Cursos</a>
