@@ -18,7 +18,6 @@ import U_Register from '../pages/usuario/U_Register'
 import A_Usuarios from '../pages/admin/A_Usuarios'
 import U_Perfil from '../pages/usuario/U_Perfil'
 import U_Catalogo from '../pages/usuario/U_Catalogo'
-import U_PerfilEdit from '../pages/usuario/U_PerfilEdit'
 
 
 import { ProtectedRoute } from './ProtectedRoute'
@@ -74,7 +73,6 @@ const Enrutador = () => {
 
                     
                     <Route path='cursos' element={ <C_Cursos/> } />
-                    <Route path='perfilEdit' element={ <U_PerfilEdit/> } />
 
                     <Route path='comprar' element={ <><h1>Comprar</h1></> } />
                     <Route path='pagar' element={ <><h1>Pagar</h1></> } />
