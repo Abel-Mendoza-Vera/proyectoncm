@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useObtenerCursoPorId } from "../../hooks/useCurso"
 import { useObtenerArchivos } from "../../hooks/useArchivo"
 import { useObtenerLeccionesPorCurso } from "../../hooks/useLeccion"
@@ -7,9 +7,14 @@ import imgDefault from '../../assets/curso.jpg'
 import Cargando from '../../pages/Cargando'
 import { BiLinkExternal } from "react-icons/bi"
 
+import { useAccesoStore } from '../../store/accesoStore'
+
 const U_Curso = () => {
 
     const { idCurso } = useParams()
+    const navigation = useNavigate()
+    const acceso = useAccesoStore((state) => state.acceso)
+
     const { data: curso, isLoading: isLoadingCurso } = useObtenerCursoPorId(idCurso)
     const { data: leccionesCurso, isLoading: isLoadingLeccionesCurso } = useObtenerLeccionesPorCurso(idCurso)
     const { data: archivos, isLoading: isLoadingArchivos } = useObtenerArchivos()
@@ -19,15 +24,20 @@ const U_Curso = () => {
     let archivoVideo = archivos.find((archivo) => archivo.idArchivo == curso.idVideo)
     let archivoMiniatura = archivos.find((archivo) => archivo.idArchivo == curso.idMiniatura)
 
+    const irLeccion = (leccionId) => {
+        navigation(`/curso/leccion/${idCurso}/${curso.nombre}/${leccionId}`)
+    }
+
+
     return (
         <div className="container-fluid">
 
             {/** Detalle del curso */}
-            <div className="row text-white py-5 px-5" style={{ backgroundColor: "#274a93", /*height: "35vh" */ }}>
+            <div className="row row-2 text-white py-5 px-5" style={{ backgroundColor: "#274a93", /*height: "35vh" */ }}>
 
                 <h3 className="text-center display-3 mb-5"><strong>{curso.nombre}</strong></h3>
 
-                <div className="col-6" style={{ fontSize: "1.3rem" }}>
+                <div className="col-12 col-md-6" style={{ fontSize: "1.3rem" }}>
                     <div className="row">
                         <div className="col-6">
                             <p><strong>Duración:</strong></p>
@@ -47,7 +57,7 @@ const U_Curso = () => {
 
                 </div>
 
-                <div className="col-6 d-flex justify-content-center align-content-center">
+                <div className="col-12 col-md-6 d-flex justify-content-center align-content-center">
                     {/**/}
                     {
                         archivoVideo ?
@@ -83,7 +93,12 @@ const U_Curso = () => {
                                 return <div key={leccion.idLeccion} className="list-group-item" >
                                     <div className="d-flex w-100 justify-content-between">
                                         <h5 className="mb-1">Lección {index + 1}: {leccion.nombre}</h5>
-                                        <Link><BiLinkExternal size="1.7rem" /></Link>
+                                        {
+                                            index > 0 && !acceso ? 
+                                            <button className="btn btn-outline-dark btn-sm" disabled ><BiLinkExternal size="1.5rem" /></button>
+                                            :
+                                            <button className="btn btn-outline-primary btn-sm" onClick={() => irLeccion(leccion.idLeccion)} ><BiLinkExternal size="1.5rem" /></button>
+                                        }
                                     </div>
                                     <p className="mb-1 mt-1">{leccion.informacion}</p>
                                 </div>

@@ -23,6 +23,7 @@ import U_PerfilEdit from '../pages/usuario/U_PerfilEdit'
 
 import { ProtectedRoute } from './ProtectedRoute'
 import U_Curso from '../pages/usuario/U_Curso'
+import U_Leccion from '../pages/usuario/U_Leccion'
 
 
 
@@ -38,7 +39,7 @@ const Enrutador = () => {
                 <Route path='/' element={ <Home/> } />
                 <Route path='/pages/Contac' element={ <Contac/> } />
                 <Route path='/pages/Us' element={ <Us/> } />
-                <Route path='/curso/:idCurso' element={ <U_Curso/> } />
+                
 
 
 
@@ -46,7 +47,12 @@ const Enrutador = () => {
                 <Route path='/iniciar_sesion' element={ <U_Login/> } />
                 <Route path='/registrar' element={ <U_Register/> } />
                 <Route path='/perfil' element={ <U_Perfil/> } />
+
+                {/** Rutas para la vista general de los cursos */}
                 <Route path='/catalogo_cursos' element={ <U_Catalogo/> } />
+                <Route path='/curso/:idCurso' element={ <U_Curso/> } />
+                <Route path='/curso/leccion/:idCurso/:nombreCurso/:idLeccion' element={ <U_Leccion/> } />
+
 
 
                 {/* Rutas administrativas */}
@@ -68,11 +74,9 @@ const Enrutador = () => {
 
                     
                     <Route path='cursos' element={ <C_Cursos/> } />
-                    <Route path='perfil' element={ <><h1>Perfil</h1></> } />
                     <Route path='perfilEdit' element={ <U_PerfilEdit/> } />
 
                     <Route path='comprar' element={ <><h1>Comprar</h1></> } />
-                    <Route path='pagar' element={ <><h1>Pagar</h1></> } />
                     <Route path='pagar' element={ <><h1>Pagar</h1></> } />
                 </Route>
 

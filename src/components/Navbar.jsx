@@ -43,7 +43,7 @@ const Navbar = () => {
                             acceso && usuario.roles ?
                                 <>
                                     {
-                                        usuario.roles.includes("empleado") || usuario.roles.includes("administrador") ?
+                                        usuario.roles.includes("staff") || usuario.roles.includes("administrador") ?
                                             <>
                                                 <li className="nav-item dropdown">
                                                     <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -109,16 +109,13 @@ const Navbar = () => {
 
                                         </li>
                                         <li><hr className="dropdown-divider" /></li>
+                                        {
+                                            acceso ? 
+                                            <li className='nav-item' ><a className="nav-link" onClick={cerrarSesion} >Cerrar sesión</a></li>
+                                            :
+                                            <li><Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link></li>
+                                        }
 
-                                        <li className="nav-item">
-                                            {acceso ?
-                                                <>
-                                                    <Link className="nav-link" onClick={cerrarSesion} > Cerrar sesion</Link>
-                                                </>
-                                                :
-                                                <Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link>
-                                            }
-                                        </li>
                                     </ul>
 
                                 </div>
