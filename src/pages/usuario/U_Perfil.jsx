@@ -10,10 +10,6 @@ import { useEffect } from 'react';
 const U_Perfil = () => {
 
 
-    const U_PerfilEdit = () => {
-        navigate(`/cliente/perfilEdit`)
-    }
-
 
     const navigate = useNavigate();
     const { token, saveUser } = useAccesoStore((state) => ({ token: state.token, saveUser: state.saveUser }))
