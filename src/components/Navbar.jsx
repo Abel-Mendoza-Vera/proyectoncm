@@ -4,6 +4,8 @@ import logo from '../assets/logo.png'
 import { shallow } from 'zustand/shallow'
 import { useAccesoStore } from '../store/accesoStore'
 
+import Cargando from '../pages/Cargando'
+
 const Navbar = () => {
 
     const navigate = useNavigate();
@@ -59,12 +61,9 @@ const Navbar = () => {
                                                         </li>
                                                     </ul>
                                                 </li>
-
-                          
                                             </>
                                             :
                                             <>
-                                                 
                                             </>
                                     }
                                 </>
@@ -78,53 +77,66 @@ const Navbar = () => {
 
                     <ul className="navbar-nav">
 
-                    <span className="nav-item text-primary" >
-                        {acceso ?
-                            <>
-                                <div className="nav-item dropdown">
-                                    <a
-                                        className="nav-link dropdown-toggle d-flex align-items-center hidden-arrow"
-                                        href="#"
-                                        id="navbarDropdownMenuAvatar"
-                                        role="button"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                    >
-                                        <img
-                                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                                            className="rounded-circle"
-                                            height="25"
-                                            alt="Black and White Portrait of a Man"
-                                            loading="lazy"
-                                        />
-                                    </a>
-                                    <ul className="dropdown-menu">
+                        <span className="nav-item text-primary" >
+                            {acceso ?
+                                <>
+                                    <div className="nav-item dropdown">
+                                        <a
+                                            className="nav-link dropdown-toggle d-flex align-items-center hidden-arrow"
+                                            href="#"
+                                            id="navbarDropdownMenuAvatar"
+                                            role="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                            <img
+                                                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                                                className="rounded-circle"
+                                                height="25"
+                                                alt="Black and White Portrait of a Man"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                        <ul className="dropdown-menu">
 
-                                        <li className="nav-item">
-                                            <Link to="/perfil" className="nav-link" >Perfil</Link>
-                                        </li>
-                                        <li><hr className="dropdown-divider" /></li>
-                                        <li className="nav-item">
-                                            <Link to="/cliente/cursos" className="nav-link" >Mis cursos</Link>
+                                            <li className="nav-item">
+                                                <Link to="/perfil" className="nav-link" >Perfil</Link>
+                                            </li>
+                                            {
+                                                acceso && usuario.roles ?
+                                                    <>
+                                                        {
+                                                            usuario.roles.includes("cliente") ?
+                                                                <>
+                                                                    <li><hr className="dropdown-divider" /></li>
+                                                                    <li className="nav-item">
+                                                                        <Link to="/cliente/cursos" className="nav-link" >Mis cursos</Link>
 
-                                        </li>
-                                        <li><hr className="dropdown-divider" /></li>
-                                        {
-                                            acceso ? 
-                                            <li className='nav-item' ><a className="nav-link" onClick={cerrarSesion} >Cerrar sesión</a></li>
-                                            :
-                                            <li><Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link></li>
-                                        }
+                                                                    </li>
+                                                                </>
+                                                                : <></>
+                                                        }
+                                                    </>
+                                                    :
+                                                    <></>
+                                            }
+                                            <li><hr className="dropdown-divider" /></li>
+                                            {
+                                                acceso ?
+                                                    <li className='nav-item' ><a className="nav-link" onClick={cerrarSesion} >Cerrar sesión</a></li>
+                                                    :
+                                                    <li><Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link></li>
+                                            }
 
-                                    </ul>
+                                        </ul>
 
-                                </div>
-                                
-                            </>
-                            :
-                            <Link to="/iniciar_sesion" className="nav-link text-primary" >Iniciar Sesión</Link>
-                        }
-                    </span>
+                                    </div>
+
+                                </>
+                                :
+                                <Link to="/iniciar_sesion" className="nav-link text-primary" >Iniciar Sesión</Link>
+                            }
+                        </span>
                     </ul>
                     {
                         acceso ?

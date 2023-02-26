@@ -43,7 +43,9 @@ const U_Leccion = () => {
 
 
                     <div className="row">
-                        <div className="d-flex justify-content-end mb-2">
+                        {
+                            acceso ?
+                            <div className="d-flex justify-content-end mb-2">
                             {
                                 archivosLecciones.length == 0 ?
                                     <></>
@@ -62,6 +64,9 @@ const U_Leccion = () => {
 
                             <button className="btn btn-primary btn-sm">Cuestionario</button>
                         </div>
+                            :
+                            <></>
+                        }
 
                         <p>
                             {leccion.informacion}
@@ -76,9 +81,9 @@ const U_Leccion = () => {
                         { /** Cuando tengan el mismo id se asigna la clase active */}
                         {
                             leccionesCurso.map((leccion, index) => {
-                                if (index > 0 && !acceso) return <button type="button" className="list-group-item list-group-item-action" disabled >{leccion.nombre}</button>
+                                if (index > 0 && !acceso) return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >Lección {index + 1}: {leccion.nombre}</button>
 
-                                return <button type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >{leccion.nombre}</button>
+                                return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
 
                             })
                         }

@@ -1,4 +1,3 @@
-import { useArchivoStore } from '../../store/archivoStore'
 import Swal from 'sweetalert2'
 
 import { storage } from '../../firebase'

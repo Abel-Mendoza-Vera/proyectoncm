@@ -1,6 +1,3 @@
-import { useCursoStore } from "../../store/cursoStore"
-import { useArchivoStore } from "../../store/archivoStore"
-
 import { useObtenerCursoPorId } from "../../hooks/useCurso"
 import { useObtenerArchivos } from "../../hooks/useArchivo"
 

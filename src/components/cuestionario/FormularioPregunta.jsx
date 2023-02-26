@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { usePreguntaStore } from "../../store/preguntaStore";
 
 import { useAccesoStore } from "../../store/accesoStore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
