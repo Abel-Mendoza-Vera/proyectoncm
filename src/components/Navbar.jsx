@@ -110,7 +110,7 @@ const Navbar = () => {
                                                                 <>
                                                                     <li><hr className="dropdown-divider" /></li>
                                                                     <li className="nav-item">
-                                                                        <Link to="/cliente/cursos" className="nav-link" >Mis cursos</Link>
+                                                                        <Link to="/cliente/mis_cursos" className="nav-link" >Mis cursos</Link>
 
                                                                     </li>
                                                                 </>

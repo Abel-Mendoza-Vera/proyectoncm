@@ -11,9 +11,7 @@ const Certificaciones = () => {
         navigate(`/cliente/mis_cursos`)
     }
 
-    const Cursos = () => {
-        navigate(`/cliente/cursos`)
-    }
+ 
 
     const Certificaciones = () => {
         navigate(`/cliente/certificaciones`)
@@ -29,9 +27,7 @@ const Certificaciones = () => {
                     </div>
                 </div>
                 <ul className="nav nav-tabs">
-                    <li className="nav-item">
-                        <a className="nav-link" onClick={Cursos}>Carrito</a>
-                    </li>
+                     
                     <li className="nav-item">
                         <a className="nav-link" onClick={MisCursos}>Mis Cursos</a>
                     </li>

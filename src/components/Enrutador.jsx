@@ -7,7 +7,6 @@ import Contac from '../pages/Contac'
 import Us from '../pages/Us'
 import C_Mis_Cursos from '../pages/cliente/C_Mis_Cursos'
 import A_Lecciones from '../pages/admin/A_Lecciones'
-import C_Cursos from '../pages/cliente/C_Cursos'
 import C_CursoPlantilla from '../pages/cliente/C_CursoPlantilla'
 import C_Certificaciones from '../pages/cliente/C_Certificaciones'
 
@@ -73,8 +72,6 @@ const Enrutador = () => {
                     <Route path='examen' element={ <C_Examen/> } />
 
                     
-                    <Route path='cursos' element={ <C_Cursos/> } />
-
                     <Route path='carrito' element={ <C_Carrito/> } />
                     <Route path='pagar' element={ <><h1>Pagar</h1></> } />
                 </Route>

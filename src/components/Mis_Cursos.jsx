@@ -32,18 +32,11 @@ const Mis_Cursos = () => {
 
     const navigate = useNavigate()
 
-    const Cursos = () => {
-        navigate(`/cliente/cursos`)
-    }
-
+   
     const MisCursos = () => {
         navigate(`/cliente/mis_cursos`)
     }
 
-
-    const continuar_curso = () => {
-        navigate(`/cliente/cursos_plantilla`)
-    }
     
     const Certificaciones = () => {
         navigate(`/cliente/certificaciones`)
@@ -55,9 +48,7 @@ const Mis_Cursos = () => {
                 <div className='col-6'>
                 </div>
                 <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" onClick={Cursos}>Carrito</a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" onClick={MisCursos}>Mis Cursos</a>
                     </li>
