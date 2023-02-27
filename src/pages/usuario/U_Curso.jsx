@@ -8,6 +8,7 @@ import Cargando from '../../pages/Cargando'
 import { BiLinkExternal } from "react-icons/bi"
 
 import { useAccesoStore } from '../../store/accesoStore'
+import AgregarAlCarrito from "../../components/carrito/AgregarAlCarrito"
 
 const U_Curso = () => {
 
@@ -55,6 +56,10 @@ const U_Curso = () => {
                     <p><strong>Descripción:</strong></p>
                     <p>{curso.descripcion}</p>
 
+                    <div className="d-flex justify-content-end">
+                        <AgregarAlCarrito idCurso={idCurso} blanco />
+                    </div>
+
                 </div>
 
                 <div className="col-12 col-md-6 d-flex justify-content-center align-content-center">
@@ -94,10 +99,10 @@ const U_Curso = () => {
                                     <div className="d-flex w-100 justify-content-between">
                                         <h5 className="mb-1">Lección {index + 1}: {leccion.nombre}</h5>
                                         {
-                                            index > 0 && !acceso ? 
-                                            <button className="btn btn-outline-dark btn-sm" disabled ><BiLinkExternal size="1.5rem" /></button>
-                                            :
-                                            <button className="btn btn-outline-primary btn-sm" onClick={() => irLeccion(leccion.idLeccion)} ><BiLinkExternal size="1.5rem" /></button>
+                                            index > 0 && !acceso ?
+                                                <button className="btn btn-outline-dark btn-sm" disabled ><BiLinkExternal size="1.5rem" /></button>
+                                                :
+                                                <button className="btn btn-outline-primary btn-sm" onClick={() => irLeccion(leccion.idLeccion)} ><BiLinkExternal size="1.5rem" /></button>
                                         }
                                     </div>
                                     <p className="mb-1 mt-1">{leccion.informacion}</p>

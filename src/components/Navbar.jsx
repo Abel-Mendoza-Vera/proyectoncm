@@ -4,7 +4,7 @@ import logo from '../assets/logo.png'
 import { shallow } from 'zustand/shallow'
 import { useAccesoStore } from '../store/accesoStore'
 
-import Cargando from '../pages/Cargando'
+import { BsFillCartFill } from 'react-icons/bs'
 
 const Navbar = () => {
 
@@ -140,9 +140,22 @@ const Navbar = () => {
                     </ul>
                     {
                         acceso ?
-                            <small className='me-1' >{usuario.nombre} {usuario.primerApellido} {usuario.segundoApellido}</small>
+                            <small className='me-3' >{usuario.nombre} {usuario.primerApellido} {usuario.segundoApellido}</small>
                             :
                             <></>
+                    }
+                    {
+                        acceso && usuario.roles ? 
+                        <>
+                        {
+                            usuario.roles.includes("cliente") ? 
+                            <Link to="/cliente/carrito" ><BsFillCartFill size="1.4rem" /></Link>
+                            :
+                            <></>
+                        }
+                        </>
+                        :
+                        <></>
                     }
                 </div>
             </div>

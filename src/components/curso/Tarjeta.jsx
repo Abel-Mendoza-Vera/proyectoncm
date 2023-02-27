@@ -1,6 +1,7 @@
 import { BsCartPlusFill } from 'react-icons/bs'
 import imgCurso from '../../assets/curso.jpg'
 import { useNavigate } from 'react-router-dom'
+import AgregarAlCarrito from '../carrito/AgregarAlCarrito'
 
 
 const Tarjeta = ({curso, archivo}) => {
@@ -24,6 +25,7 @@ const Tarjeta = ({curso, archivo}) => {
 
     return (
         < div id={`curso${curso.idCurso}`} onMouseOver={mouseOver} onMouseOut={mouseOut} className='col' >
+            
             <div className="card" style={{ width: "18rem" }}>
                 <img src={curso.idMiniatura != 0 ? archivo.url : imgCurso} onClick={irAlCurso} style={{ cursor: "pointer" }} height="190px" className="card-img-top" alt="..." />
                 <div className="card-body">
@@ -33,7 +35,7 @@ const Tarjeta = ({curso, archivo}) => {
                 </div>
                 <div className="card-footer">
                     <div className="d-flex justify-content-end">
-                        <button className='btn btn-primary btn-sm'>Agregar al carrito <BsCartPlusFill/></button>
+                        <AgregarAlCarrito small idCurso={curso.idCurso} />
                     </div>
                 </div>
             </div>

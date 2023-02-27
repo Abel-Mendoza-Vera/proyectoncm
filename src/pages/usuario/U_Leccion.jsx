@@ -1,5 +1,7 @@
 import { useParams, Navigate, useNavigate } from "react-router-dom"
-
+import { BsCartPlusFill } from 'react-icons/bs'
+import AgregarAlCarrito from "../../components/carrito/AgregarAlCarrito"
+import { useObtenerCursoPorId } from "../../hooks/useCurso"
 import { useObtenerLeccion } from "../../hooks/useLeccion"
 import { useObtenerArchivos, useObtenerArchivoPorLeccion } from "../../hooks/useArchivo"
 import { useObtenerLeccionesPorCurso } from "../../hooks/useLeccion"
@@ -12,14 +14,15 @@ const U_Leccion = () => {
     const { idCurso, nombreCurso, idLeccion } = useParams()
     const acceso = useAccesoStore((state) => state.acceso)
     const navigation = useNavigate()
+    const { data: curso, isLoading: isLoadingCurso } = useObtenerCursoPorId(idCurso)
     const { data: leccion, isLoading: isLoadingLeccion } = useObtenerLeccion(idLeccion)
     const { data: leccionesCurso, isLoading: isLoadingLeccionesCurso } = useObtenerLeccionesPorCurso(idCurso)
     const { data: archivos, isLoading: isLoadingArchivos } = useObtenerArchivos()
     const { data: archivosLecciones, isLoading: isLoadingArchivosLecciones } = useObtenerArchivoPorLeccion(idLeccion)
 
-    if (isLoadingLeccion || isLoadingLeccionesCurso || isLoadingArchivos || isLoadingArchivosLecciones) return <Cargando />
+    if (isLoadingCurso || isLoadingLeccion || isLoadingLeccionesCurso || isLoadingArchivos || isLoadingArchivosLecciones) return <Cargando />
 
-    if( leccionesCurso[0].idLeccion != idLeccion && !acceso ) return <Navigate to={`/curso/${idCurso}`} />
+    if (leccionesCurso[0].idLeccion != idLeccion && !acceso) return <Navigate to={`/curso/${idCurso}`} />
 
     const videoLeccion = archivos.find((archivo) => archivo.idArchivo == leccion.idVideo)
 
@@ -30,7 +33,7 @@ const U_Leccion = () => {
     return (
         <div className="container-fluid py-5">
 
-            <h2 className="text-center display-2 mb-5">{nombreCurso}</h2>
+            <h2 className="text-center display-2 mb-5">{curso.nombre}</h2>
 
             <div className="row">
                 <div className="col-8">
@@ -45,27 +48,27 @@ const U_Leccion = () => {
                     <div className="row">
                         {
                             acceso ?
-                            <div className="d-flex justify-content-end mb-2">
-                            {
-                                archivosLecciones.length == 0 ?
-                                    <></>
-                                    :
-                                    <div className="dropdown">
-                                        <button className="btn btn-primary btn-sm dropdown-toggle me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Archivos
-                                        </button>
-                                        <ul className="dropdown-menu">
-                                            {
-                                                archivosLecciones.map((a) => <li><a className="dropdown-item" href={a.url} target="_blank" >{a.nombre}</a></li>)
-                                            }
-                                        </ul>
-                                    </div>
-                            }
+                                <div className="d-flex justify-content-end mb-2">
+                                    {
+                                        archivosLecciones.length == 0 ?
+                                            <></>
+                                            :
+                                            <div className="dropdown">
+                                                <button className="btn btn-primary btn-sm dropdown-toggle me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Archivos
+                                                </button>
+                                                <ul className="dropdown-menu">
+                                                    {
+                                                        archivosLecciones.map((a) => <li><a className="dropdown-item" href={a.url} target="_blank" >{a.nombre}</a></li>)
+                                                    }
+                                                </ul>
+                                            </div>
+                                    }
 
-                            <button className="btn btn-primary btn-sm">Cuestionario</button>
-                        </div>
-                            :
-                            <></>
+                                    <button className="btn btn-primary btn-sm">Cuestionario</button>
+                                </div>
+                                :
+                                <></>
                         }
 
                         <p>
@@ -77,6 +80,19 @@ const U_Leccion = () => {
 
                 <div className="col-4">
                     <h4 className="text-center mb-3">Lecciones del curso</h4>
+
+                    {
+                        !acceso ?
+                            <div className="alert alert-info" role="alert">
+                                <p>
+                                Compra el curso "{curso.nombre}" para seguir disfrutando de su contenido.
+                                </p>
+                                <AgregarAlCarrito idCurso={idCurso} />
+                            </div>
+                            :
+                            <></>
+                    }
+
                     <div className="list-group overflow-y-auto" style={{ height: "500px" }}>
                         { /** Cuando tengan el mismo id se asigna la clase active */}
                         {
