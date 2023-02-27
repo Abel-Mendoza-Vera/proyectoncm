@@ -1,5 +1,3 @@
-import { usePreguntaStore } from '../../store/preguntaStore'
-
 import FormularioPregunta from "./FormularioPregunta"
 import ItemPregunta from "./ItemPregunta"
 

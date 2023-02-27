@@ -23,6 +23,7 @@ import U_Catalogo from '../pages/usuario/U_Catalogo'
 import { ProtectedRoute } from './ProtectedRoute'
 import U_Curso from '../pages/usuario/U_Curso'
 import U_Leccion from '../pages/usuario/U_Leccion'
+import C_Carrito from '../pages/cliente/C_Carrito'
 
 
 
@@ -74,7 +75,7 @@ const Enrutador = () => {
                     
                     <Route path='cursos' element={ <C_Cursos/> } />
 
-                    <Route path='comprar' element={ <><h1>Comprar</h1></> } />
+                    <Route path='carrito' element={ <C_Carrito/> } />
                     <Route path='pagar' element={ <><h1>Pagar</h1></> } />
                 </Route>
 

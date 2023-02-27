@@ -4,11 +4,10 @@ import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebas
 import { storage } from '../../firebase'
 
 import { useArchivoStore } from '../../store/archivoStore'
-import { useLeccionStore } from '../../store/leccionStore'
 
 import { useAccesoStore } from '../../store/accesoStore'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { crearArchivo, modificarArchivo } from '../../hooks/useArchivo'
+import { modificarArchivo } from '../../hooks/useArchivo'
 import { modificarLeccionVideo } from '../../hooks/useLeccion'
 
 const FormularioAgregarVideoLeccion = ({ idLeccion, idVideo, objVideo, cursoNombre, leccionNombre }) => {
