@@ -90,57 +90,97 @@ const U_Perfil = () => {
 
     return (
         <>
-            <div className="gradient-custom">
-                <section className="vh-100" style={{ backgroundColor: "#f4f5f7" }}>
-                    <div className="container py-5 h-100">
-                        <div className="row d-flex justify-content-center align-items-center h-100">
-                            <div className="col col-lg-6 mb-4 mb-lg-0">
-                                <div className="card mb-3" style={{ borderradius: ".5rem" }}>
-                                    <div className="row g-0">
-                                        <div className="col-md-4 gradient-custom text-center text-white"
-                                            style={{ bordertopleftradius: ".5rem", borderbottomleftradius: ".5rem" }}>
-                                            <img src="https://cdn-icons-png.flaticon.com/512/6915/6915669.png"
-                                                alt="Avatar" className="img-fluid my-5" style={{ width: "80px" }} />
+            <div>
+            <section style={{ backgroundcolor: "eee" }}>
+                    <div class="container py-5">
+                        <div class="row">
+                            <div class="col">
+                                <div className='text-center'> <h1>Mi Perfil</h1></div>
+                            </div>
+                        </div>
 
-                                            <p>{data.nombre} {data.primerApellido} {data.segundoApellido}</p>
-                                            <p>{data.fechaNac}</p>
-                                            <i className="far fa-edit mb-5"></i>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="card mb-4">
+                                    <div class="card-body text-center">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                                            class="rounded-circle img-fluid" style={{ width: "150px" }} />
+                                        <h5 class="my-3">{data.nombre} {data.primerApellido}</h5>
+                                        <p class="text-muted mb-1">{data.correo}</p>
+                                        <p class="text-muted mb-4">{data.telefono}</p>
+                                        <div class="d-flex justify-content-center mb-2">
+                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><span className='material-icons'>edit</span></button>
                                         </div>
-                                        <div className="col-md-8">
-                                            <div className="card-body p-6">
-                                                <h6>Información</h6>
-                                                <hr className="mt-0 mb-4" />
-                                                <div className="row pt-1">
-                                                    <div className="col-6 mb-3">
-                                                        <h6>Grado de Estudios</h6>
-                                                        <p className="text-muted">{data.ultimoGradoEstudio}</p>
+                                    </div>
+                                </div>
+                                </div>
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Nombre</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{data.nombre} {data.primerApellido} {data.segundoApellido}</p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Correo</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{data.correo}</p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Genero</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{data.genero}</p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Ultimo Grado de Estudios</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{data.ultimoGradoEstudio}</p>
+                                            </div>
+                                        </div>
+                                        <hr/>
 
-                                                    </div>
-                                                    <div className="col-6 mb-3">
-                                                        <h6>Curp</h6>
-                                                        <p className="text-muted">{data.curp}</p>
-                                                    </div>
-                                                </div>
-                                                <h6>Contacto</h6>
-                                                <hr className="mt-0 mb-4" />
-                                                <div className="row pt-1">
-                                                    <div className="col-6 mb-3">
-                                                        <h6>Teléfono</h6>
-                                                        <p className="text-muted">{data.telefono}</p>
-                                                    </div>
-                                                    <div className="col-6 mb-3">
-                                                        <h6>Correo</h6>
-                                                        <p className="text-muted">{data.correo}</p>
-                                                    </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Fecha de Nacimiento</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{data.fechaNac}</p>
+                                            </div>
+                                            
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Curp</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">{data.curp}</p>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-                                                </div>
-
-
-                                                <div className="d-flex justify-content-center">
-                                                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><span className='material-icons'>edit</span></button>
-                                                </div>
-
-                                                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div className="modal-dialog">
                                                         <div className="modal-content">
                                                             <div className="modal-header">
@@ -274,17 +314,6 @@ const U_Perfil = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                </section>
             </div>
 
         </>
