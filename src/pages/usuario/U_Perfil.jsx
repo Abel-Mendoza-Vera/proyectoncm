@@ -92,84 +92,84 @@ const U_Perfil = () => {
         <>
             <div>
             <section style={{ backgroundcolor: "eee" }}>
-                    <div class="container py-5">
-                        <div class="row">
-                            <div class="col">
+                    <div className="container py-5">
+                        <div className="row">
+                            <div className="col">
                                 <div className='text-center'> <h1>Mi Perfil</h1></div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card mb-4">
-                                    <div class="card-body text-center">
+                        <div className="row">
+                            <div className="col-lg-4">
+                                <div className="card mb-4">
+                                    <div className="card-body text-center">
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                                            class="rounded-circle img-fluid" style={{ width: "150px" }} />
-                                        <h5 class="my-3">{data.nombre} {data.primerApellido}</h5>
-                                        <p class="text-muted mb-1">{data.correo}</p>
-                                        <p class="text-muted mb-4">{data.telefono}</p>
-                                        <div class="d-flex justify-content-center mb-2">
+                                            className="rounded-circle img-fluid" style={{ width: "150px" }} />
+                                        <h5 className="my-3">{data.nombre} {data.primerApellido}</h5>
+                                        <p className="text-muted mb-1">{data.correo}</p>
+                                        <p className="text-muted mb-4">{data.telefono}</p>
+                                        <div className="d-flex justify-content-center mb-2">
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><span className='material-icons'>edit</span></button>
                                         </div>
                                     </div>
                                 </div>
                                 </div>
-                            <div class="col-lg-8">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Nombre</p>
+                            <div className="col-lg-8">
+                                <div className="card mb-4">
+                                    <div className="card-body">
+                                        <div className="row">
+                                            <div className="col-sm-3">
+                                                <p className="mb-0">Nombre</p>
                                             </div>
-                                            <div class="col-sm-9">
-                                                <p class="text-muted mb-0">{data.nombre} {data.primerApellido} {data.segundoApellido}</p>
-                                            </div>
-                                        </div>
-                                        <hr/>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Correo</p>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <p class="text-muted mb-0">{data.correo}</p>
+                                            <div className="col-sm-9">
+                                                <p className="text-muted mb-0">{data.nombre} {data.primerApellido} {data.segundoApellido}</p>
                                             </div>
                                         </div>
                                         <hr/>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Genero</p>
+                                        <div className="row">
+                                            <div className="col-sm-3">
+                                                <p className="mb-0">Correo</p>
                                             </div>
-                                            <div class="col-sm-9">
-                                                <p class="text-muted mb-0">{data.genero}</p>
+                                            <div className="col-sm-9">
+                                                <p className="text-muted mb-0">{data.correo}</p>
                                             </div>
                                         </div>
                                         <hr/>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Ultimo Grado de Estudios</p>
+                                        <div className="row">
+                                            <div className="col-sm-3">
+                                                <p className="mb-0">Genero</p>
                                             </div>
-                                            <div class="col-sm-9">
-                                                <p class="text-muted mb-0">{data.ultimoGradoEstudio}</p>
+                                            <div className="col-sm-9">
+                                                <p className="text-muted mb-0">{data.genero}</p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div className="row">
+                                            <div className="col-sm-3">
+                                                <p className="mb-0">Ultimo Grado de Estudios</p>
+                                            </div>
+                                            <div className="col-sm-9">
+                                                <p className="text-muted mb-0">{data.ultimoGradoEstudio}</p>
                                             </div>
                                         </div>
                                         <hr/>
 
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Fecha de Nacimiento</p>
+                                        <div className="row">
+                                            <div className="col-sm-3">
+                                                <p className="mb-0">Fecha de Nacimiento</p>
                                             </div>
-                                            <div class="col-sm-9">
-                                                <p class="text-muted mb-0">{data.fechaNac}</p>
+                                            <div className="col-sm-9">
+                                                <p className="text-muted mb-0">{data.fechaNac}</p>
                                             </div>
                                             
                                         </div>
                                         <hr />
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Curp</p>
+                                        <div className="row">
+                                            <div className="col-sm-3">
+                                                <p className="mb-0">Curp</p>
                                             </div>
-                                            <div class="col-sm-9">
-                                                <p class="text-muted mb-0">{data.curp}</p>
+                                            <div className="col-sm-9">
+                                                <p className="text-muted mb-0">{data.curp}</p>
                                             </div>
                                             
                                         </div>
