@@ -56,7 +56,7 @@ const U_Curso = () => {
                     <p><strong>Descripción:</strong></p>
                     <p>{curso.descripcion}</p>
 
-                    <div className="d-flex justify-content-end">
+                    <div className="">
                         <AgregarAlCarrito idCurso={idCurso} blanco />
                     </div>
 
@@ -66,7 +66,7 @@ const U_Curso = () => {
                     {/**/}
                     {
                         archivoVideo ?
-                            <video controls >
+                            <video controls width="500">
                                 <source src={archivoVideo.url} type={archivoVideo.extencion} />
                             </video>
                             :

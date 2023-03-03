@@ -103,7 +103,7 @@ const U_Perfil = () => {
                             <div className="col-lg-4">
                                 <div className="card mb-4">
                                     <div className="card-body text-center">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                                        <img src="https://cdn-icons-png.flaticon.com/512/6915/6915669.png" alt="avatar"
                                             className="rounded-circle img-fluid" style={{ width: "150px" }} />
                                         <h5 className="my-3">{data.nombre} {data.primerApellido}</h5>
                                         <p className="text-muted mb-1">{data.correo}</p>
