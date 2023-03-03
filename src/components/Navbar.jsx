@@ -149,7 +149,7 @@ const Navbar = () => {
                         <>
                         {
                             usuario.roles.includes("cliente") ? 
-                            <Link to="/cliente/carrito" ><BsFillCartFill size="1.4rem" /></Link>
+                            <Link to="/cliente/carrito" className='text-dark' ><BsFillCartFill size="1.4rem" /></Link>
                             :
                             <></>
                         }

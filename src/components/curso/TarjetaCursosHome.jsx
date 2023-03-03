@@ -1,6 +1,7 @@
 import { BsCartPlusFill } from 'react-icons/bs'
 import imgCurso from '../../assets/curso.jpg'
 import { useNavigate } from 'react-router-dom'
+import AgregarAlCarrito from '../carrito/AgregarAlCarrito';
 
 
 const Tarjeta = ({ curso, archivo }) => {
@@ -43,7 +44,7 @@ const Tarjeta = ({ curso, archivo }) => {
                 {curso.descripcion}
               </p>
 
-              <button className='btn btn-primary btn-sm'>Agregar al carrito <BsCartPlusFill/></button>
+              <AgregarAlCarrito small />
             </div>
           </div>
 
