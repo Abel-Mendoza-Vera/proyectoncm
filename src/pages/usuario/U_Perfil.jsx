@@ -86,14 +86,14 @@ const U_Perfil = () => {
         let render = new FileReader()
         render.readAsDataURL(file)
         render.onload = () => {
-          let base64 = render.result
-          setFormularioUsuario({
-            ...formularioUsuario,
-            imagen : base64
-          })
-          
+            let base64 = render.result
+            setFormularioUsuario({
+                ...formularioUsuario,
+                imagen: base64
+            })
+
         }
-      }
+    }
 
     const handlerSubmitFormUsuario = async (e) => {
         e.preventDefault();
@@ -132,6 +132,15 @@ const U_Perfil = () => {
                             <div className="col-lg-8">
                                 <div className="card mb-4">
                                     <div className="card-body">
+                                        <div className="row">
+                                            <div className="col-sm-3">
+                                                <p className="mb-0">Numero de cuenta</p>
+                                            </div>
+                                            <div className="col-sm-9">
+                                                <p className="text-muted mb-0">#NC{data.idUsuario}</p>
+                                            </div>
+                                        </div>
+                                        <hr />
                                         <div className="row">
                                             <div className="col-sm-3">
                                                 <p className="mb-0">Nombre</p>
@@ -212,7 +221,7 @@ const U_Perfil = () => {
                                                     <div className="account-settings">
                                                         <div className="user-profile">
                                                             <div className="user-avatar">
-                                                                <img src={ !data.imagen ? "https://th.bing.com/th/id/OIP.w2McZSq-EYWxh02iSvC3xwHaHa?pid=ImgDet&rs=1" : data.imagen } alt="Maxwell Admin" />
+                                                                <img src={!data.imagen ? "https://th.bing.com/th/id/OIP.w2McZSq-EYWxh02iSvC3xwHaHa?pid=ImgDet&rs=1" : data.imagen} alt="Maxwell Admin" />
                                                             </div>
                                                             <h5 className="user-name">{data.nombre} {data.primerApellido} {data.segundoApellido}</h5>
                                                             <input type="file" name='imagen' onChange={(e) => convertirABase64(e.target.files[0])} className="form-control" placeholder="" accept="image/*" />
