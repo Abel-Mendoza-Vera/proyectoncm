@@ -61,7 +61,7 @@ const C_Carrito = () => {
 
         limpiarCarrito(usuario.idUsuario)
     }
-    
+
 
     if (isLoadingCursos || isLoadingArchivos) return < Cargando />
 
@@ -76,7 +76,7 @@ const C_Carrito = () => {
                     { /**Card */}
 
                     {
-                        
+
                         !carritoCliente || carritoCliente.cursos.length == 0 ?
                             <div className="border rounded text-center mb-3 alert alert-info" role="alert">
                                 <h3 className="my-4">No hay cursos agregados al carrito de compras</h3>
@@ -90,10 +90,10 @@ const C_Carrito = () => {
                                 total += Number(curso.precio)
 
                                 return (
-                                    <div key={curso.idCurso} className="border rounded mb-3">
+                                    <div key={curso.idCurso} className="border border-dark-subtle rounded mb-3">
                                         <div className="row m-3">
                                             <div className="col-4">
-                                                <img src={ !miniatura ? imgDefault : miniatura.url } className="img-fluid img-thumbnail rounded" alt="curso" />
+                                                <img src={!miniatura ? imgDefault : miniatura.url} className="img-fluid img-thumbnail rounded mx-auto d-block" width="200px" alt="curso" />
                                             </div>
                                             <div className="col-8">
                                                 <h4>Curso: {curso.nombre}</h4>
@@ -123,13 +123,71 @@ const C_Carrito = () => {
                             <h4 className="card-title text-center">$ {total} MXN</h4>
                         </div>
                         <div className="card-footer d-flex justify-content-end">
-                            <button onClick={handlePagar} className="btn btn-primary" >Pagar</button>
+                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Hacer pago</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered modal-lg">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Proceso de pago</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form>
+
+                                <div className="container">
+                                    <div className="row gutters">
+                                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div className="card h-100">
+                                                <div className="card-body">
+                                                    <div className="row gutters">
+                                                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                            <h6 className="mb-2 text-primary text-center">Instrucciones</h6>
+                                                        </div>
+                                                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                                                            <div>
+                                                            <h6 className="mb-2 text-primary">Paso 1</h6>
+                                                                <p> Para realizar el pago es necesario realizar una transferencia al siguiente número de cuenta:</p>
+                                                                <h6>123 456 178 123</h6>
+                                                                <p className=" text-success ">El total a pagar es: ${total} MXN</p>
+                                                            </div>
+                                                            <div>
+                                                            <h6 className="mb-2 text-primary">Paso 2</h6>
+                                                                <p>Una vez realizado el pago es necesario enviar el comprobante de pago al siguiente correo:</p>
+                                                                <a href="mailto:hola@novatec-consultores.com?" target="_blank" className='text-primary'>hola@novatec-consultores.com</a>
+                                                            </div><br />
+                                                            <div>
+                                                            <h6 className="mb-2 text-primary">Paso 3</h6>
+                                                                <p>El curso se reflejará en las proximas 12 horas en el apartado "Mis Cursos"</p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-success">Aceptar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
     )
 }
+
 
 export default C_Carrito
