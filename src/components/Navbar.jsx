@@ -90,7 +90,7 @@ const Navbar = () => {
                                             aria-expanded="false"
                                         >
                                             <img
-                                                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                                                src={ !usuario.imagen ? "https://th.bing.com/th/id/OIP.w2McZSq-EYWxh02iSvC3xwHaHa?pid=ImgDet&rs=1" : usuario.imagen}
                                                 className="rounded-circle"
                                                 height="25"
                                                 alt="Black and White Portrait of a Man"

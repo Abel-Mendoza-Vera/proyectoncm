@@ -44,7 +44,7 @@ const Tarjeta = ({ curso, archivo }) => {
                 {curso.descripcion}
               </p>
 
-              <AgregarAlCarrito small />
+              <AgregarAlCarrito small idCurso={curso.idCurso} />
             </div>
           </div>
 

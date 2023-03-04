@@ -45,6 +45,20 @@ export const useCarritoStore = create( persist(
             })
 
             set((state) => ({ carrito : newCarrito }))
+        },
+
+        limpiarCarrito: (idUsuario) => {
+            let store = get((state) => state)
+            let usuario = store.carrito.find((item) => item.idUsuario == idUsuario)
+
+            let newCarrito = store.carrito.map((item) => {
+                if(item.idUsuario == usuario.idUsuario){
+                    item.cursos = []
+                }
+                return item
+            })
+
+            set((state) => ({ carrito : newCarrito }))
         }
 
     }),

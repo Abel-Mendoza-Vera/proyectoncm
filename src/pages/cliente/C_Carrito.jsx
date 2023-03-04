@@ -15,9 +15,10 @@ const C_Carrito = () => {
         usuario: state.usuario
     }))
 
-    const { carrito, quitarDelCarrito } = useCarritoStore((state) => ({
+    const { carrito, quitarDelCarrito, limpiarCarrito } = useCarritoStore((state) => ({
         carrito: state.carrito,
-        quitarDelCarrito: state.quitarDelCarrito
+        quitarDelCarrito: state.quitarDelCarrito,
+        limpiarCarrito: state.limpiarCarrito
     }), shallow)
 
     const { data: cursos, isLoading: isLoadingCursos } = useObtenerCursos()
@@ -40,6 +41,25 @@ const C_Carrito = () => {
 
     const handlePagar = () => {
         console.log("Pagando");
+
+        let objCursos = []
+        
+        for (let i = 0; i < cursos.length; i++){
+            let c = cursos[i]
+            if(carritoCliente.cursos.includes(c.idCurso)){
+                objCursos.push({ idCurso: c.idCurso, precio: c.precio })
+            }
+        }
+
+        let datos = {
+            idCliente: usuario.idUsuario,
+            totalCompra: total,
+            cursos: objCursos
+        }
+
+        console.log(datos);
+
+        limpiarCarrito(usuario.idUsuario)
     }
     
 
@@ -103,7 +123,7 @@ const C_Carrito = () => {
                             <h4 className="card-title text-center">$ {total} MXN</h4>
                         </div>
                         <div className="card-footer d-flex justify-content-end">
-                            <button onClick={handlePagar} className="btn btn-primary" >Pagar ahora</button>
+                            <button onClick={handlePagar} className="btn btn-primary" >Pagar</button>
                         </div>
                     </div>
                 </div>
