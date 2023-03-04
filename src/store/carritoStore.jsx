@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware'
 
 export const useCarritoStore = create( persist(
 
-    (set) => ({
+    (set, get) => ({
 
         carrito:[],
         
@@ -34,15 +34,17 @@ export const useCarritoStore = create( persist(
 
         quitarDelCarrito: (idCurso, idUsuario) => {
 
-            set( (state) => ({
-                carrito: state.carrito.map((item) => {
-                    if(item.idUsuario == idUsuario) {
-                        let aux = item.cursos
-                        item.cursos = aux.filter((cursoId) => cursoId != idCurso)
-                    }
-                    return item
-                })
-            }))
+            let store = get((state) => state)
+            let usuario = store.carrito.find((item) => item.idUsuario == idUsuario)
+
+            let newCarrito = store.carrito.map((item) => {
+                if(item.idUsuario == usuario.idUsuario){
+                    item.cursos = usuario.cursos.filter((c) => c != idCurso)
+                }
+                return item
+            })
+
+            set((state) => ({ carrito : newCarrito }))
         }
 
     }),

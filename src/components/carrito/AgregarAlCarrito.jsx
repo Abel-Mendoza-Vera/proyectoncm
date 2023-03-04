@@ -12,15 +12,18 @@ const AgregarAlCarrito = ({ small = false, blanco = false, idCurso }) => {
     acceso: state.acceso,
     usuario: state.usuario
   }))
-  
-  const agregarAlCarrito = useCarritoStore((state) => state.agregarAlCarrito)
+
+  const { carrito, agregarAlCarrito } = useCarritoStore((state) => ({
+    carrito: state.carrito,
+    agregarAlCarrito: state.agregarAlCarrito
+  }))
 
   const handleAgregar = () => {
-    if( !acceso ) {
-      navigate("/iniciar_sesion")
+    if (!acceso) {
+      return navigate("/iniciar_sesion")
     }
 
-    if(!usuario.roles.includes("cliente")){
+    if (!usuario.roles.includes("cliente")) {
       Swal.fire({
         title: "Agregar al carrito",
         text: "Esta opción es unica para los clientes",
@@ -32,8 +35,35 @@ const AgregarAlCarrito = ({ small = false, blanco = false, idCurso }) => {
       })
     }
 
+    let carritoCliente = carrito.find((c) => c.idUsuario == usuario.idUsuario)
+
+    if (!carritoCliente) {
+      agregarAlCarrito(idCurso, usuario.idUsuario)
+      return Swal.fire({
+        title: "Agregar al carrito",
+        text: "El curso se ha agregado al carrito de compras",
+        icon: "success",
+        //iconColor: "",
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      })
+    }
+
+    if (carritoCliente.cursos.includes(idCurso)) {
+      return Swal.fire({
+        title: "Agregar al carrito",
+        text: "El curso ya se encuentra en el carrito de compras",
+        icon: "success",
+        //iconColor: "",
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      })
+    }
+
     agregarAlCarrito(idCurso, usuario.idUsuario)
-    Swal.fire({
+    return Swal.fire({
       title: "Agregar al carrito",
       text: "El curso se ha agregado al carrito de compras",
       icon: "success",
