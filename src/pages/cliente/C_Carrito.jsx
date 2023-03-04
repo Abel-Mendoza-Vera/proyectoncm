@@ -133,7 +133,7 @@ const C_Carrito = () => {
                 <div className="modal-dialog modal-dialog-centered modal-lg">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Proceso de pago</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">Proceso de Pago</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
@@ -146,24 +146,27 @@ const C_Carrito = () => {
                                                 <div className="card-body">
                                                     <div className="row gutters">
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                            <h6 className="mb-2 text-primary text-center">Instrucciones</h6>
+                                                            <h4 className="mb-2 text-primary text-center">Instrucciones</h4>
                                                         </div>
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
                                                             <div>
                                                             <h6 className="mb-2 text-primary">Paso 1</h6>
                                                                 <p> Para realizar el pago es necesario realizar una transferencia al siguiente número de cuenta:</p>
-                                                                <h6>123 456 178 123</h6>
+                                                                <h6>Número de Cuenta BBVA: 123 456 178 123</h6>
                                                                 <p className=" text-success ">El total a pagar es: ${total} MXN</p>
                                                             </div>
                                                             <div>
                                                             <h6 className="mb-2 text-primary">Paso 2</h6>
-                                                                <p>Una vez realizado el pago es necesario enviar el comprobante de pago al siguiente correo:</p>
+                                                                <p>Una vez realizado el pago es necesario enviar un correo solicitando los codigos de acceso a el/los cursos que adquiriste adjuntando la foto del comprobante y tu numero de cliente al siguiente correo:</p>
+                        
+
                                                                 <a href="mailto:hola@novatec-consultores.com?" target="_blank" className='text-primary'>hola@novatec-consultores.com</a>
                                                             </div><br />
                                                             <div>
                                                             <h6 className="mb-2 text-primary">Paso 3</h6>
-                                                                <p>El curso se reflejará en las proximas 12 horas en el apartado "Mis Cursos"</p>
+                                                                <p>Una vez que se te envien el/los codigos de acceso dirigete a la seccion "Mis cursos" donde podras habilitar el/los cursos.</p>
+                                                                
                                                             </div>
                                                         </div>
 
