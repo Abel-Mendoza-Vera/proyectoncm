@@ -46,31 +46,6 @@ const U_Leccion = () => {
 
 
                     <div className="row">
-                        {
-                            acceso ?
-                                <div className="d-flex justify-content-end mb-2">
-                                    {
-                                        archivosLecciones.length == 0 ?
-                                            <></>
-                                            :
-                                            <div className="dropdown">
-                                                <button className="btn btn-primary btn-sm dropdown-toggle me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Archivos
-                                                </button>
-                                                <ul className="dropdown-menu">
-                                                    {
-                                                        archivosLecciones.map((a) => <li><a className="dropdown-item" href={a.url} target="_blank" >{a.nombre}</a></li>)
-                                                    }
-                                                </ul>
-                                            </div>
-                                    }
-
-                                    <button className="btn btn-primary btn-sm">Cuestionario</button>
-                                </div>
-                                :
-                                <></>
-                        }
-
                         <p>
                             {leccion.informacion}
                         </p>
@@ -81,23 +56,20 @@ const U_Leccion = () => {
                 <div className="col-4">
                     <h4 className="text-center mb-3">Lecciones del curso</h4>
 
-                    {
-                        !acceso ?
-                            <div className="alert alert-info" role="alert">
-                                <p>
-                                Compra el curso "{curso.nombre}" para seguir disfrutando de su contenido.
-                                </p>
-                                <AgregarAlCarrito idCurso={idCurso} />
-                            </div>
-                            :
-                            <></>
-                    }
+
+                    <div className="alert alert-info" role="alert">
+                        <p>
+                            Compra el curso "{curso.nombre}" para seguir disfrutando de su contenido.
+                        </p>
+                        <AgregarAlCarrito idCurso={idCurso} />
+                    </div>
+
 
                     <div className="list-group overflow-y-auto" style={{ height: "500px" }}>
                         { /** Cuando tengan el mismo id se asigna la clase active */}
                         {
                             leccionesCurso.map((leccion, index) => {
-                                if (index > 0 && !acceso) return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >Lección {index + 1}: {leccion.nombre}</button>
+                                if (index > 0) return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >Lección {index + 1}: {leccion.nombre}</button>
 
                                 return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
 

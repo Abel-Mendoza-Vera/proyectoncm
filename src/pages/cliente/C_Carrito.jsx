@@ -79,7 +79,7 @@ const C_Carrito = () => {
 
         useRegistrarCompra.mutate({ token, datos })
 
-        
+
     }
 
 
@@ -143,7 +143,7 @@ const C_Carrito = () => {
                             <h4 className="card-title text-center">$ {total} MXN</h4>
                         </div>
                         <div className="card-footer d-flex justify-content-end">
-                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Pagar ahora</button>
+                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Hacer pago</button>
                         </div>
                     </div>
                 </div>

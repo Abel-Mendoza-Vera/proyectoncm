@@ -6,18 +6,7 @@ import AgregarAlCarrito from '../carrito/AgregarAlCarrito';
 
 const Tarjeta = ({ curso, archivo }) => {
 
-    const navigate = useNavigate();
-
-    const mouseOver = () => {
-        let divSeleccionado = document.getElementById(`curso${curso.idCurso}`)
-        divSeleccionado.setAttribute("class", "col shadow-lg p-1 bg-primary bg-opacity-75 rounded")
-    }
-
-    const mouseOut = () => {
-        let divSeleccionado = document.getElementById(`curso${curso.idCurso}`)
-        divSeleccionado.removeAttribute("class")
-        divSeleccionado.setAttribute("class", "col")
-    }
+    const navigate = useNavigate()
 
     const irAlCurso = () => {
         navigate(`/curso/${curso.idCurso}`)

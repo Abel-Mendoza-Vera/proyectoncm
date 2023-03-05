@@ -40,7 +40,7 @@ const TarjetaMisCursos = ({ curso, archivo }) => {
         <>
             < div id={`curso${curso.idCurso}`} onMouseOver={mouseOver} onMouseOut={mouseOut} className='col' >
                 <div className="card" style={{ width: "18rem" }}>
-                    <img src={curso.idMiniatura != 0 ? archivo.url : imgCurso} onClick={irAlCurso} style={{ cursor: "pointer" }} height="190px" className="card-img-top" alt="..." />
+                    <img src={curso.idMiniatura != 0 ? archivo.url : imgCurso} onClick={ curso.autorizado ? () => irAlCurso : () => console.log("Activa el curso") } style={{ cursor: "pointer" }} height="190px" className="card-img-top" alt="..." />
                     <div className="card-body">
                         <h5 className="card-title">{curso.nombre}</h5>
 
