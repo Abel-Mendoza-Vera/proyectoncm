@@ -21,9 +21,10 @@ const C_Carrito = () => {
         token: state.token
     }))
 
-    const { carrito, quitarDelCarrito } = useCarritoStore((state) => ({
+    const { carrito, quitarDelCarrito, limpiarCarrito } = useCarritoStore((state) => ({
         carrito: state.carrito,
-        quitarDelCarrito: state.quitarDelCarrito
+        quitarDelCarrito: state.quitarDelCarrito,
+        limpiarCarrito: state.limpiarCarrito
     }), shallow)
 
     const { data: cursos, isLoading: isLoadingCursos } = useObtenerCursos()
@@ -110,10 +111,10 @@ const C_Carrito = () => {
                                 total += Number(curso.precio)
 
                                 return (
-                                    <div key={curso.idCurso} className="border rounded mb-3">
+                                    <div key={curso.idCurso} className="border border-dark-subtle rounded mb-3">
                                         <div className="row m-3">
                                             <div className="col-4">
-                                                <img src={!miniatura ? imgDefault : miniatura.url} className="img-fluid img-thumbnail rounded" alt="curso" />
+                                                <img src={!miniatura ? imgDefault : miniatura.url} className="img-fluid img-thumbnail rounded mx-auto d-block" width="200px" alt="curso" />
                                             </div>
                                             <div className="col-8">
                                                 <h4>Curso: {curso.nombre}</h4>
@@ -143,14 +144,20 @@ const C_Carrito = () => {
                             <h4 className="card-title text-center">$ {total} MXN</h4>
                         </div>
                         <div className="card-footer d-flex justify-content-end">
-                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Hacer pago</button>
+                            {
+                                !carritoCliente || carritoCliente.cursos.length == 0 ?
+                                    <button type="button" className="btn btn-primary" disabled>Hacer pago</button>
+                                    :
+                                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Hacer pago</button>
+                            }
+
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
+                <div className="modal-dialog modal-dialog-centered modal-lg">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">Proceso de Pago</h5>
