@@ -21,11 +21,11 @@ export const cambiarEstatusCompra = async ({ token, datos }) => {
 }
 
 export const useObtenerCompras = (token) => {
-    return useQuery(["getComprasC", token], () => obtenerCompras(token))
+    return useQuery(["getComprasA", token], () => obtenerCompras(token))
 }
 
 export const useObtenerCompra = (idCompra, token) => {
-    return useQuery(["getCompraC", idCompra, token], () => obtenerCompra(idCompra, token))
+    return useQuery(["getCompraA", idCompra, token], () => obtenerCompra(idCompra, token))
 }
 export const useObtenerCodigosAutorizacion = (idCliente, idCompra, token) => {
     return useQuery(["getCodigosAuth", idCliente, idCompra, token], () => obtenerCodigosAutorizacion(idCliente, idCompra, token))

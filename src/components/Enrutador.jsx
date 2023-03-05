@@ -23,6 +23,8 @@ import { ProtectedRoute } from './ProtectedRoute'
 import U_Curso from '../pages/usuario/U_Curso'
 import U_Leccion from '../pages/usuario/U_Leccion'
 import C_Carrito from '../pages/cliente/C_Carrito'
+import A_Cuestionario from './cuestionario/A_Cuestionario'
+import A_Compras from '../pages/admin/A_Compras'
 
 
 
@@ -60,6 +62,7 @@ const Enrutador = () => {
                     <Route path='cursos_editar/:cursoId/:cursoNombre' element={ <A_CursosEditar/> } />
                     <Route path='lecciones/:cursoNombre/:leccionNombre/:leccionId' element={ <A_Lecciones/> } />
                     <Route path='usuarios' element={ <A_Usuarios/> } />
+                    <Route path='compras' element={ <A_Compras/> } />
                 </Route>
  
                 {/* Rutas del cliente */}

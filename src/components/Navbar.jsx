@@ -59,6 +59,10 @@ const Navbar = () => {
                                                         <li className="nav-item">
                                                             <Link to="/admin/usuarios" className="nav-link" >Usuarios</Link>
                                                         </li>
+                                                        <li><hr className="dropdown-divider" /></li>
+                                                        <li className="nav-item">
+                                                            <Link to="/admin/compras" className="nav-link" >Compras</Link>
+                                                        </li>
                                                     </ul>
                                                 </li>
                                             </>

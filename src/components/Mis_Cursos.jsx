@@ -1,17 +1,19 @@
-import React from "react";
-import img from '../assets/curso.jpg'
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { BiSearch } from "react-icons/bi"
 
 import Cargando from "../../src/pages/Cargando"
 import Tarjeta from "../components/curso/TarjetaMisCursos"
-import { useObtenerCursos } from "../hooks/useCurso"
+import { useObtenerCursosCliente } from "../hooks/useCurso"
 import { useObtenerArchivos } from "../hooks/useArchivo"
 import { useState } from "react"
 
+import { useAccesoStore } from "../store/accesoStore"
 
 const Mis_Cursos = () => {
-    const { data: cursos, isLoading: isLoadingCursos } = useObtenerCursos()
+
+    const navigate = useNavigate()
+    const { token, usuario } = useAccesoStore((state) => ({ token: state.token, usuario: state.usuario }))
+    const { data: cursos, isLoading: isLoadingCursos } = useObtenerCursosCliente(token, usuario.idUsuario)
     const { data: archivos, isLoading: isLoadingArchivos } = useObtenerArchivos();
     const [buscadorCurso, setBuscadorCurso] = useState("")
 
@@ -30,16 +32,12 @@ const Mis_Cursos = () => {
         listaCursos = cursos.filter((curso) => curso.nombre.toLowerCase().includes(buscadorCurso.toLowerCase()))
     }
 
-    const navigate = useNavigate()
-
-   
     const MisCursos = () => {
-        navigate(`/cliente/mis_cursos`)
+        return navigate(`/cliente/mis_cursos`)
     }
 
-    
     const Certificaciones = () => {
-        navigate(`/cliente/certificaciones`)
+        return navigate(`/cliente/certificaciones`)
     }
 
     return (
@@ -47,49 +45,43 @@ const Mis_Cursos = () => {
             <div className="row mt-3 justify-content-end mb-5">
                 <div className='col-6'>
                 </div>
-                <ul class="nav nav-tabs">
-                    
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" onClick={MisCursos}>Mis Cursos</a>
+                <ul className="nav nav-tabs">
+
+                    <li className="nav-item">
+                        <a className="nav-link active" aria-current="page" onClick={MisCursos}>Mis Cursos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" onClick={Certificaciones}>Cursos Terminados</a>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={Certificaciones}>Cursos Terminados</a>
                     </li>
                 </ul>
             </div>
 
+
             <div className="container-fluid" >
+                <div className="row mt-3 justify-content-end">
+                    <div className='col-6'>
+                        <div className="input-group">
+                            <input value={buscadorCurso} onChange={(e) => onChangeBuscadorCurso(e)} className='form-control' placeholder='Buscar' type="search" name="buscadorUsuario" />
+                            <span className='input-group-text'><BiSearch size="2em" /></span>
+                        </div>
+                    </div>
+                </div>
 
-
-
-
-<div className="row mt-3 justify-content-end">
-    <div className='col-6'>
-        <div className="input-group">
-            <input value={buscadorCurso} onChange={(e) => onChangeBuscadorCurso(e)} className='form-control' placeholder='Buscar' type="search" name="buscadorUsuario" />
-            <span className='input-group-text'><BiSearch size="2em" /></span>
-        </div>
-    </div>
-</div>
-
-<div className="container-fluid mt-3 justify-content-center">
-    <div className='row mt-3 row-cols-auto g-3 mx-auto justify-content-start' >
-        {
-            listaCursos.length ?
-                listaCursos.map((curso) => {
-                    let archivo = archivos.find((item) => item.idArchivo == curso.idMiniatura)
-                    return <Tarjeta key={curso.idCurso} curso={curso} archivo={archivo} />
-                })
-                :
-                <h1 className="my-5">No Se Ha Encontrado Dicho Curso</h1>
-        }
-    </div>
-</div>
-
-
-
-</div>
-
+                <div className="container-fluid mt-3 justify-content-center">
+                    <div className='row mt-3 row-cols-auto g-3 mx-auto justify-content-start' >
+                        {
+                            listaCursos.length ?
+                                listaCursos.map((curso) => {
+                                    let archivo = archivos.find((item) => item.idArchivo == curso.idMiniatura)
+                                    return <Tarjeta key={curso.idCurso} curso={curso} archivo={archivo} />
+                                })
+                                :
+                                <h1 className="my-5">No Se Ha Encontrado Dicho Curso</h1>
+                        }
+                    </div>
+                </div>
+            </div>
+            
         </div>
     )
 }

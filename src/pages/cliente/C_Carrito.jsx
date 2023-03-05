@@ -9,10 +9,16 @@ import { useObtenerArchivos } from "../../hooks/useArchivo"
 import Cargando from "../Cargando"
 import Swal from "sweetalert2"
 
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { registrarCompra } from "../../hooks/useCompraCliente"
+import { useNavigate } from "react-router-dom"
+
 const C_Carrito = () => {
 
-    const { usuario } = useAccesoStore((state) => ({
-        usuario: state.usuario
+    const navigate = useNavigate();
+    const { usuario, token } = useAccesoStore((state) => ({
+        usuario: state.usuario,
+        token: state.token
     }))
 
     const { carrito, quitarDelCarrito, limpiarCarrito } = useCarritoStore((state) => ({
@@ -23,6 +29,22 @@ const C_Carrito = () => {
 
     const { data: cursos, isLoading: isLoadingCursos } = useObtenerCursos()
     const { data: archivos, isLoading: isLoadingArchivos } = useObtenerArchivos();
+
+    const queryClient = useQueryClient()
+    const useRegistrarCompra = useMutation({
+        mutationFn: registrarCompra,
+        onSuccess: () => {
+            Swal.fire({
+                title: "Registrar compra", text: "La compra se ha realizado correctamente", icon: "success", timer: 1500, timerProgressBar: true
+            })
+            queryClient.invalidateQueries("getComprasC")
+            limpiarCarrito(usuario.idUsuario)
+            let btnCerrar = document.getElementById("cerrarModal")
+            btnCerrar.click()
+            navigate("/cliente/mis_cursos")
+        },
+        onError: () => { Swal.fire({ title: "Registrar compra", text: "La compra no se ha realizado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
+    })
 
     let carritoCliente = carrito.find((c) => c.idUsuario == usuario.idUsuario)
     let total = 0
@@ -40,13 +62,12 @@ const C_Carrito = () => {
     }
 
     const handlePagar = () => {
-        console.log("Pagando");
 
         let objCursos = []
-        
-        for (let i = 0; i < cursos.length; i++){
+
+        for (let i = 0; i < cursos.length; i++) {
             let c = cursos[i]
-            if(carritoCliente.cursos.includes(c.idCurso)){
+            if (carritoCliente.cursos.includes(c.idCurso)) {
                 objCursos.push({ idCurso: c.idCurso, precio: c.precio })
             }
         }
@@ -57,9 +78,9 @@ const C_Carrito = () => {
             cursos: objCursos
         }
 
-        console.log(datos);
+        useRegistrarCompra.mutate({ token, datos })
 
-        limpiarCarrito(usuario.idUsuario)
+        
     }
 
 
@@ -151,22 +172,22 @@ const C_Carrito = () => {
                                                         <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
                                                             <div>
-                                                            <h6 className="mb-2 text-primary">Paso 1</h6>
+                                                                <h6 className="mb-2 text-primary">Paso 1</h6>
                                                                 <p> Para realizar el pago es necesario realizar una transferencia al siguiente número de cuenta:</p>
                                                                 <h6>Número de Cuenta BBVA: 123 456 178 123</h6>
                                                                 <p className=" text-success ">El total a pagar es: ${total} MXN</p>
                                                             </div>
                                                             <div>
-                                                            <h6 className="mb-2 text-primary">Paso 2</h6>
+                                                                <h6 className="mb-2 text-primary">Paso 2</h6>
                                                                 <p>Una vez realizado el pago es necesario enviar un correo solicitando los codigos de acceso a el/los cursos que adquiriste adjuntando la foto del comprobante y tu numero de cliente al siguiente correo:</p>
-                        
+
 
                                                                 <a href="mailto:hola@novatec-consultores.com?" target="_blank" className='text-primary'>hola@novatec-consultores.com</a>
                                                             </div><br />
                                                             <div>
-                                                            <h6 className="mb-2 text-primary">Paso 3</h6>
+                                                                <h6 className="mb-2 text-primary">Paso 3</h6>
                                                                 <p>Una vez que se te envien el/los codigos de acceso dirigete a la seccion "Mis cursos" donde podras habilitar el/los cursos.</p>
-                                                                
+
                                                             </div>
                                                         </div>
 
@@ -181,7 +202,8 @@ const C_Carrito = () => {
 
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-success">Aceptar</button>
+                            <button type="button" id="cerrarModal" className="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" className="btn btn-success" onClick={handlePagar}>Aceptar pago</button>
                         </div>
                     </div>
                 </div>
