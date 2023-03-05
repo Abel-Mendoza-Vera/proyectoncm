@@ -99,7 +99,7 @@ const U_Curso = () => {
                                     <div className="d-flex w-100 justify-content-between">
                                         <h5 className="mb-1">Lección {index + 1}: {leccion.nombre}</h5>
                                         {
-                                            index > 0 && !acceso ?
+                                            index > 0 ?
                                                 <button className="btn btn-outline-dark btn-sm" disabled ><BiLinkExternal size="1.5rem" /></button>
                                                 :
                                                 <button className="btn btn-outline-primary btn-sm" onClick={() => irLeccion(leccion.idLeccion)} ><BiLinkExternal size="1.5rem" /></button>
