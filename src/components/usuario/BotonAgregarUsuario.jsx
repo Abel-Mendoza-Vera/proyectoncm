@@ -172,7 +172,7 @@ const BotonAgregarUsuario = () => {
                                 </div>
 
                                 <div className="form-floating mb-3">
-                                    <input type="date" onChange={(e) => handlerChangeFormUsuario(e)} name="fechaNac" id="fechaNac" className="form-control" />
+                                    <input type="date" value={fechaNac} onChange={(e) => handlerChangeFormUsuario(e)} name="fechaNac" id="fechaNac" className="form-control" />
                                     <label>Fecha de nacimiento</label>
                                 </div>
 

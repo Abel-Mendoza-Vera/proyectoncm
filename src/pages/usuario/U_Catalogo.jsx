@@ -30,11 +30,12 @@ const U_Catalogo = () => {
     return (
         <div className="container-fluid" >
 
-            <span id="hero" className="d-flex flex-column justify-content-center align-items-center">
-                <div className="hero-container" data-aos="fade-in">
-                    <h1>¡ Checa nuestro catálogo !</h1>
+            <span id="hero">
+                <div className="border rounded text-center mb-3 alert alert-info" role="alert">
+                    <h3 className="my-4">¡ Checa nuestro catálogo ! </h3>
                 </div>
             </span>
+
 
 
             <div className="row mt-3 justify-content-end">

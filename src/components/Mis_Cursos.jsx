@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { BiSearch } from "react-icons/bi"
+import { Link } from "react-router-dom"
 
 import Cargando from "../../src/pages/Cargando"
 import Tarjeta from "../components/curso/TarjetaMisCursos"
@@ -76,7 +77,10 @@ const Mis_Cursos = () => {
                                     return <Tarjeta key={curso.idCurso} curso={curso} archivo={archivo} />
                                 })
                                 :
-                                <h1 className="my-5">No Se Ha Encontrado Dicho Curso</h1>
+                                <div className="border rounded text-center mb-3 alert alert-info" role="alert">
+                                <h3 className="my-4">No Se Ha Encontrado Dicho Curso </h3>
+                                <p>Consulta Nuestros Catálogo de Cursos <Link to="/catalogo_cursos">aqui</Link>.</p>
+                            </div>
                         }
                     </div>
                 </div>

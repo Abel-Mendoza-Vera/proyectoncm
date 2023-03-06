@@ -1,6 +1,8 @@
 import React from "react";
 import img from '../assets/curso.jpg'
 import { Link, useNavigate } from "react-router-dom"
+import { BiSearch } from "react-icons/bi"
+
 
 const Certificaciones = () => {
 
@@ -11,7 +13,7 @@ const Certificaciones = () => {
         navigate(`/cliente/mis_cursos`)
     }
 
- 
+
 
     const Certificaciones = () => {
         navigate(`/cliente/certificaciones`)
@@ -20,14 +22,8 @@ const Certificaciones = () => {
     return (
         <div className="mb-5">
             <div className="row mt-3 justify-content-end mb-5">
-                <div className='col-6'>
-                    <div className="input-group">
-                        <input value="" className='form-control' placeholder='Buscar' type="search" name="buscador" />
-                        <span className='input-group-text material-icons'>search</span>
-                    </div>
-                </div>
                 <ul className="nav nav-tabs">
-                     
+
                     <li className="nav-item">
                         <a className="nav-link" onClick={MisCursos}>Mis Cursos</a>
                     </li>
@@ -36,7 +32,15 @@ const Certificaciones = () => {
                     </li>
                 </ul>
             </div>
+            <div className="row mt-3 justify-content-end">
 
+                <div className='col-6'>
+                    <div className="input-group">
+                        <input className='form-control' placeholder='Buscar' type="search" name="buscadorUsuario" />
+                        <span className='input-group-text'><BiSearch size="2em" /></span>
+                    </div>
+                </div>
+            </div>
             <div className="text-center">
                 <h4>
                     Mis Certificaciones
@@ -72,7 +76,7 @@ const Certificaciones = () => {
                                             </button>
                                         </div>
                                         <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                        <button type="button" className="btn btn-success btn-block">Descargar</button>
+                                            <button type="button" className="btn btn-success btn-block">Descargar</button>
                                         </div>
                                         <div className="col-md-1 col-lg-1 col-xl-1 text-end">
                                             <a href="#!" className="text-danger"><i className="fas fa-trash fa-lg"></i></a>
