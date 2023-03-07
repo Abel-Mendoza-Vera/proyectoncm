@@ -57,8 +57,8 @@ const A_Tabla_Usuarios = () => {
 
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
                     <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("todo")} > <strong>Todos</strong></button>
-                    <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("cliente")} > <strong>Staff</strong></button>
-                    <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("staff")} > <strong>Clientes</strong></button>
+                    <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("staff")} > <strong>Staff</strong></button>
+                    <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("cliente")} > <strong>Clientes</strong></button>
                 </div>
 
             </div>
