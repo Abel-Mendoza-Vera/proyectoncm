@@ -55,7 +55,7 @@ const A_Tabla_Usuarios = () => {
 
             <div className=" mt-3 d-flex justify-content-end">
 
-                <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
+                <div className="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
                     <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("todo")} > <strong>Todos</strong></button>
                     <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("cliente")} > <strong>Staff</strong></button>
                     <button type="button" className="btn btn-outline-primary" onClick={() => setTipoUsuario("staff")} > <strong>Clientes</strong></button>
