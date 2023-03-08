@@ -47,7 +47,7 @@ const BotonAgregarUsuario = () => {
 
     const handlerRolesUsuario = () => {
         let isCheckedCliente = document.getElementById('cliente').checked;
-        let isCheckedEmpleado = document.getElementById('empleado').checked;
+        let isCheckedStaff = document.getElementById('staff').checked;
         let isCheckedAdministrador = document.getElementById('administrador').checked;
 
         let arregloRoles = []
@@ -60,11 +60,11 @@ const BotonAgregarUsuario = () => {
         }
 
 
-        if (isCheckedEmpleado && !arregloRoles.includes("empleado")) {
-            arregloRoles.push("empleado")
+        if (isCheckedStaff && !arregloRoles.includes("staff")) {
+            arregloRoles.push("staff")
         }
-        if (!isCheckedEmpleado && arregloRoles.includes("empleado")) {
-            arregloRoles = arregloRoles.filter((rol) => rol != "empleado")
+        if (!isCheckedStaff && arregloRoles.includes("staff")) {
+            arregloRoles = arregloRoles.filter((rol) => rol != "staff")
         }
 
         if (isCheckedAdministrador && !arregloRoles.includes("administrador")) {
@@ -209,8 +209,8 @@ const BotonAgregarUsuario = () => {
                                     </div>
 
                                     <div className="form-check">
-                                        <input className="form-check-input" type="checkbox" value="empleado" id="empleado" />
-                                        <label className="form-check-label">Empleado</label>
+                                        <input className="form-check-input" type="checkbox" value="staff" id="staff" />
+                                        <label className="form-check-label">Staff</label>
                                     </div>
 
                                     <div className="form-check">
