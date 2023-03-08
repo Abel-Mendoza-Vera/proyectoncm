@@ -1,5 +1,7 @@
 import { useState } from "react"
 import Swal from "sweetalert2"
+import { FaUserCircle } from 'react-icons/fa'
+import { MdEmail, MdPassword,MdPhone,MdOutlinePermIdentity } from 'react-icons/all'
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { registrarCliente } from "../hooks/useAcceso"
@@ -93,9 +95,15 @@ const Register = () => {
             <div class="card rounded-3">
 
               <div class="card-body p-4 p-md-5">
-                <h3 className="mb-5 text-uppercase text-center">Registrarse</h3>
 
+              <div className="text-center">
+              <FaUserCircle size="3em" />
+                <h3 className="mb-5 text-uppercase text-center">Registrarse</h3>
+              </div>
+             
                 <div className="row">
+                
+
                   <div className="col-md-6 mb-4">
                     <div className="form-floating mb-3">
                       <input type="text" name='nombre' value={nombre} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" required />
@@ -155,19 +163,27 @@ const Register = () => {
                   </div>
                 </div>
 
+              
+
                 <div className="row">
-                  <div className="col-md-6 mb-4">
-                    <div className="form-floating mb-3">
-                      <input type="text" name='curp' value={curp} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" />
-                      <label htmlFor="curp">Curp</label>
-                    </div>
+                  
+                <div className="input-group mb-3">
+                  <span className='input-group-text'><MdOutlinePermIdentity size="2em" /></span>
+                  <div className="form-floating">
+                  <input type="text" name='curp' value={curp} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" />
+                    <label className='text-dark'>Curp</label>
                   </div>
-                  <div className="col-md-6 mb-4">
-                    <div className="form-floating mb-3">
-                      <input type="number" name='telefono' value={telefono} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" required />
-                      <label htmlFor="telefono">Teléfono</label>
-                    </div>
+                </div>
+
+                  <div className="input-group mb-3">
+                  <span className='input-group-text'><MdPhone size="2em" /></span>
+                  <div className="form-floating">
+                  <input type="number" name='telefono' value={telefono} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" required />
+                    <label className='text-dark'>Teléfono</label>
                   </div>
+                </div>
+                  
+
                 </div>
 
                 {/** Foto de perfil */}
@@ -179,18 +195,24 @@ const Register = () => {
 
 
                 <div className="row">
-                  <div className="col-md-6 mb-4">
-                    <div className="form-floating mb-3">
-                      <input type="email" name='correo' value={correo} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" required />
-                      <label htmlFor="correo">Correo</label>
-                    </div>
+
+                <div className="input-group mb-3">
+                  <span className='input-group-text'><MdEmail size="2em" /></span>
+                  <div className="form-floating">
+                    <input name='correo' value={correo} onChange={(e) => handlerChangeFormUsuario(e)}  type="email" className="form-control" placeholder="" required />
+                    <label className='text-dark'>Correo</label>
                   </div>
-                  <div className="col-md-6 mb-4">
-                    <div className="form-floating mb-3">
-                      <input type="password" name='contrasenia' value={contrasenia} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" required />
-                      <label htmlFor="contrasenia">Contraseña</label>
-                    </div>
+                </div>
+                
+                <div className="input-group mb-3">
+                  <span className='input-group-text'><MdPassword size="2em" /></span>
+                  <div className="form-floating">
+                  <input type="password" name='contrasenia' value={contrasenia} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" required />
+                    <label className='text-dark'>Contraseña</label>
                   </div>
+                </div>
+                
+                  
 
                 </div>
 
