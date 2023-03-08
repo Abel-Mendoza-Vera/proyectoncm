@@ -87,14 +87,14 @@ const Register = () => {
 
 
   return (
-<section class="h-100 h-custom bg-primary bg-opacity-25" >
+<section className="h-100 h-custom bg-primary bg-opacity-25" >
     <form id="registrarUsuarioForm" onSubmit={handlerSubmitFormUsuario} >
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-lg-8 col-xl-6">
-            <div class="card rounded-3">
+      <div className="container py-5 h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-lg-8 col-xl-6">
+            <div className="card rounded-3">
 
-              <div class="card-body p-4 p-md-5">
+              <div className="card-body p-4 p-md-5">
 
               <div className="text-center">
               <FaUserCircle size="3em" />
@@ -163,10 +163,7 @@ const Register = () => {
                   </div>
                 </div>
 
-              
-
-                <div className="row">
-                  
+                <div className="row">    
                 <div className="input-group mb-3">
                   <span className='input-group-text'><MdOutlinePermIdentity size="2em" /></span>
                   <div className="form-floating">
