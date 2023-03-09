@@ -19,8 +19,8 @@ const Tarjeta = ({ curso, archivo }) => {
 
           <div className="row">
             <div className="col-md-4 mb-4">
-              <div className="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light">
-                <img src={curso.idMiniatura != 0 ? archivo.url : imgCurso} onClick={irAlCurso} style={{ cursor: "pointer" }} className="img-fluid" />
+              <div className="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light" style={{ width: "18rem" }}>
+                <img height="190px" width="290px" src={curso.idMiniatura != 0 ? archivo.url : imgCurso} onClick={irAlCurso} style={{ cursor: "pointer" }} className="img-fluid" />
                 <a href="#!">
                   <div className="mask" style={{ backgroundcolor: "rgba(251, 251, 251, 0.15)" }}></div>
                 </a>
