@@ -36,13 +36,14 @@ const U_Leccion = () => {
             <h2 className="text-center display-2 mb-5">{curso.nombre}</h2>
 
             <div className="row">
-                <div className="col-8">
+                <div className="col-12 col-md-8">
                     <div className="row">
                         <video controls>
                             <source src={videoLeccion.url} />
                         </video>
-                        <h4 className="mt-3" >{leccion.nombre}</h4>
+                        
                     </div>
+                    <h4 className="mt-3" >{leccion.nombre}</h4>
 
 
                     <div className="row">
@@ -53,7 +54,7 @@ const U_Leccion = () => {
                 </div>
 
 
-                <div className="col-4">
+                <div className="col-12 col-md-4">
                     <h4 className="text-center mb-3">Lecciones del curso</h4>
 
 
