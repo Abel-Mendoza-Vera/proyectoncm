@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 import { useAccesoStore } from "../../store/accesoStore"
-import { useObtenerCursosCliente } from '../../hooks/useCurso'
+import { useObtenerCursosCliente } from '../../hooks/useCursoCliente'
 import { useCarritoStore } from '../../store/carritoStore'
 import Cargando from '../../pages/Cargando'
 

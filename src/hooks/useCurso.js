@@ -19,15 +19,6 @@ export const useObtenerCursoPorId = (id) => {
     return useQuery(["getCurso", id], () => obtenerCursoPorId(id))
 }
 
-const obtenerCursosCliente = async (token, idCliente) => {
-    const result = await api.get(`/curso_c/${idCliente}`, { headers: { "x-access-token" : token } })
-    return result.data
-}
-
-export const useObtenerCursosCliente = (token, idCliente) => {
-    return useQuery(["getCursosCliente", token, idCliente], () => obtenerCursosCliente(token, idCliente))
-}
-
 export const crearCurso = async ({ token, curso }) => {
     return await api.post("/curso", {
         nombre: curso.nombre,

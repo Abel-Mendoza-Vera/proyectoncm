@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 import Cargando from "../../src/pages/Cargando"
 import Tarjeta from "../components/curso/TarjetaMisCursos"
-import { useObtenerCursosCliente } from "../hooks/useCurso"
+import { useObtenerCursosCliente } from "../hooks/useCursoCliente"
 import { useObtenerArchivos } from "../hooks/useArchivo"
 import { useState } from "react"
 

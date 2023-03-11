@@ -1,5 +1,4 @@
 import { useParams, Navigate, useNavigate } from "react-router-dom"
-import { BsCartPlusFill } from 'react-icons/bs'
 import AgregarAlCarrito from "../../components/carrito/AgregarAlCarrito"
 import { useObtenerCursoPorId } from "../../hooks/useCurso"
 import { useObtenerLeccion } from "../../hooks/useLeccion"

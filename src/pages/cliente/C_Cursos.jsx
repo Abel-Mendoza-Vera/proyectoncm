@@ -1,32 +1,29 @@
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { useObtenerCursoPorId } from "../../hooks/useCurso"
+import { useParams } from "react-router-dom"
+import { useObtenerCursoCliente } from "../../hooks/useCursoCliente"
 import { useObtenerArchivos } from "../../hooks/useArchivo"
-import { useObtenerLeccionesPorCurso } from "../../hooks/useLeccion"
 import imgDefault from '../../assets/curso.jpg'
 
 import Cargando from '../../pages/Cargando'
-import { BiLinkExternal } from "react-icons/bi"
 
 import { useAccesoStore } from '../../store/accesoStore'
+import ListaLecciones from "../../components/clienteLeccion/ListaLecciones"
 
 const C_Curso = () => {
 
     const { idCurso } = useParams()
-    const navigation = useNavigate()
-    const acceso = useAccesoStore((state) => state.acceso)
+    
+    const { token, usuario } = useAccesoStore((state) => ({
+        token: state.token,
+        usuario: state.usuario
+    }))
 
-    const { data: curso, isLoading: isLoadingCurso } = useObtenerCursoPorId(idCurso)
-    const { data: leccionesCurso, isLoading: isLoadingLeccionesCurso } = useObtenerLeccionesPorCurso(idCurso)
+    const { data: curso, isLoading: isLoadingCurso } = useObtenerCursoCliente(token, usuario.idUsuario, idCurso)
     const { data: archivos, isLoading: isLoadingArchivos } = useObtenerArchivos()
 
-    if (isLoadingCurso || isLoadingLeccionesCurso || isLoadingArchivos) return <Cargando />
+    if (isLoadingCurso || isLoadingArchivos) return <Cargando />
 
     let archivoVideo = archivos.find((archivo) => archivo.idArchivo == curso.idVideo)
     let archivoMiniatura = archivos.find((archivo) => archivo.idArchivo == curso.idMiniatura)
-
-    const irLeccion = (leccionId) => {
-        navigation(`/cliente/curso/leccion/${idCurso}/${curso.nombre}/${leccionId}`)
-    }
 
 
     return (
@@ -39,14 +36,7 @@ const C_Curso = () => {
 
                 <div className="col-12 col-md-6" style={{ fontSize: "1.3rem" }}>
                     <div className="row">
-                        <div className="col-6">
-                            <p><strong>Duración:</strong></p>
-                            <p>{curso.duracion} horas</p>
-                        </div>
-                        <div className="col-6">
-                            <p><strong>Precio:</strong></p>
-                            <p>$ {curso.precio} MXN</p>
-                        </div>
+                            <p><strong>Duración:</strong> {curso.duracion} horas</p>
                     </div>
 
                     <p><strong>Objetivo:</strong></p>
@@ -74,34 +64,7 @@ const C_Curso = () => {
 
             </div>
             {/** Lecciones del curso */}
-            <div className="row p-5">
-                <h3 className="text-center display-3 mb-5" style={{ color: "#ffa100" }} >Lecciones del curso</h3>
-
-                <div className="list-group">
-
-                    {
-                        leccionesCurso.length == 0 ?
-                            <div className="list-group-item" >
-                                <div className="d-flex w-100 justify-content-between">
-                                    <h5 className="mb-1">El curso no cuenta con lecciones</h5>
-                                </div>
-                            </div>
-                            :
-                            leccionesCurso.map((leccion, index) => {
-
-                                return <div key={leccion.idLeccion} className="list-group-item" >
-                                    <div className="d-flex w-100 justify-content-between">
-                                        <h5 className="mb-1">Lección {index + 1}: {leccion.nombre}</h5>
-                                        <button className="btn btn-outline-primary btn-sm" onClick={() => irLeccion(leccion.idLeccion)} ><BiLinkExternal size="1.5rem" /></button>
-                                    </div>
-                                    <p className="mb-1 mt-1">{leccion.informacion}</p>
-                                </div>
-
-                            })
-                    }
-
-                </div>
-            </div>
+            <ListaLecciones curso = { curso } />
         </div>
     )
 }
