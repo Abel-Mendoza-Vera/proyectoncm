@@ -3,6 +3,7 @@ import img from '../assets/curso.jpg'
 import { Link, useNavigate } from "react-router-dom"
 import { BiSearch } from "react-icons/bi"
 
+import { api } from "../api/novatec";
 
 const Certificaciones = () => {
 
@@ -17,6 +18,16 @@ const Certificaciones = () => {
 
     const Certificaciones = () => {
         navigate(`/cliente/certificaciones`)
+    }
+
+    const descargar = async () => {
+        const res = await api.get("/certificacion/1")
+
+        let blob = new Blob([res.data], { type: 'application/pdf' });
+        let blobURL = URL.createObjectURL(blob);
+        window.open(blobURL);
+        
+        console.log(res.data);
     }
 
     return (
@@ -63,23 +74,9 @@ const Certificaciones = () => {
                                         <div className="col-md-3 col-lg-3 col-xl-3">
                                             <p className="lead fw-normal mb-2">Curso 1</p>
                                         </div>
-                                        <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                            <button className="btn btn-link px-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                <i className="fas fa-minus"></i>
-                                            </button>
 
-
-                                            <button className="btn btn-link px-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                <i className="fas fa-plus"></i>
-                                            </button>
-                                        </div>
                                         <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                            <button type="button" className="btn btn-success btn-block">Descargar</button>
-                                        </div>
-                                        <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                                            <a href="#!" className="text-danger"><i className="fas fa-trash fa-lg"></i></a>
+                                            <button type="button" onClick={descargar} className="btn btn-success btn-block">Descargar</button>
                                         </div>
                                     </div>
                                 </div>

@@ -6,10 +6,19 @@ const obtenerCuestionarios = async (token) => {
     return result.data
 }
 
+const obtenerCuestionarioPorLeccion = async (token, idLeccion) => {
+    const result = await api.get(`/cuestionario_lec/${idLeccion}`, { headers: { "x-access-token": token } })
+    return result.data
+}
+
 // Exportaciones
 
 export const useObtenerCuestionarios = (token) => {
     return useQuery(["getCuestionarios", token], () => obtenerCuestionarios(token))
+}
+
+export const useObtenerCuestionarioPorLeccion = (token, idLeccion) => {
+    return useQuery(["getCuestionariooPorLeccion", token, idLeccion], () => obtenerCuestionarioPorLeccion(token, idLeccion))
 }
 
 export const crearCuestionario = async ({ token, cuestionario }) => {

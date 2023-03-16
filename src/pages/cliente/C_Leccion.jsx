@@ -7,21 +7,28 @@ import { useObtenerLeccionesPorCurso } from "../../hooks/useLeccion"
 import { useAccesoStore } from '../../store/accesoStore'
 
 import Cargando from '../../pages/Cargando'
+import { useObtenerCalificacionesClientePorCurso } from "../../hooks/useCalificacion"
+import { useObtenerCuestionarioPorLeccion } from "../../hooks/useCuestionario"
+import BotonCuestionario from "../../components/clienteLeccion/BotonCuestionario"
 
 const C_Leccion = () => {
 
   const { idCurso, nombreCurso, idLeccion } = useParams()
-  const acceso = useAccesoStore((state) => state.acceso)
+  const { acceso, token, usuario } = useAccesoStore((state) => ({
+    acceso: state.acceso,
+    token: state.token,
+    usuario: state.usuario
+  }))
   const navigation = useNavigate()
   const { data: curso, isLoading: isLoadingCurso } = useObtenerCursoPorId(idCurso)
   const { data: leccion, isLoading: isLoadingLeccion } = useObtenerLeccion(idLeccion)
   const { data: leccionesCurso, isLoading: isLoadingLeccionesCurso } = useObtenerLeccionesPorCurso(idCurso)
   const { data: archivos, isLoading: isLoadingArchivos } = useObtenerArchivos()
   const { data: archivosLecciones, isLoading: isLoadingArchivosLecciones } = useObtenerArchivoPorLeccion(idLeccion)
+  const { data: califCurso, isLoading: isLoadingCalifCurso } = useObtenerCalificacionesClientePorCurso(token, usuario.idUsuario, idCurso)
+  const { data: cuestionario, isLoading: isLoadingCuestionario } = useObtenerCuestionarioPorLeccion(token, idLeccion)
 
-  if (isLoadingCurso || isLoadingLeccion || isLoadingLeccionesCurso || isLoadingArchivos || isLoadingArchivosLecciones) return <Cargando />
-
-  if (leccionesCurso[0].idLeccion != idLeccion && !acceso) return <Navigate to={`/curso/${idCurso}`} />
+  if (isLoadingCurso || isLoadingLeccion || isLoadingLeccionesCurso || isLoadingArchivos || isLoadingArchivosLecciones || isLoadingCalifCurso || isLoadingCuestionario) return <Cargando />
 
   const videoLeccion = archivos.find((archivo) => archivo.idArchivo == leccion.idVideo)
 
@@ -57,13 +64,13 @@ const C_Leccion = () => {
                     </button>
                     <ul className="dropdown-menu">
                       {
-                        archivosLecciones.map((a) => <li><a className="dropdown-item" href={a.url} target="_blank" >{a.nombre}</a></li>)
+                        archivosLecciones.map((a) => <li key={a.idArchivo}><a className="dropdown-item" href={a.url} target="_blank" >{a.nombre}</a></li>)
                       }
                     </ul>
                   </div>
               }
 
-              <button className="btn btn-primary btn-sm">Cuestionario</button>
+              <BotonCuestionario cuestionario={cuestionario} idCurso={idCurso} />
             </div>
 
 
@@ -75,27 +82,18 @@ const C_Leccion = () => {
 
 
         <div className="col-4">
-          <h4 className="text-center mb-3">Lecciones del curso</h4>
-
-          {
-            !acceso ?
-              <div className="alert alert-info" role="alert">
-                <p>
-                  Compra el curso "{curso.nombre}" para seguir disfrutando de su contenido.
-                </p>
-                <AgregarAlCarrito idCurso={idCurso} />
-              </div>
-              :
-              <></>
-          }
-
+          <h4 className="text-center mb-3">Lecciones del curSo</h4>
           <div className="list-group overflow-y-auto" style={{ height: "500px" }}>
             { /** Cuando tengan el mismo id se asigna la clase active */}
             {
               leccionesCurso.map((leccion, index) => {
-                if (index > 0 && !acceso) return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >Lección {index + 1}: {leccion.nombre}</button>
 
-                return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
+                if (califCurso.length == 0 && index == 0) return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >1Lección {index + 1}: {leccion.nombre}</button>
+                
+                if( califCurso.length <= index) return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >2Lección {index + 1}: {leccion.nombre}</button>
+
+                return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >3Lección {index + 1}: {leccion.nombre}</button>
+
 
               })
             }
