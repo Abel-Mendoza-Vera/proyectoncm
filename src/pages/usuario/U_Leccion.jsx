@@ -62,7 +62,7 @@ const U_Leccion = () => {
                         <p>
                             Compra el curso "{curso.nombre}" para seguir disfrutando de su contenido.
                         </p>
-                        <AgregarAlCarrito idCurso={idCurso} />
+                        <AgregarAlCarrito idCurso={curso.idCurso}/>
                     </div>
 
 

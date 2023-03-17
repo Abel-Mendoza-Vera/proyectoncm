@@ -82,7 +82,7 @@ const C_Leccion = () => {
 
 
         <div className="col-4">
-          <h4 className="text-center mb-3">Lecciones del curSo</h4>
+          <h4 className="text-center mb-3">Lecciones del curso</h4>
           <div className="list-group overflow-y-auto" style={{ height: "500px" }}>
             { /** Cuando tengan el mismo id se asigna la clase active */}
             {

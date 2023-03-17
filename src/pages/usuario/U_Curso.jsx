@@ -57,7 +57,7 @@ const U_Curso = () => {
                     <p>{curso.descripcion}</p>
 
                     <div className="">
-                        <AgregarAlCarrito idCurso={idCurso} blanco />
+                        <AgregarAlCarrito idCurso={curso.idCurso} blanco />
                     </div>
 
                 </div>
