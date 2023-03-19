@@ -2,10 +2,12 @@ import Swal from "sweetalert2"
 import { useAccesoStore } from "../../store/accesoStore"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { registrarCalificacion, modificarCalificacion } from "../../hooks/useCalificacion"
+import { registrarCertificado } from "../../hooks/useCertificacion"
+import { modificarCursoCliente } from "../../hooks/useCursoCliente"
 import { api } from "../../api/novatec"
 
-const BotonCuestionario = ({ cuestionario, idCurso }) => {
-    
+const BotonCuestionario = ({ cuestionario, idCurso, finalizado, idRelacion }) => {
+
     const queryClient = useQueryClient()
     const { token, usuario } = useAccesoStore((state) => ({
         token: state.token,
@@ -26,6 +28,20 @@ const BotonCuestionario = ({ cuestionario, idCurso }) => {
         }
     })
 
+    const useRegistrarCertificado = useMutation({
+        mutationFn: registrarCertificado,
+        onSuccess: () => {
+            queryClient.invalidateQueries("getCertificaciones")
+        }
+    })
+
+    const useModificarCursoCliente = useMutation({
+        mutationFn: modificarCursoCliente,
+        onSuccess: () => {
+            queryClient.invalidateQueries("getCursosCliente")
+        }
+    })
+
     const obtenerCalif = async () => {
         const result = await api.get(`/calificacion_una/${usuario.idUsuario}/${cuestionario.idCuestionario}`, { headers: { "x-access-token": token } })
         return result.data
@@ -38,6 +54,14 @@ const BotonCuestionario = ({ cuestionario, idCurso }) => {
 
         let formElement = document.getElementById("formCuestionario")
         let formData = new FormData(formElement)
+
+        let new_date = new Date()
+        let dia = new_date.getDate()
+        let mes = new_date.getMonth() + 1
+        let anio = new_date.getFullYear()
+        let date1 = `${anio}-${mes < 10 ? `0${mes}` : mes}-${dia < 10 ? `0${dia}` : dia}`
+        let arrayDate1 = date1.split("-")
+        let fechaArmada = `${arrayDate1[2]}/${arrayDate1[1]}/${arrayDate1[0]}`
 
         for (const [key, value] of formData) {
             let idP = Number(key.replace("p", ""))
@@ -63,21 +87,36 @@ const BotonCuestionario = ({ cuestionario, idCurso }) => {
                 idCliente: usuario.idUsuario,
                 calificacion
             }
-            useRegistrarCalificacion.mutate({ token, datos})
+            useRegistrarCalificacion.mutate({ token, datos })
+            if (finalizado && calificacion >= 8) {
+                useModificarCursoCliente.mutate({ token, idRelacion, curso: { fechaFinalizacionCurso: fechaArmada, finalizado: 1, ultimaConexion: fechaArmada } })
+                useRegistrarCertificado.mutate({ token, datos: { idCliente: usuario.idUsuario, idCurso: idCurso } })
+            }
             Swal.fire({
                 title: cuestionario.nombre,
                 text: calificacion >= 8 ? `Tu calificación es de ${calificacion}, felicidades puedes seguir a la siguiente lección.` : `Tu calificación es de ${calificacion}, lo siento no pudieste alcanzar la calificación minima para avanzar a la siguiente lección.`,
                 icon: calificacion >= 8 ? "success" : "error"
             })
         }
-        else if(calificacionAlmacenada.calificacion < calificacion){
-            useModificarCalificacion.mutate({token, idCalificacion: calificacionAlmacenada.idCalificacion, calificacion})
+        else if (calificacionAlmacenada.calificacion < calificacion) {
+            useModificarCalificacion.mutate({ token, idCalificacion: calificacionAlmacenada.idCalificacion, calificacion })
+            if (finalizado && calificacion >= 8) {
+                useModificarCursoCliente.mutate({ token, idRelacion, curso: { fechaFinalizacionCurso: fechaArmada, finalizado: 1, ultimaConexion: fechaArmada } })
+                useRegistrarCertificado.mutate({ token, datos: { idCliente: usuario.idUsuario, idCurso: idCurso } })
+            }
             Swal.fire({
                 title: cuestionario.nombre,
-                text: calificacion >= 8 ? `Tu calificación es de ${calificacionAlmacenada.calificacion}, felicidades puedes seguir a la siguiente lección.` : `Tu calificación es de ${calificacionAlmacenada.calificacion}, lo siento no pudieste alcanzar la calificación minima para avanzar a la siguiente lección.`,
+                text: calificacion >= 8 ? `Tu calificación es de ${calificacion}, felicidades puedes seguir a la siguiente lección.` : `Tu calificación es de ${calificacion}, lo siento no pudieste alcanzar la calificación minima para avanzar a la siguiente lección.`,
                 icon: calificacion >= 8 ? "success" : "error"
             })
-        }        
+        }
+        else {
+            Swal.fire({
+                title: cuestionario.nombre,
+                text: `Ya cuenta con una calificación aprovatoria de ${calificacionAlmacenada.calificacion}.`,
+                icon: "success"
+            })
+        }
 
     }
 

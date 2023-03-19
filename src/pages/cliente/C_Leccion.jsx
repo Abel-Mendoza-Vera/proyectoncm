@@ -13,7 +13,7 @@ import BotonCuestionario from "../../components/clienteLeccion/BotonCuestionario
 
 const C_Leccion = () => {
 
-  const { idCurso, nombreCurso, idLeccion } = useParams()
+  const { idCurso, nombreCurso, idLeccion, idRelacion } = useParams()
   const { acceso, token, usuario } = useAccesoStore((state) => ({
     acceso: state.acceso,
     token: state.token,
@@ -33,7 +33,13 @@ const C_Leccion = () => {
   const videoLeccion = archivos.find((archivo) => archivo.idArchivo == leccion.idVideo)
 
   const irLeccion = (leccionId) => {
-    navigation(`/cliente/curso/leccion/${idCurso}/${nombreCurso}/${leccionId}`)
+    navigation(`/cliente/curso/leccion/${idCurso}/${nombreCurso}/${leccionId}/${idRelacion}`)
+  }
+
+  let finalizado = false;
+  let auxLec = leccionesCurso[leccionesCurso.length - 1]
+  if (auxLec.idLeccion == leccion.idLeccion) {
+    finalizado = true;
   }
 
   return (
@@ -70,9 +76,8 @@ const C_Leccion = () => {
                   </div>
               }
 
-              <BotonCuestionario cuestionario={cuestionario} idCurso={idCurso} />
+              <BotonCuestionario cuestionario={cuestionario} idCurso={idCurso} finalizado={finalizado} idRelacion={idRelacion} />
             </div>
-
 
             <p>
               {leccion.informacion}
@@ -88,11 +93,23 @@ const C_Leccion = () => {
             {
               leccionesCurso.map((leccion, index) => {
 
-                if (califCurso.length == 0 && index == 0) return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >1Lección {index + 1}: {leccion.nombre}</button>
-                
-                if( califCurso.length <= index) return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >2Lección {index + 1}: {leccion.nombre}</button>
+                if (califCurso.length == 0 && index == 0) return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
 
-                return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >3Lección {index + 1}: {leccion.nombre}</button>
+                if (index <= califCurso.length) {
+                  return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
+
+
+                }
+
+                let c = califCurso[califCurso.length - 1]
+
+                if (c.calificacion >= 8) {
+                  return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
+                }
+
+                else {
+                  return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >Lección {index + 1}: {leccion.nombre}</button>
+                }
 
 
               })

@@ -4,7 +4,6 @@ import { api } from "../api/novatec";
 
 const obtenerCalificacionesClientePorCurso = async (token, idCliente, idCurso) => {
     const result = await api.get(`/calificacion/${idCliente}/${idCurso}`, { headers: { "x-access-token": token } })
-    console.log(result.data.length);
     return result.data
 }
 

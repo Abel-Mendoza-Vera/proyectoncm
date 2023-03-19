@@ -8,7 +8,8 @@ import { useAccesoStore } from '../../store/accesoStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { modificarCursoCliente } from '../../hooks/useCursoCliente';
 
-
+import { useObtenerCalificacionesClientePorCurso } from '../../hooks/useCalificacion';
+import { useObtenerLeccionesPorCurso } from '../../hooks/useLeccion';
 
 const TarjetaMisCursos = ({ curso, archivo }) => {
 
@@ -28,7 +29,14 @@ const TarjetaMisCursos = ({ curso, archivo }) => {
 
     const navigate = useNavigate();
     const queryClient = useQueryClient();
-    const token = useAccesoStore((state) => state.token)
+    const { token, usuario } = useAccesoStore((state) => ({
+        token: state.token,
+        usuario: state.usuario
+    }))
+
+    const { data, isLoading } = useObtenerCalificacionesClientePorCurso(token, usuario.idUsuario, curso.idCurso)
+    const { data: lecciones, isLoading: isLoadingLecciones } = useObtenerLeccionesPorCurso(curso.idCurso)
+
     const useModificarCursoCliente = useMutation({
         mutationFn: modificarCursoCliente,
         onSuccess: () => {
@@ -36,6 +44,46 @@ const TarjetaMisCursos = ({ curso, archivo }) => {
         }
     })
 
+    if (isLoading || isLoadingLecciones) return < div className='col' >
+        <div className="card" style={{ width: "18rem" }}>
+            <img src={imgCurso} height="190px" className="card-img-top" alt="..." />
+            <div className="card-body">
+                <h5 className="card-title">Curso</h5>
+
+                <p className='card-text'><small>Ultima conexión hace 0 dias</small></p>
+
+                <div className="progress">
+                    <div className="progress-bar" role="progressbar" style={{ width: "0%" }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                </div>
+
+            </div>
+
+            <div className="card-footer">
+                <div className="d-flex justify-content-end">
+
+                    <button className='btn btn-primary btn-sm'>Cargando...</button>
+
+                </div>
+            </div>
+        </div>
+    </div >
+
+    let numTotalCalif = 0
+    let numTotalLec = lecciones.length
+    
+    for(let i = 0; i < data.length; i++){
+        let calif = data[i]
+        
+        if(calif.calificacion >= 8){
+            numTotalCalif += 1
+        }
+        else{
+            numTotalCalif += 0.5
+        }
+    }
+    let progreso = (numTotalCalif / numTotalLec) * 100
+    progreso = progreso.toFixed(0)
+    
     const mouseOver = () => {
         let divSeleccionado = document.getElementById(`curso${curso.idCurso}`)
         divSeleccionado.setAttribute("class", "col shadow-lg p-1 bg-primary bg-opacity-75 rounded")
@@ -68,20 +116,20 @@ const TarjetaMisCursos = ({ curso, archivo }) => {
         })
     }
 
-    
+
 
     return (
         <>
             < div id={`curso${curso.idCurso}`} onMouseOver={mouseOver} onMouseOut={mouseOut} className='col' >
                 <div className="card" style={{ width: "18rem" }}>
-                    <img src={curso.idMiniatura != 0 ? archivo.url : imgCurso} onClick={ curso.autorizado ? () => irAlCurso() : () => alertaNoActivacion(curso.nombre) } style={{ cursor: "pointer" }} height="190px" className="card-img-top" alt="..." />
+                    <img src={curso.idMiniatura != 0 ? archivo.url : imgCurso} onClick={curso.autorizado ? () => irAlCurso() : () => alertaNoActivacion(curso.nombre)} style={{ cursor: "pointer" }} height="190px" className="card-img-top" alt="..." />
                     <div className="card-body">
                         <h5 className="card-title">{curso.nombre}</h5>
 
                         <p className='card-text'><small>Ultima conexión hace {diferencia} dias</small></p>
 
                         <div className="progress">
-                            <div className="progress-bar" role="progressbar" style={{ width: "0%" }} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                            <div className={progreso == 100 ? "progress-bar bg-success" : "progress-bar"} role="progressbar" style={{ width: `${progreso}%` }} aria-valuenow={`${progreso}`} aria-valuemin="0" aria-valuemax="100">{progreso}%</div>
                         </div>
 
                     </div>

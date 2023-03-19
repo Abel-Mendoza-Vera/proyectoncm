@@ -15,7 +15,7 @@ const ListaLecciones = ({ curso }) => {
     const { data: califCurso, isLoading: isLoadingCalifCurso } = useObtenerCalificacionesClientePorCurso(token, usuario.idUsuario, curso.idCurso)
 
     const irLeccion = (leccionId) => {
-        navigation(`/cliente/curso/leccion/${curso.idCurso}/${curso.nombre}/${leccionId}`)
+        navigation(`/cliente/curso/leccion/${curso.idCurso}/${curso.nombre}/${leccionId}/${curso.idRelacion}`)
     }
 
     if (isLoadingLeccionesCurso || isLoadingCalifCurso) return <Cargando />
@@ -36,7 +36,40 @@ const ListaLecciones = ({ curso }) => {
                         :
                         leccionesCurso.map((leccion, index) => {
 
-                            if (califCurso.length == 0 && index != 0) {
+                            if (califCurso.length == 0 && index == 0) {
+                                return <div key={leccion.idLeccion} className="list-group-item" >
+                                    <div className="d-flex w-100 justify-content-between">
+                                        <h5 className="mb-1">Lección {index + 1}: {leccion.nombre}</h5>
+                                        <button className="btn btn-outline-primary btn-sm" onClick={() => irLeccion(leccion.idLeccion)} ><BiLinkExternal size="1.5rem" /></button>
+                                    </div>
+                                    <p className="mb-1 mt-1">{leccion.informacion}</p>
+                                </div>
+                            }
+
+                            if (index <= califCurso.length - 1) {
+
+                                return <div key={leccion.idLeccion} className="list-group-item" >
+                                    <div className="d-flex w-100 justify-content-between">
+                                        <h5 className="mb-1">Lección {index + 1}: {leccion.nombre}</h5>
+                                        <button className="btn btn-outline-primary btn-sm" onClick={() => irLeccion(leccion.idLeccion)} ><BiLinkExternal size="1.5rem" /></button>
+                                    </div>
+                                    <p className="mb-1 mt-1">{leccion.informacion}</p>
+                                </div>
+
+                            }
+
+                            let c = califCurso[califCurso.length - 1]
+
+                            if (c.calificacion >= 8) {
+                                return <div key={leccion.idLeccion} className="list-group-item" >
+                                    <div className="d-flex w-100 justify-content-between">
+                                        <h5 className="mb-1">Lección {index + 1}: {leccion.nombre}</h5>
+                                        <button className="btn btn-outline-primary btn-sm" onClick={() => irLeccion(leccion.idLeccion)} ><BiLinkExternal size="1.5rem" /></button>
+                                    </div>
+                                    <p className="mb-1 mt-1">{leccion.informacion}</p>
+                                </div>
+                            }
+                            else {
                                 return <div key={leccion.idLeccion} className="list-group-item" >
                                     <div className="d-flex w-100 justify-content-between">
                                         <h5 className="mb-1">Lección {index + 1}: {leccion.nombre}</h5>
@@ -45,15 +78,6 @@ const ListaLecciones = ({ curso }) => {
                                     <p className="mb-1 mt-1">{leccion.informacion}</p>
                                 </div>
                             }
-
-
-                            return <div key={leccion.idLeccion} className="list-group-item" >
-                                <div className="d-flex w-100 justify-content-between">
-                                    <h5 className="mb-1">Lección {index + 1}: {leccion.nombre}</h5>
-                                    <button className="btn btn-outline-primary btn-sm" onClick={() => irLeccion(leccion.idLeccion)} ><BiLinkExternal size="1.5rem" /></button>
-                                </div>
-                                <p className="mb-1 mt-1">{leccion.informacion}</p>
-                            </div>
 
                         })
                 }

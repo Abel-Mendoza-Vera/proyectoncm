@@ -1,33 +1,30 @@
 import React from "react";
-import img from '../assets/curso.jpg'
-import { Link, useNavigate } from "react-router-dom"
-import { BiSearch } from "react-icons/bi"
 
-import { api } from "../api/novatec";
+import { useNavigate } from "react-router-dom"
+import { BiSearch } from "react-icons/bi"
+import { useAccesoStore } from "../store/accesoStore"
+import { useObtenerCertificacionesCliente } from "../hooks/useCertificacion";
+import Cargando from "../pages/Cargando"
+import ItemCertificado from "./certificado/ItemCertificado";
 
 const Certificaciones = () => {
 
-
     const navigate = useNavigate()
+    const { token, usuario } = useAccesoStore((state) => ({
+        token: state.token,
+        usuario: state.usuario
+    }))
+
+    const { data, isLoading } = useObtenerCertificacionesCliente(token, usuario.idUsuario)
+
+    if (isLoading) return <Cargando />
 
     const MisCursos = () => {
         navigate(`/cliente/mis_cursos`)
     }
 
-
-
     const Certificaciones = () => {
         navigate(`/cliente/certificaciones`)
-    }
-
-    const descargar = async () => {
-        const res = await api.get("/certificacion/1")
-
-        let blob = new Blob([res.data], { type: 'application/pdf' });
-        let blobURL = URL.createObjectURL(blob);
-        window.open(blobURL);
-        
-        console.log(res.data);
     }
 
     return (
@@ -63,24 +60,16 @@ const Certificaciones = () => {
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-10">
 
-                            <div className="card rounded-3 mb-4">
-                                <div className="card-body p-4">
-                                    <div className="row d-flex justify-content-between align-items-center">
-                                        <div className="col-md-2 col-lg-2 col-xl-2">
-                                            <img
-                                                src={img}
-                                                className="img-fluid rounded-3" alt="Cotton T-shirt" />
-                                        </div>
-                                        <div className="col-md-3 col-lg-3 col-xl-3">
-                                            <p className="lead fw-normal mb-2">Curso 1</p>
-                                        </div>
-
-                                        <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                            <button type="button" onClick={descargar} className="btn btn-success btn-block">Descargar</button>
-                                        </div>
+                            {
+                                data.length == 0 ?
+                                    <div className="alert alert-info text-center" role="alert">
+                                        <h3>No se encontro nignun certificado</h3>
                                     </div>
-                                </div>
-                            </div>
+                                    :
+                                    data.map((item) => {
+                                        return <ItemCertificado key={item.idCertificacion} certificacion={item} />
+                                    })
+                            }
 
                         </div>
                     </div>

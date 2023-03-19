@@ -70,7 +70,7 @@ const Enrutador = () => {
                     <Route path='certificaciones' element={ <C_Certificaciones/> } />
 
                     <Route path='curso/:idCurso' element={ <C_Curso/> } />
-                    <Route path='curso/leccion/:idCurso/:nombreCurso/:idLeccion' element={ <C_Leccion/> } />
+                    <Route path='curso/leccion/:idCurso/:nombreCurso/:idLeccion/:idRelacion' element={ <C_Leccion/> } />
                     
                     <Route path='examen' element={ <C_Examen/> } />
 

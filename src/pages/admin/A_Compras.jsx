@@ -19,19 +19,35 @@ const A_Compras = () => {
     const { data: compras, isLoading: isLoadingCompras } = useObtenerCompras(token)
 
     let listaCompra = []
+    let listaCompraP = []
+    let listaCompraNP = []
 
     const [buscadorCompra, setBuscadorCompra] = useState("")
+    const [estatusCompra, setEstatusCompra] = useState(2)
+
     const handlerBuscadorCompra = (e) => {
         setBuscadorCompra(e.target.value)
     }
 
     if (isLoadingUsuarios || isLoadingCompras) return <Cargando />
 
+    listaCompra = compras
+    listaCompraP = compras.filter((cP) => cP.estatus == 1)
+    listaCompraNP = compras.filter((cNP) => cNP.estatus == 0)
+
     if (!buscadorCompra) {
         listaCompra = compras
+        listaCompraP = compras.filter((cP) => cP.estatus == 1)
+        listaCompraNP = compras.filter((cNP) => cNP.estatus == 0)
     }
     else {
         listaCompra = compras.filter((c) => `NC${c.idCliente}`.toLowerCase().includes(buscadorCompra.toLowerCase()))
+
+
+        listaCompraP = compras.filter((c) => (`NC${c.idCliente}`.toLowerCase().includes(buscadorCompra.toLowerCase())) && c.estatus == 1 )
+
+
+        listaCompraNP = compras.filter((c) => (`NC${c.idCliente}`.toLowerCase().includes(buscadorCompra.toLowerCase())) && c.estatus == 0 )
     }
 
     return (
@@ -51,9 +67,9 @@ const A_Compras = () => {
             <div className=" mt-3 d-flex justify-content-end">
 
                 <div className="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
-                    <button type="button" className="btn btn-outline-primary" > <strong>Todo</strong></button>
-                    <button type="button" className="btn btn-outline-primary"> <strong>Pago pendiente</strong></button>
-                    <button type="button" className="btn btn-outline-primary" > <strong>Pagado</strong></button>
+                    <button type="button" className="btn btn-outline-primary" onClick={ () => setEstatusCompra(2) } > <strong>Todo</strong></button>
+                    <button type="button" className="btn btn-outline-primary" onClick={ () => setEstatusCompra(0) } > <strong>Pago pendiente</strong></button>
+                    <button type="button" className="btn btn-outline-primary" onClick={ () => setEstatusCompra(1) } > <strong>Pagado</strong></button>
                 </div>
 
             </div>
@@ -76,19 +92,34 @@ const A_Compras = () => {
                     <tbody className='table-group-divider' >
 
                         {
-                            listaCompra.length == 0 ?
+                            compras.length == 0 ?
                                 <tr>
                                     <td colSpan="7">
                                         <h3 className="text-center my-3">No se han registrado compras</h3>
                                     </td>
                                 </tr>
                                 :
+                                estatusCompra == 2 ?
+
                                 listaCompra.map((c) => {
-
-                                    
-
                                     let u = usuarios.find((obj) => obj.idUsuario == c.idCliente)
-                                    return <ItemTablaCompra key = { c.idCompra } compra = { c } cliente = { u } />
+                                    return <ItemTablaCompra key={c.idCompra} compra={c} cliente={u} />
+                                })
+
+                                :
+
+                                estatusCompra == 1 ?
+
+                                listaCompraP.map((c) => {
+                                    let u = usuarios.find((obj) => obj.idUsuario == c.idCliente)
+                                    return <ItemTablaCompra key={c.idCompra} compra={c} cliente={u} />
+                                })
+
+                                :
+
+                                listaCompraNP.map((c) => {
+                                    let u = usuarios.find((obj) => obj.idUsuario == c.idCliente)
+                                    return <ItemTablaCompra key={c.idCompra} compra={c} cliente={u} />
                                 })
                         }
 
