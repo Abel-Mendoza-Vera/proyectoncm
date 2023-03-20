@@ -71,15 +71,17 @@ const ItemCertificado = ({ certificacion }) => {
         <div className="card rounded-3 mb-4">
             <div className="card-body p-4">
                 <div className="row d-flex justify-content-between align-items-center">
+                <div className="col-md-3 col-lg-3 col-xl-3">
+                        <p className="lead fw-bold mb-2">{certificacion.nombreCurso}</p>
+                    </div><hr />
                     <div className="col-md-2 col-lg-2 col-xl-2">
                         <img
                             src={!archivoImagenCurso ? img : archivoImagenCurso.url}
                             className="img-fluid rounded-3" alt="Cotton T-shirt" />
                     </div>
                     <div className="col-md-3 col-lg-3 col-xl-3">
-                        <p className="lead fw-normal mb-2">{certificacion.nombreCurso}</p>
+                        <p className="lead fw-normal mb-2">{usuario.nombre} {usuario.primerApellido}</p>
                     </div>
-
                     <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                         <button type="button" onClick={() => descargar()} className="btn btn-success btn-block">Descargar</button>
                     </div>
