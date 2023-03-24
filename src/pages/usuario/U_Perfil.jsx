@@ -313,7 +313,7 @@ const U_Perfil = () => {
                                                             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                                                 <div className="form-group">
                                                                     <label htmlFor="correo">Correo</label>
-                                                                    <input value={correo} onChange={(e) => handlerChangeFormUsuario(e)} type="email" className="form-control" name="correo" placeholder="" />
+                                                                    <input value={correo} onChange={(e) => handlerChangeFormUsuario(e)} type="email" className="form-control" name="correo" placeholder="" disabled/>
                                                                 </div>
                                                             </div>
                                                             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
