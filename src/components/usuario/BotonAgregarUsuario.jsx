@@ -8,7 +8,10 @@ import { crearUsuario } from '../../hooks/useUsuario';
 
 const BotonAgregarUsuario = () => {
 
-    const token = useAccesoStore((state) => state.token)
+    const {token, usuario} = useAccesoStore((state) => ({
+        token: state.token,
+        usuario: state.usuario
+    }))
     const queryClient = useQueryClient()
     const useCrearUsuario = useMutation({
         mutationFn: crearUsuario,
@@ -33,50 +36,15 @@ const BotonAgregarUsuario = () => {
         ultimoGradoEstudio: "",
         genero: "",
         telefono: "",
-        roles: []
+        rol: ""
     })
 
-    const { nombre, primerApellido, segundoApellido, fechaNac, curp, correo, contrasenia, ultimoGradoEstudio, genero, telefono, roles } = formularioUsuario
+    const { nombre, primerApellido, segundoApellido, fechaNac, curp, correo, contrasenia, ultimoGradoEstudio, genero, telefono, rol } = formularioUsuario
 
     const handlerChangeFormUsuario = (e) => {
         setFormularioUsuario({
             ...formularioUsuario,
             [e.target.name]: e.target.value
-        })
-    }
-
-    const handlerRolesUsuario = () => {
-        let isCheckedCliente = document.getElementById('cliente').checked;
-        let isCheckedStaff = document.getElementById('staff').checked;
-        let isCheckedAdministrador = document.getElementById('administrador').checked;
-
-        let arregloRoles = []
-
-        if (isCheckedCliente && !arregloRoles.includes("cliente")) {
-            arregloRoles.push("cliente")
-        }
-        if (!isCheckedCliente && arregloRoles.includes("cliente")) {
-            arregloRoles = arregloRoles.filter((rol) => rol != "cliente")
-        }
-
-
-        if (isCheckedStaff && !arregloRoles.includes("staff")) {
-            arregloRoles.push("staff")
-        }
-        if (!isCheckedStaff && arregloRoles.includes("staff")) {
-            arregloRoles = arregloRoles.filter((rol) => rol != "staff")
-        }
-
-        if (isCheckedAdministrador && !arregloRoles.includes("administrador")) {
-            arregloRoles.push("administrador")
-        }
-        if (!isCheckedAdministrador && arregloRoles.includes("administrador")) {
-            arregloRoles = arregloRoles.filter((rol) => rol != "administrador")
-        }
-
-        setFormularioUsuario({
-            ...formularioUsuario,
-            roles: arregloRoles
         })
     }
 
@@ -95,7 +63,7 @@ const BotonAgregarUsuario = () => {
             ultimoGradoEstudio: "",
             genero: "",
             telefono: "",
-            roles: []
+            rol: ""
         })
 
         let btnCancelarUsuario = document.getElementById("btnCancelarUsuario");
@@ -104,10 +72,6 @@ const BotonAgregarUsuario = () => {
 
     const handlerSubmitFormUsuario = async (e) => {
         e.preventDefault();
-        handlerRolesUsuario();
-
-        if (roles.length == 0) return Swal.fire({ title: "Guardar usuario", text: "Es necesario seleccionar por lo menos 1 tipo de rol para el usuario", icon: "warning" });
-
         const usuario = formularioUsuario
         useCrearUsuario.mutate({ token, usuario })
     }
@@ -202,21 +166,22 @@ const BotonAgregarUsuario = () => {
                                 </div>
 
                                 <div className="mb-3">
-                                    <label>Roles</label>
-                                    <div className="form-check">
-                                        <input className="form-check-input" type="checkbox" value="cliente" id="cliente" />
-                                        <label className="form-check-label">Cliente</label>
-                                    </div>
+                                    <label>Rol</label>
+                                    <select name="rol" value={rol} onChange={(e) => handlerChangeFormUsuario(e)} id="rol" className="form-select">
+                                        <option value="">Selecciona una de las opciones</option>
+                                        <option value="cliente">Cliente</option>
+                                        <option value="staff">Staff</option>
 
-                                    <div className="form-check">
-                                        <input className="form-check-input" type="checkbox" value="staff" id="staff" />
-                                        <label className="form-check-label">Staff</label>
-                                    </div>
+                                        {
+                                            usuario.roles.includes("administrador") ? 
+                                            <option value="administrador">Administrador</option>
+                                            :
+                                            <></>
+                                        }
 
-                                    <div className="form-check">
-                                        <input className="form-check-input" type="checkbox" value="administrador" id="administrador" />
-                                        <label className="form-check-label">Administrador</label>
-                                    </div>
+                                        
+                                    </select>
+
                                 </div>
 
                             </form>

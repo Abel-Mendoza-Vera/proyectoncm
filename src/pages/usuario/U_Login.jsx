@@ -43,7 +43,9 @@ const U_Login = () => {
 
     e.preventDefault();
     try {
-      const { acceso } = await login(correo, contrasenia)
+      const result = await login(correo, contrasenia)
+
+      const { acceso } = result.data
 
       Swal.fire({
         title: "Iniciar sesión",
@@ -56,12 +58,20 @@ const U_Login = () => {
       navigate("/perfil");
 
     } catch (error) {
+
+      if(error.response.status == 401){
+        return Swal.fire({
+          title: "Iniciar sesión",
+          text: "El correo o contraseña son incorrectos.",
+          icon: "error",
+        })  
+      }
+
       Swal.fire({
         title: "Iniciar sesión",
-        text: "Usuario o contraseña incorrectos, intentelo de nuevo",
+        text: error.response.data.mensaje,
         icon: "error",
-        timer: 1500,
-        timerProgressBar: true
+        
       })
     }
 

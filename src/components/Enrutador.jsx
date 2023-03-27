@@ -22,7 +22,6 @@ import { ProtectedRoute } from './ProtectedRoute'
 import U_Curso from '../pages/usuario/U_Curso'
 import U_Leccion from '../pages/usuario/U_Leccion'
 import C_Carrito from '../pages/cliente/C_Carrito'
-import A_Cuestionario from './cuestionario/A_Cuestionario'
 import A_Compras from '../pages/admin/A_Compras'
 
 
@@ -70,7 +69,7 @@ const Enrutador = () => {
                     <Route path='certificaciones' element={ <C_Certificaciones/> } />
 
                     <Route path='curso/:idCurso' element={ <C_Curso/> } />
-                    <Route path='curso/leccion/:idCurso/:nombreCurso/:idLeccion/:idRelacion' element={ <C_Leccion/> } />
+                    <Route path='curso/leccion/:idCurso/:idLeccion/:idRelacion' element={ <C_Leccion/> } />
                     
                     <Route path='examen' element={ <C_Examen/> } />
 
