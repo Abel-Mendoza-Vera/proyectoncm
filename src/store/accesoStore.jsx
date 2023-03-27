@@ -16,12 +16,12 @@ export const useAccesoStore = create( persist(
             })
 
             if(result.status != 200){
-                return result.data;
+                return result;
             }
 
             set( (state) => ({ token: result.data.token, acceso: result.data.acceso }) )
 
-            return result.data;
+            return result;
 
         },
 

@@ -1,5 +1,4 @@
 import { useParams, Navigate, useNavigate } from "react-router-dom"
-import AgregarAlCarrito from "../../components/carrito/AgregarAlCarrito"
 import { useObtenerCursoPorId } from "../../hooks/useCurso"
 import { useObtenerLeccion } from "../../hooks/useLeccion"
 import { useObtenerArchivos, useObtenerArchivoPorLeccion } from "../../hooks/useArchivo"
@@ -13,7 +12,7 @@ import BotonCuestionario from "../../components/clienteLeccion/BotonCuestionario
 
 const C_Leccion = () => {
 
-  const { idCurso, nombreCurso, idLeccion, idRelacion } = useParams()
+  const { idCurso, idLeccion, idRelacion } = useParams()
   const { acceso, token, usuario } = useAccesoStore((state) => ({
     acceso: state.acceso,
     token: state.token,
@@ -33,7 +32,7 @@ const C_Leccion = () => {
   const videoLeccion = archivos.find((archivo) => archivo.idArchivo == leccion.idVideo)
 
   const irLeccion = (leccionId) => {
-    navigation(`/cliente/curso/leccion/${idCurso}/${nombreCurso}/${leccionId}/${idRelacion}`)
+    navigation(`/cliente/curso/leccion/${idCurso}/${leccionId}/${idRelacion}`)
   }
 
   let finalizado = false;
@@ -95,21 +94,25 @@ const C_Leccion = () => {
 
                 if (califCurso.length == 0 && index == 0) return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
 
+                if (califCurso.length == 0 && index > 0) return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >Lección {index + 1}: {leccion.nombre}</button>
+
                 if (index <= califCurso.length) {
-                  return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
 
+                  if (index != califCurso.length) {
+                    return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
+                  }
 
+                  let c = califCurso[index - 1]
+
+                  if (c.calificacion >= 8) {
+                    return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
+                  } else {
+                    return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >Lección {index + 1}: {leccion.nombre}</button>
+                  }
                 }
 
-                let c = califCurso[califCurso.length - 1]
+                return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >Lección {index + 1}: {leccion.nombre}</button>
 
-                if (c.calificacion >= 8) {
-                  return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
-                }
-
-                else {
-                  return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >Lección {index + 1}: {leccion.nombre}</button>
-                }
 
 
               })

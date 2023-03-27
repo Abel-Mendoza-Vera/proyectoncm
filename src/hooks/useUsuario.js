@@ -30,7 +30,7 @@ export const crearUsuario = async ({token, usuario}) => {
         imagen: usuario.imagen,
         correo: usuario.correo,
         contrasenia: usuario.contrasenia,
-        roles: usuario.roles
+        roles: [usuario.rol]
     }, {
         headers: { "x-access-token": token }
     });

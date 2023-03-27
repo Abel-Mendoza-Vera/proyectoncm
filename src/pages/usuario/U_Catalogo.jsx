@@ -53,7 +53,12 @@ const U_Catalogo = () => {
                         listaCursos.length ?
                             listaCursos.map((curso) => {
                                 let archivo = archivos.find((item) => item.idArchivo == curso.idMiniatura)
-                                return <Tarjeta key={curso.idCurso} curso={curso} archivo={archivo} />
+                                if(curso.estatus == 0){
+                                    return <></>
+                                }
+                                else{
+                                    return <Tarjeta key={curso.idCurso} curso={curso} archivo={archivo} />
+                                }
                             })
                             :
                             <h1 className="my-5">No Se Ha Encontrado Dicho Curso</h1>
