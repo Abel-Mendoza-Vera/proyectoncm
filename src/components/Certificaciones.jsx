@@ -63,7 +63,7 @@ const Certificaciones = () => {
                             {
                                 data.length == 0 ?
                                     <div className="alert alert-info text-center" role="alert">
-                                        <h3>No se encontro nignun certificado</h3>
+                                        <h3>No se ha encontrado niguna certificación</h3>
                                     </div>
                                     :
                                     data.map((item) => {
