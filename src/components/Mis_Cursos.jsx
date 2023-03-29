@@ -57,6 +57,64 @@ const Mis_Cursos = () => {
                 </ul>
             </div>
 
+            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Instrucciones</button>
+
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered modal-lg">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Proceso de Pago</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form>
+
+                                <div className="container">
+                                    <div className="row gutters">
+                                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div className="card h-100">
+                                                <div className="card-body">
+                                                    <div className="row gutters">
+                                                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                            <h4 className="mb-2 text-primary text-center">Instrucciones</h4>
+                                                        </div>
+                                                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                                                            <div>
+                                                                <h6 className="mb-2 text-primary">Paso 1</h6>
+                                                                <p> Para realizar el pago es necesario realizar una transferencia al siguiente número de cuenta:</p>
+                                                                <h6>Número de Cuenta BBVA: 123 456 178 123</h6>
+                                                            </div>
+                                                            <div>
+                                                                <h6 className="mb-2 text-primary">Paso 2</h6>
+                                                                <p>Una vez realizado el pago es necesario enviar un correo solicitando los codigos de acceso a el/los cursos que adquiriste adjuntando la foto del comprobante y tu numero de cliente al siguiente correo:</p>
+
+
+                                                                <a href="mailto:hola@novatec-consultores.com?" target="_blank" className='text-primary'>hola@novatec-consultores.com</a>
+                                                            </div><br />
+                                                            <div>
+                                                                <h6 className="mb-2 text-primary">Paso 3</h6>
+                                                                <p>Una vez que se te envien el/los codigos de acceso dirigete a la seccion "Mis cursos" donde podras habilitar el/los cursos.</p>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" id="cerrarModal" className="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div className="container-fluid" >
                 <div className="row mt-3 justify-content-end">
@@ -85,6 +143,7 @@ const Mis_Cursos = () => {
                     </div>
                 </div>
             </div>
+
             
         </div>
     )

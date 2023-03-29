@@ -134,14 +134,17 @@ const TarjetaMisCursos = ({ curso, archivo }) => {
 
                     </div>
 
+
                     <div className="card-footer">
                         <div className="d-flex justify-content-end">
                             {
                                 !curso.autorizado ?
-                                    <ModalActivarCurso curso={curso} />
+                                    <ModalActivarCurso curso={curso}/>
                                     :
                                     <button className='btn btn-primary btn-sm' onClick={irAlCurso}>Continuar</button>
-                            }
+                                
+                          }
+                            
                         </div>
                     </div>
                 </div>
