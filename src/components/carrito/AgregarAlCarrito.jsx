@@ -34,14 +34,14 @@ const AgregarAlCarrito = ({ small = false, blanco = false, idCurso }) => {
     <AgregarAlCarritoCliente small = { small } blanco = { blanco } idCurso = { idCurso } />
     :
     small ?
-    <button onClick={alertaNoEsCliente} className={blanco ? 'btn btn-light btn-sm' : 'btn btn-primary btn-sm'} ><BsCartPlusFill /> Agregar al carrito</button>
+    <button onClick={alertaNoEsCliente} className={blanco ? 'btn btn-light btn-sm' : 'btn btn-primary btn-sm'} ><BsCartPlusFill /> Agregar </button>
     :
-    <button onClick={alertaNoEsCliente} className={blanco ? 'btn btn-light' : 'btn btn-primary'} ><BsCartPlusFill size="1.5rem" /> Agregar al carrito</button>
+    <button onClick={alertaNoEsCliente} className={blanco ? 'btn btn-light' : 'btn btn-primary'} ><BsCartPlusFill size="1.5rem" /> Agregar </button>
     :
     small ?
-    <button onClick={irLogin} className={blanco ? 'btn btn-light btn-sm' : 'btn btn-primary btn-sm'} ><BsCartPlusFill /> Agregar al carrito</button>
+    <button onClick={irLogin} className={blanco ? 'btn btn-light btn-sm' : 'btn btn-primary btn-sm'} ><BsCartPlusFill /> Agregar </button>
     :
-    <button onClick={irLogin} className={blanco ? 'btn btn-light' : 'btn btn-primary'} ><BsCartPlusFill size="1.5rem" /> Agregar al carrito</button>
+    <button onClick={irLogin} className={blanco ? 'btn btn-light' : 'btn btn-primary'} ><BsCartPlusFill size="1.5rem" /> Agregar</button>
   
 }
 

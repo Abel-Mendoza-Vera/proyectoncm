@@ -6,44 +6,46 @@ import AgregarAlCarrito from '../carrito/AgregarAlCarrito';
 
 const Tarjeta = ({ curso, archivo }) => {
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    const irAlCurso = () => {
-        navigate(`/curso/${curso.idCurso}`)
-    }
+  const irAlCurso = () => {
+    navigate(`/curso/${curso.idCurso}`)
+  }
 
-    return (
-        <div className="container">
-        <section className="text-center text-md-start">
-          <h4 className="mb-5"><strong> </strong></h4>
-
-          <div className="row">
-            <div className="col-md-4 mb-4">
-              <div className="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light" style={{ width: "18rem" }}>
-                <img height="190px" width="290px" src={curso.idMiniatura != 0 ? archivo.url : imgCurso} onClick={irAlCurso} style={{ cursor: "pointer" }} className="img-fluid" />
-                <a href="#!">
-                  <div className="mask" style={{ backgroundcolor: "rgba(251, 251, 251, 0.15)" }}></div>
-                </a>
+  return (
+    <div className="container h-100 py-5">
+      <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="card rounded-3 mb-4 text-center">
+            <div className="card-body p-4">
+              <div className="row d-flex justify-content-between align-items-center">
+                <div className="col-md-3 col-lg-3 col-xl-3">
+                  <p className="lead fw-bold mb-2">{curso.nombre}</p>
+                </div><hr />
+                <div className="col-md-2 col-lg-2 col-xl-2">
+                  <img height="190px" width="290px" src={curso.idMiniatura != 0 ? archivo.url : imgCurso}
+                    onClick={irAlCurso} style={{ cursor: "pointer" }}
+                    className="img-fluid rounded-3" alt="Cotton T-shirt" />
+                </div>
+                <div className="col-md-4 col-lg-4 col-xl-4">
+                  <p className="lead fw-normal mb-4">Duración: {curso.duracion} horas</p>
+                </div>
+                <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                  <AgregarAlCarrito small idCurso={curso.idCurso} />
+                </div>
               </div>
             </div>
-
-            <div className="col-md-8 mb-4">
-              <h5>{curso.nombre}</h5>
-              <p>
-                {curso.descripcion}
-              </p>
-
-              <AgregarAlCarrito small idCurso={curso.idCurso} />
-            </div>
-          </div>
-
-        
-
-          
-        </section>
+        </div>
       </div>
+    </div>
 
-    )
+
+
+
+
+
+
+
+  )
 }
 
 export default Tarjeta
