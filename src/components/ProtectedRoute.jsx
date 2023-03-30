@@ -12,7 +12,9 @@ export const ProtectedRoute = ({ rol, children }) => {
         return <Navigate to="/iniciar-sesion" replace />
     }
 
-    if(!usuario.roles.includes(rol)){
+    if(rol == "staff" && usuario.roles.includes("administrador")) return children ? children : <Outlet />;
+
+    if(!usuario.roles.includes(rol) ){
         return <Navigate to="/" replace />
     }
 

@@ -1,5 +1,5 @@
 
-const urlBase = "http://localhost:3000/api"
+const urlBase = "https://novatecbackend-production.up.railway.app/api"
 
 export const urlCursos = `${urlBase}/curso`
 export const urlLecciones = `${urlBase}/leccion`
