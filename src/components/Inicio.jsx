@@ -7,22 +7,11 @@ import { useState } from "react"
 const Inicio = () => {
   const { data: cursos, isLoading: isLoadingCursos } = useObtenerCursos()
   const { data: archivos, isLoading: isLoadingArchivos } = useObtenerArchivos();
-  const [buscadorCurso, setBuscadorCurso] = useState("")
 
   if (isLoadingCursos || isLoadingArchivos) return < Cargando />
 
-  const onChangeBuscadorCurso = (e) => {
-      setBuscadorCurso(e.target.value)
-  }
+  let listaCursos = cursos.filter((curso) => curso.estatus == 1)
 
-  let listaCursos = cursos
-
-  if (!buscadorCurso) {
-      listaCursos = cursos
-  }
-  else {
-      listaCursos = cursos.filter((curso) => curso.nombre.toLowerCase().includes(buscadorCurso.toLowerCase()))
-  }
   return (
     <>
       <div className='container-fluid'>
@@ -34,7 +23,7 @@ const Inicio = () => {
           </div>
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img src="https://cssslider.com/sliders/demo-10/data1/images/1.jpg" className="d-block w-100" height="250px" alt="Slide 1"/>
+              <img src="https://cssslider.com/sliders/demo-10/data1/images/1.jpg" className="d-block w-100" height="250px" alt="Slide 1" />
             </div>
             <div className="carousel-item">
               <img src="https://cssslider.com/sliders/demo-10/data1/images/3.jpg" className="d-block w-100" height="250px" alt="Slide 2" />
@@ -55,20 +44,24 @@ const Inicio = () => {
         </div>
       </div>
       <div className="container-fluid mt-3 justify-content-center">
-                <div className='row mt-3 row-cols-auto g-3 mx-auto justify-content-start' >
-                    {
-                        listaCursos.length ?
-                            listaCursos.map((curso) => {
-                                let archivo = archivos.find((item) => item.idArchivo == curso.idMiniatura)
-                                return <TarjetaCursosHome key={curso.idCurso} curso={curso} archivo={archivo} />
-                            })
-                            :
-                            <h1 className="my-5">No Se Ha Encontrado Dicho Curso</h1>
-                    }
-                </div>
-            </div>
+        <div className='row mt-3 row-cols-auto g-3 mx-auto justify-content-start' >
+          {
+            listaCursos.length ?
+              listaCursos.map((curso, index) => {
+                
+                if (index < 3) {
+                  let archivo = archivos.find((item) => item.idArchivo == curso.idMiniatura)
+                  return <TarjetaCursosHome key={curso.idCurso} curso={curso} archivo={archivo} />
+                }
+                return <></>
+              })
+              :
+              <h1 className="my-5">No Se Ha Encontrado Dicho Curso</h1>
+          }
+        </div>
+      </div>
 
-      
+
     </>
   )
 }
