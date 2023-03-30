@@ -1,6 +1,6 @@
 import ItemArchivoByLeccion from './ItemArchivoByLeccion'
 
-const ListaArchivosByLeccion = ({ archivosByLeccion, leccionId, cursoNombre, leccionNombre }) => {
+const ListaArchivosByLeccion = ({ archivosByLeccion, leccionId, cursoId }) => {
 
     return (
         <div className="card mt-4" style={{ height: "300px" }}>
@@ -13,7 +13,7 @@ const ListaArchivosByLeccion = ({ archivosByLeccion, leccionId, cursoNombre, lec
                 {
                     archivosByLeccion.map((item) => {
                         return (
-                            <ItemArchivoByLeccion key={item.idArchivo} archivo={item} leccionId={leccionId} cursoNombre={cursoNombre} leccionNombre={leccionNombre} />
+                            <ItemArchivoByLeccion key={item.idArchivo} archivo={item} leccionId={leccionId} cursoId={cursoId} />
                         )
                     })
 

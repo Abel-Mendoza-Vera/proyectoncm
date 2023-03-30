@@ -7,7 +7,7 @@ import A_Archivo from "../../components/archivo/A_Archivo"
 import { useObtenerLeccion } from '../../hooks/useLeccion'
 
 const A_Lecciones = () => {
-  let { cursoNombre, leccionNombre, leccionId } = useParams()
+  let { cursoId, leccionId } = useParams()
 
   const { data, isLoading } = useObtenerLeccion(leccionId);
 
@@ -17,7 +17,7 @@ const A_Lecciones = () => {
 
   return (
     <>
-      <A_DetalleLeccion leccion={data} cursoNombre={cursoNombre} />
+      <A_DetalleLeccion leccion={data} cursoId={cursoId} />
 
       <div className="container my-5">
         <div className="row row-2 gx-5">
@@ -27,7 +27,7 @@ const A_Lecciones = () => {
           </div>
 
           <div className="col-12 col-md-6">
-            <A_Archivo leccionId={leccionId} cursoNombre={cursoNombre} leccionNombre={leccionNombre} />
+            <A_Archivo leccionId={leccionId} cursoId={cursoId} />
           </div>
 
         </div>

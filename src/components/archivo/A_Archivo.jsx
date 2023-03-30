@@ -3,7 +3,7 @@ import ListaArchivosByLeccion from './ListaArchivosByLeccion'
 
 import { useObtenerArchivoPorLeccion } from '../../hooks/useArchivo'
 
-const A_Archivo = ({ leccionId, cursoNombre, leccionNombre }) => {
+const A_Archivo = ({ leccionId, cursoId }) => {
 
     const { data, isLoading } = useObtenerArchivoPorLeccion(leccionId)
 
@@ -17,10 +17,10 @@ const A_Archivo = ({ leccionId, cursoNombre, leccionNombre }) => {
             <h3><strong className="me-4">Archivos</strong></h3>
 
             {/** Boton para agregar un archivo y alert */}
-            <FormularioAgregarArchivoLeccion numArchivosByLeccion={data.length} leccionId={leccionId} cursoNombre={cursoNombre} leccionNombre={leccionNombre} />
+            <FormularioAgregarArchivoLeccion numArchivosByLeccion={data.length} leccionId={leccionId} cursoId={cursoId}  />
 
             {/** Listado de archivos de la leccion */}
-            <ListaArchivosByLeccion archivosByLeccion={data} leccionId={leccionId} cursoNombre={cursoNombre} leccionNombre={leccionNombre} />
+            <ListaArchivosByLeccion archivosByLeccion={data} leccionId={leccionId} cursoId={cursoId} />
             
         </>
     )

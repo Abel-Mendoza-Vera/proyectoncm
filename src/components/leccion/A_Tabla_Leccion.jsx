@@ -3,7 +3,7 @@ import A_Registro_Leccion from "./A_Registro_Leccion"
 
 import { useObtenerLeccionesPorCurso } from "../../hooks/useLeccion"
 
-const A_Tabla_Leccion = ({ cursoId, cursoNombre }) => {
+const A_Tabla_Leccion = ({ cursoId }) => {
 
     const { data ,isLoading } = useObtenerLeccionesPorCurso(cursoId)
 
@@ -58,7 +58,7 @@ const A_Tabla_Leccion = ({ cursoId, cursoNombre }) => {
 
                                 listaLecciones.map((leccion) => {
                                     return (
-                                        <A_Registro_Leccion key={leccion.idLeccion} leccion={leccion} cursoNombre={cursoNombre} />
+                                        <A_Registro_Leccion key={leccion.idLeccion} leccion={leccion} cursoId={cursoId} />
                                     )
                                 })
 

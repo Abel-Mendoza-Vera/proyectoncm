@@ -6,11 +6,11 @@ import BotonAgregarLeccion from "../../components/leccion/BotonAgregarLeccion"
 
 const A_CursosEditar = () => {
 
-  let { cursoId, cursoNombre } = useParams()
+  let { cursoId } = useParams()
 
   return (
     <>
-      <A_DetalleCurso cursoId={cursoId} cursoNombre={cursoNombre} />
+      <A_DetalleCurso cursoId={cursoId} />
       <div className="container">
         <hr />
 
@@ -20,7 +20,7 @@ const A_CursosEditar = () => {
         </h3>
 
         {/** Tabla */}
-        <A_Tabla_Leccion cursoId={cursoId} cursoNombre={cursoNombre} />
+        <A_Tabla_Leccion cursoId={cursoId}/>
       </div>
 
     </>

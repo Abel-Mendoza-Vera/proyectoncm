@@ -57,8 +57,8 @@ const Enrutador = () => {
                 {/* Rutas administrativas */}
                 <Route path='/admin/*' element={<ProtectedRoute rol="staff" />} >
                     <Route path='cursos' element={ <A_Cursos/> } />
-                    <Route path='cursos_editar/:cursoId/:cursoNombre' element={ <A_CursosEditar/> } />
-                    <Route path='lecciones/:cursoNombre/:leccionNombre/:leccionId' element={ <A_Lecciones/> } />
+                    <Route path='cursos_editar/:cursoId/' element={ <A_CursosEditar/> } />
+                    <Route path='lecciones/:cursoId/:leccionId' element={ <A_Lecciones/> } />
                     <Route path='usuarios' element={ <A_Usuarios/> } />
                     <Route path='compras' element={ <A_Compras/> } />
                 </Route>

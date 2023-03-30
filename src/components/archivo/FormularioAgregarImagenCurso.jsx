@@ -11,7 +11,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { modificarCursoImagen } from '../../hooks/useCurso'
 import { crearArchivo, modificarArchivo } from '../../hooks/useArchivo'
 
-const FormularioAgregarArchivoCurso = ({ idCurso, idImagen, objImagen, cursoNombre }) => {
+const FormularioAgregarArchivoCurso = ({ idCurso, idImagen, objImagen }) => {
 
     const queryClient = useQueryClient();
     const token = useAccesoStore((state) => state.token)
@@ -79,7 +79,7 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idImagen, objImagen, cursoNomb
             return;
         }
 
-        const storageRef = ref(storage, `/cursos/${cursoNombre}/imagen/${file.name}`)
+        const storageRef = ref(storage, `/cursos/${idCurso}/imagen/${file.name}`)
         const uploadTask = uploadBytesResumable(storageRef, file)
 
         uploadTask.on("state_changed",
@@ -110,7 +110,7 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idImagen, objImagen, cursoNomb
 
                         if (objImagen.nombre != file.name) {
 
-                            const deleteRef = ref(storage, `/cursos/${cursoNombre}/imagen/${objImagen.nombre}`)
+                            const deleteRef = ref(storage, `/cursos/${idCurso}/imagen/${objImagen.nombre}`)
 
                             deleteObject(deleteRef).then(async () => {
                                 let archivo = {

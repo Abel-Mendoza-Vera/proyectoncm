@@ -3,7 +3,7 @@ import FormularioAgregarVideoLeccion from '../archivo/FormularioAgregarVideoLecc
 
 import { useObtenerArchivos } from "../../hooks/useArchivo"
 
-const A_DetalleLeccion = ({ leccion, cursoNombre }) => {
+const A_DetalleLeccion = ({ leccion, cursoId }) => {
 
 
     const { data, isLoading } = useObtenerArchivos()
@@ -14,7 +14,6 @@ const A_DetalleLeccion = ({ leccion, cursoNombre }) => {
 
     let videoLeccion = data.find((item) => item.idArchivo == leccion.idVideo)
 
-    console.log(videoLeccion);
     return (
         <>
             <div className='container mt-3'>
@@ -42,7 +41,7 @@ const A_DetalleLeccion = ({ leccion, cursoNombre }) => {
                                         :
                                         <div className="alert alert-warning" role="alert"><p>No se ha agregado un video para esta lección.</p></div>
                                 }
-                                <FormularioAgregarVideoLeccion idLeccion={leccion.idLeccion} idVideo={leccion.idVideo} objVideo={videoLeccion} cursoNombre={cursoNombre} leccionNombre={leccion.nombre} />
+                                <FormularioAgregarVideoLeccion idLeccion={leccion.idLeccion} idVideo={leccion.idVideo} objVideo={videoLeccion} cursoId={cursoId} />
                             </div>
                         </div>
 

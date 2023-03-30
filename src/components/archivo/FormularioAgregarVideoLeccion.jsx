@@ -10,7 +10,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { modificarArchivo } from '../../hooks/useArchivo'
 import { modificarLeccionVideo } from '../../hooks/useLeccion'
 
-const FormularioAgregarVideoLeccion = ({ idLeccion, idVideo, objVideo, cursoNombre, leccionNombre }) => {
+const FormularioAgregarVideoLeccion = ({ idLeccion, idVideo, objVideo, cursoId }) => {
 
     const token = useAccesoStore((state) => state.token)
     const queryClient = useQueryClient()
@@ -66,7 +66,7 @@ const FormularioAgregarVideoLeccion = ({ idLeccion, idVideo, objVideo, cursoNomb
             return;
         }
 
-        const storageRef = ref(storage, `/cursos/${cursoNombre}/lecciones/${leccionNombre}/video/${file.name}`)
+        const storageRef = ref(storage, `/cursos/${cursoId}/lecciones/${idLeccion}/video/${file.name}`)
         const uploadTask = uploadBytesResumable(storageRef, file)
 
         uploadTask.on("state_changed",
@@ -97,7 +97,7 @@ const FormularioAgregarVideoLeccion = ({ idLeccion, idVideo, objVideo, cursoNomb
 
                         if (objVideo.nombre != file.name) {
 
-                            const deleteRef = ref(storage, `/cursos/${cursoNombre}/lecciones/${leccionNombre}/video/${objVideo.nombre}`)
+                            const deleteRef = ref(storage, `/cursos/${cursoId}/lecciones/${idLeccion}/video/${objVideo.nombre}`)
 
                             deleteObject(deleteRef).then(async () => {
                                 let archivo = {

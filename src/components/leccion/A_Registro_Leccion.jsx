@@ -5,7 +5,7 @@ import { useAccesoStore } from "../../store/accesoStore"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cambiarEstadoLeccion } from "../../hooks/useLeccion"
 
-const A_Registro_Leccion = ({ leccion, cursoNombre }) => {
+const A_Registro_Leccion = ({ leccion, cursoId }) => {
 
     const navigate = useNavigate()
     const token = useAccesoStore((state) => state.token)
@@ -52,7 +52,7 @@ const A_Registro_Leccion = ({ leccion, cursoNombre }) => {
     }
 
     const editar_leccion = () => {
-        navigate(`/admin/lecciones/${cursoNombre}/${leccion.nombre}/${leccion.idLeccion}`) 
+        navigate(`/admin/lecciones/${cursoId}/${leccion.idLeccion}`) 
     }
 
     return (

@@ -9,7 +9,7 @@ import { useAccesoStore } from '../../store/accesoStore'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { eliminarArchivo, eliminarArchivoLeccion } from '../../hooks/useArchivo'
 
-const ItemArchivoByLeccion = ({ archivo, leccionId, cursoNombre, leccionNombre }) => {
+const ItemArchivoByLeccion = ({ archivo, leccionId, cursoId }) => {
 
     const token = useAccesoStore((state) => state.token)
     const queryClient = useQueryClient()
@@ -41,7 +41,7 @@ const ItemArchivoByLeccion = ({ archivo, leccionId, cursoNombre, leccionNombre }
 
     const handlerDeteleArchivo = () => {
 
-        const desertRef = ref(storage, `/cursos/${cursoNombre}/lecciones/${leccionNombre}/archivos/${archivo.nombre}`);
+        const desertRef = ref(storage, `/cursos/${cursoId}/lecciones/${leccionId}/archivos/${archivo.nombre}`);
 
 
         const swalWithBootstrapButtons = Swal.mixin({

@@ -8,7 +8,7 @@ import { useAccesoStore } from '../../store/accesoStore'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { crearArchivoLeccion } from '../../hooks/useArchivo'
 
-const FormularioAgregarArchivoLeccion = ({ numArchivosByLeccion, leccionId, cursoNombre, leccionNombre }) => {
+const FormularioAgregarArchivoLeccion = ({ numArchivosByLeccion, leccionId, cursoId }) => {
 
     const token = useAccesoStore((state) => state.token)
     const queryClient = useQueryClient()
@@ -49,7 +49,7 @@ const FormularioAgregarArchivoLeccion = ({ numArchivosByLeccion, leccionId, curs
             return;
         }
 
-        const storageRef = ref(storage, `/cursos/${cursoNombre}/lecciones/${leccionNombre}/archivos/${file.name}`)
+        const storageRef = ref(storage, `/cursos/${cursoId}/lecciones/${leccionId}/archivos/${file.name}`)
         const uploadTask = uploadBytesResumable(storageRef, file)
 
         uploadTask.on("state_changed",

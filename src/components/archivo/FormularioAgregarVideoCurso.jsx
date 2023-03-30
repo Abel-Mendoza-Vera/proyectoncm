@@ -11,7 +11,7 @@ import { modificarCursoVideo } from '../../hooks/useCurso'
 import { crearArchivo, modificarArchivo } from '../../hooks/useArchivo'
 
 
-const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo, cursoNombre }) => {
+const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo }) => {
 
     const queryClient = useQueryClient();
     const token = useAccesoStore((state) => state.token)
@@ -79,7 +79,7 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo, cursoNombre
             return;
         }
 
-        const storageRef = ref(storage, `/cursos/${cursoNombre}/video/${file.name}`)
+        const storageRef = ref(storage, `/cursos/${idCurso}/video/${file.name}`)
         const uploadTask = uploadBytesResumable(storageRef, file)
 
         uploadTask.on("state_changed",
@@ -110,7 +110,7 @@ const FormularioAgregarArchivoCurso = ({ idCurso, idVideo, objVideo, cursoNombre
 
                         if (objVideo.nombre != file.name) {
 
-                            const deleteRef = ref(storage, `/cursos/${cursoNombre}/video/${objVideo.nombre}`)
+                            const deleteRef = ref(storage, `/cursos/${idCurso}/video/${objVideo.nombre}`)
 
                             deleteObject(deleteRef).then(async () => {
                                 let archivo = {
