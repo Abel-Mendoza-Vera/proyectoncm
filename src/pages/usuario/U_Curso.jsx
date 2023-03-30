@@ -26,7 +26,7 @@ const U_Curso = () => {
     let archivoMiniatura = archivos.find((archivo) => archivo.idArchivo == curso.idMiniatura)
 
     const irLeccion = (leccionId) => {
-        navigation(`/curso/leccion/${idCurso}/${curso.nombre}/${leccionId}`)
+        navigation(`/curso/leccion/${idCurso}/${leccionId}`)
     }
 
 
@@ -95,7 +95,8 @@ const U_Curso = () => {
                             :
                             leccionesCurso.map((leccion, index) => {
 
-                                return <div key={leccion.idLeccion} className="list-group-item" >
+                                if(leccion.estatus == 1){
+                                    return <div key={leccion.idLeccion} className="list-group-item" >
                                     <div className="d-flex w-100 justify-content-between">
                                         <h5 className="mb-1">Lección {index + 1}: {leccion.nombre}</h5>
                                         {
@@ -107,6 +108,8 @@ const U_Curso = () => {
                                     </div>
                                     <p className="mb-1 mt-1">{leccion.informacion}</p>
                                 </div>
+                                }
+                                return <></>
 
                             })
                     }

@@ -13,8 +13,8 @@ import BotonCuestionario from "../../components/clienteLeccion/BotonCuestionario
 const C_Leccion = () => {
 
   const { idCurso, idLeccion, idRelacion } = useParams()
-  const { acceso, token, usuario } = useAccesoStore((state) => ({
-    acceso: state.acceso,
+  const { token, usuario } = useAccesoStore((state) => ({
+    
     token: state.token,
     usuario: state.usuario
   }))
@@ -35,8 +35,10 @@ const C_Leccion = () => {
     navigation(`/cliente/curso/leccion/${idCurso}/${leccionId}/${idRelacion}`)
   }
 
+  const listaLeccionesCurso = leccionesCurso.filter((leccion) => leccion.estatus == 1)
+
   let finalizado = false;
-  let auxLec = leccionesCurso[leccionesCurso.length - 1]
+  let auxLec = listaLeccionesCurso[listaLeccionesCurso.length - 1]
   if (auxLec.idLeccion == leccion.idLeccion) {
     finalizado = true;
   }
@@ -90,7 +92,7 @@ const C_Leccion = () => {
           <div className="list-group overflow-y-auto" style={{ height: "500px" }}>
             { /** Cuando tengan el mismo id se asigna la clase active */}
             {
-              leccionesCurso.map((leccion, index) => {
+              listaLeccionesCurso.map((leccion, index) => {
 
                 if (califCurso.length == 0 && index == 0) return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
 

@@ -50,7 +50,7 @@ const Enrutador = () => {
                 {/** Rutas para la vista general de los cursos */}
                 <Route path='/catalogo_cursos' element={ <U_Catalogo/> } />
                 <Route path='/curso/:idCurso' element={ <U_Curso/> } />
-                <Route path='/curso/leccion/:idCurso/:nombreCurso/:idLeccion' element={ <U_Leccion/> } />
+                <Route path='/curso/leccion/:idCurso/:idLeccion' element={ <U_Leccion/> } />
 
 
 

@@ -37,7 +37,7 @@ const ItemCertificado = ({ certificacion }) => {
     const descargar = async () => {
 
         axios({
-            url: `http://localhost:3000/api/certificacion_gem/${certificacion.idCertificacion}`,
+            url: `https://novatecbackend-production.up.railway.app/api/certificacion_gem/${certificacion.idCertificacion}`,
             method:"GET",
             headers: {"x-access-token":token},
             responseType: "arraybuffer"
@@ -80,7 +80,7 @@ const ItemCertificado = ({ certificacion }) => {
                             className="img-fluid rounded-3" alt="Cotton T-shirt" />
                     </div>
                     <div className="col-md-3 col-lg-3 col-xl-3">
-                        <p className="lead fw-normal mb-2">{usuario.nombre} {usuario.primerApellido}</p>
+                        <p className="lead fw-normal mb-2">{usuario.nombre} {usuario.primerApellido} {usuario.segundoApellido}</p>
                     </div>
                     <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                         <button type="button" onClick={() => descargar()} className="btn btn-success btn-block">Descargar</button>

@@ -11,7 +11,7 @@ import Cargando from '../../pages/Cargando'
 
 const U_Leccion = () => {
 
-    const { idCurso, nombreCurso, idLeccion } = useParams()
+    const { idCurso, idLeccion } = useParams()
     const acceso = useAccesoStore((state) => state.acceso)
     const navigation = useNavigate()
     const { data: curso, isLoading: isLoadingCurso } = useObtenerCursoPorId(idCurso)
@@ -27,7 +27,7 @@ const U_Leccion = () => {
     const videoLeccion = archivos.find((archivo) => archivo.idArchivo == leccion.idVideo)
 
     const irLeccion = (leccionId) => {
-        navigation(`/curso/leccion/${idCurso}/${nombreCurso}/${leccionId}`)
+        navigation(`/curso/leccion/${idCurso}/${leccionId}`)
     }
 
     return (
@@ -41,7 +41,7 @@ const U_Leccion = () => {
                         <video controls>
                             <source src={videoLeccion.url} />
                         </video>
-                        
+
                     </div>
                     <h4 className="mt-3" >{leccion.nombre}</h4>
 
@@ -62,7 +62,7 @@ const U_Leccion = () => {
                         <p>
                             Compra el curso "{curso.nombre}" para seguir disfrutando de su contenido.
                         </p>
-                        <AgregarAlCarrito idCurso={curso.idCurso}/>
+                        <AgregarAlCarrito idCurso={curso.idCurso} />
                     </div>
 
 
@@ -70,9 +70,14 @@ const U_Leccion = () => {
                         { /** Cuando tengan el mismo id se asigna la clase active */}
                         {
                             leccionesCurso.map((leccion, index) => {
-                                if (index > 0) return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >Lección {index + 1}: {leccion.nombre}</button>
+                                if (leccion.estatus == 1) {
 
-                                return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
+                                    if (index > 0) return <button key={leccion.idLeccion} type="button" className="list-group-item list-group-item-action" disabled >Lección {index + 1}: {leccion.nombre}</button>
+
+                                    return <button key={leccion.idLeccion} type="button" onClick={() => irLeccion(leccion.idLeccion)} className={leccion.idLeccion == idLeccion ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action"} >Lección {index + 1}: {leccion.nombre}</button>
+                                }
+
+                                return <></>
 
                             })
                         }

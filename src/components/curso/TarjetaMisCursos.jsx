@@ -69,21 +69,22 @@ const TarjetaMisCursos = ({ curso, archivo }) => {
     </div >
 
     let numTotalCalif = 0
-    let numTotalLec = lecciones.length
-    
-    for(let i = 0; i < data.length; i++){
+    let listaLecciones = lecciones.filter((leccion) => leccion.estatus == 1)
+    let numTotalLec = listaLecciones.length
+
+    for (let i = 0; i < data.length; i++) {
         let calif = data[i]
-        
-        if(calif.calificacion >= 8){
+
+        if (calif.calificacion >= 8) {
             numTotalCalif += 1
         }
-        else{
+        else {
             numTotalCalif += 0.5
         }
     }
     let progreso = (numTotalCalif / numTotalLec) * 100
     progreso = progreso.toFixed(0)
-    
+
     const mouseOver = () => {
         let divSeleccionado = document.getElementById(`curso${curso.idCurso}`)
         divSeleccionado.setAttribute("class", "col shadow-lg p-1 bg-primary bg-opacity-75 rounded")
@@ -126,11 +127,17 @@ const TarjetaMisCursos = ({ curso, archivo }) => {
                     <div className="card-body">
                         <h5 className="card-title">{curso.nombre}</h5>
 
-                        <p className='card-text'><small>Ultima conexión hace {diferencia} dias</small></p>
-
-                        <div className="progress">
-                            <div className={progreso == 100 ? "progress-bar bg-success" : "progress-bar"} role="progressbar" style={{ width: `${progreso}%` }} aria-valuenow={`${progreso}`} aria-valuemin="0" aria-valuemax="100">{progreso}%</div>
-                        </div>
+                        {
+                            !curso.autorizado ?
+                                <></>
+                                :
+                                <>
+                                    <p className='card-text'><small>Ultima conexión hace {diferencia} dias</small></p>
+                                    <div className="progress">
+                                        <div className={progreso == 100 ? "progress-bar bg-success" : "progress-bar"} role="progressbar" style={{ width: `${progreso}%` }} aria-valuenow={`${progreso}`} aria-valuemin="0" aria-valuemax="100">{progreso}%</div>
+                                    </div>
+                                </>
+                        }
 
                     </div>
 
@@ -139,12 +146,12 @@ const TarjetaMisCursos = ({ curso, archivo }) => {
                         <div className="d-flex justify-content-end">
                             {
                                 !curso.autorizado ?
-                                    <ModalActivarCurso curso={curso}/>
+                                    <ModalActivarCurso curso={curso} />
                                     :
                                     <button className='btn btn-primary btn-sm' onClick={irAlCurso}>Continuar</button>
-                                
-                          }
-                            
+
+                            }
+
                         </div>
                     </div>
                 </div>
