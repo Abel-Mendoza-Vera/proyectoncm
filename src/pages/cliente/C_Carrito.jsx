@@ -180,7 +180,11 @@ const C_Carrito = () => {
                                                             <div>
                                                                 <h6 className="mb-2 text-primary">Paso 1</h6>
                                                                 <p> Para realizar el pago es necesario realizar una transferencia al siguiente número de cuenta:</p>
-                                                                <h6>Número de Cuenta BBVA: 123 456 178 123</h6>
+                                                                <h6>Nombre: NOVUMTEC, S.C.</h6>
+                                                                <h6>Número de Cuenta BBVA: 0161929372</h6>
+                                                                <h6>Sucursal: 5018</h6>
+                                                                <h6>Cuenta CLABE: 012225001619293724</h6>
+
                                                                 <p className=" text-success ">El total a pagar es: ${total} MXN</p>
                                                             </div>
                                                             <div>

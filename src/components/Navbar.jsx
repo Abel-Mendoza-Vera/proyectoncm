@@ -45,6 +45,32 @@ const Navbar = () => {
                             acceso && usuario.roles ?
                                 <>
                                     {
+                                        usuario.roles.includes("cliente") ?
+                                            <>
+                                                <li><hr className="dropdown-divider" /></li>
+                                                <li className="nav-item">
+                                                    <Link to="/cliente/mis_cursos" className="nav-link" >Mis cursos</Link>
+
+                                                </li>
+                                            </>
+                                            : <></>
+                                    }
+                                </>
+                                :
+                                <></>
+                        }
+
+                        <li className="nav-item">
+                            <Link to="/perfil" className="nav-link" >Perfil</Link>
+                        </li>
+
+
+
+
+                        {
+                            acceso && usuario.roles ?
+                                <>
+                                    {
                                         usuario.roles.includes("staff") || usuario.roles.includes("administrador") ?
                                             <>
                                                 <li className="nav-item dropdown">
@@ -76,6 +102,14 @@ const Navbar = () => {
                                 </>
                         }
 
+                        <li><hr className="dropdown-divider" /></li>
+                        {
+                            acceso ?
+                                <li className='nav-item' ><a className="nav-link text-danger" onClick={cerrarSesion} >Cerrar sesión</a></li>
+                                :
+                                <li></li>
+                        }
+
                     </ul>
 
 
@@ -84,55 +118,15 @@ const Navbar = () => {
                         <span className="nav-item text-primary" >
                             {acceso ?
                                 <>
-                                    <div className="nav-item dropdown">
-                                        <a
-                                            className="nav-link dropdown-toggle d-flex align-items-center hidden-arrow"
-                                            href="#"
-                                            id="navbarDropdownMenuAvatar"
-                                            role="button"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
-                                            <img
-                                                src={ !usuario.imagen ? "https://th.bing.com/th/id/OIP.w2McZSq-EYWxh02iSvC3xwHaHa?pid=ImgDet&rs=1" : usuario.imagen}
-                                                className="rounded-circle"
-                                                height="25"
-                                                alt="Black and White Portrait of a Man"
-                                                loading="lazy"
-                                            />
-                                        </a>
-                                        <ul className="dropdown-menu">
+                                    <div>
 
-                                            <li className="nav-item">
-                                                <Link to="/perfil" className="nav-link" >Perfil</Link>
-                                            </li>
-                                            {
-                                                acceso && usuario.roles ?
-                                                    <>
-                                                        {
-                                                            usuario.roles.includes("cliente") ?
-                                                                <>
-                                                                    <li><hr className="dropdown-divider" /></li>
-                                                                    <li className="nav-item">
-                                                                        <Link to="/cliente/mis_cursos" className="nav-link" >Mis cursos</Link>
-
-                                                                    </li>
-                                                                </>
-                                                                : <></>
-                                                        }
-                                                    </>
-                                                    :
-                                                    <></>
-                                            }
-                                            <li><hr className="dropdown-divider" /></li>
-                                            {
-                                                acceso ?
-                                                    <li className='nav-item' ><a className="nav-link" onClick={cerrarSesion} >Cerrar sesión</a></li>
-                                                    :
-                                                    <li><Link to="/iniciar_sesion" className="nav-link" >Iniciar Sesión</Link></li>
-                                            }
-
-                                        </ul>
+                                        <img
+                                            src={!usuario.imagen ? "https://th.bing.com/th/id/OIP.w2McZSq-EYWxh02iSvC3xwHaHa?pid=ImgDet&rs=1" : usuario.imagen}
+                                            className="rounded-circle"
+                                            height="25"
+                                            alt="Black and White Portrait of a Man"
+                                            loading="lazy"
+                                        />
 
                                     </div>
 
@@ -149,17 +143,17 @@ const Navbar = () => {
                             <></>
                     }
                     {
-                        acceso && usuario.roles ? 
-                        <>
-                        {
-                            usuario.roles.includes("cliente") ? 
-                            <Link to="/cliente/carrito" className='text-dark' ><BsFillCartFill size="1.4rem" /></Link>
+                        acceso && usuario.roles ?
+                            <>
+                                {
+                                    usuario.roles.includes("cliente") ?
+                                        <Link to="/cliente/carrito" className='text-dark' ><BsFillCartFill size="1.4rem" /></Link>
+                                        :
+                                        <></>
+                                }
+                            </>
                             :
                             <></>
-                        }
-                        </>
-                        :
-                        <></>
                     }
                 </div>
             </div>
