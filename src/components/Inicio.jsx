@@ -43,8 +43,9 @@ const Inicio = () => {
           </button>
         </div>
       </div>
+
       <div className="container-fluid mt-3 justify-content-center">
-        <div className='row mt-3 row-cols-auto g-3 mx-auto justify-content-start' >
+        <div className='row mt-3 row-cols-auto g-3 mx-auto justify-content-center' >
           {
             listaCursos.length ?
               listaCursos.map((curso, index) => {
