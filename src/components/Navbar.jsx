@@ -33,7 +33,7 @@ const Navbar = () => {
                             <Link to="/" className="nav-link" >Inicio</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/catalogo_cursos" className="nav-link" >Cursos</Link>
+                            <Link to="/catalogo_cursos" className="nav-link" >Catálogo</Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/pages/Us" className="nav-link" >Nosotros</Link>
@@ -47,10 +47,13 @@ const Navbar = () => {
                                     {
                                         usuario.roles.includes("cliente") ?
                                             <>
-                                                <li><hr className="dropdown-divider" /></li>
+
                                                 <li className="nav-item">
                                                     <Link to="/cliente/mis_cursos" className="nav-link" >Mis cursos</Link>
 
+                                                </li>
+                                                <li className="nav-item">
+                                                    <Link to="/perfil" className="nav-link" >Perfil</Link>
                                                 </li>
                                             </>
                                             : <></>
@@ -59,13 +62,6 @@ const Navbar = () => {
                                 :
                                 <></>
                         }
-
-                        <li className="nav-item">
-                            <Link to="/perfil" className="nav-link" >Perfil</Link>
-                        </li>
-
-
-
 
                         {
                             acceso && usuario.roles ?

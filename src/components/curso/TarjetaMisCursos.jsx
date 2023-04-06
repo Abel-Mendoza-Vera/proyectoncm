@@ -71,9 +71,21 @@ const TarjetaMisCursos = ({ curso, archivo }) => {
     let numTotalCalif = 0
     let listaLecciones = lecciones.filter((leccion) => leccion.estatus == 1)
     let numTotalLec = listaLecciones.length
+    let listaCalif = []
+    
+    for(let j = 0; j < data.length; j++){
+        let calif = data[j]
 
-    for (let i = 0; i < data.length; i++) {
-        let calif = data[i]
+        for(let k = 0; k<listaLecciones.length; k++){
+            let lec = listaLecciones[k]
+            if(lec.idLeccion == calif.idLeccion){
+                listaCalif.push(calif)
+            }
+        }
+    }
+
+    for (let i = 0; i < listaCalif.length; i++) {
+        let calif = listaCalif[i]
 
         if (calif.calificacion >= 8) {
             numTotalCalif += 1
