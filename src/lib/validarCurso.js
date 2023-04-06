@@ -32,6 +32,25 @@ export const validarCurso = (datos) => {
     return { pasaValidacion, mensaje }
 }
 
+export const validarLeccion = (datos) => {
+
+    let pasaValidacion = true
+    mensaje = "Todo bien."
+
+    if(!validarTexto(datos.nombre, 100)){
+        pasaValidacion = false
+        mensaje = "El nombre de la lección puede tener un maximo de 100 caracteres."
+    }
+
+    if(!validarTexto(datos.informacion, 1500)){
+        pasaValidacion = false
+        mensaje = "La información de la lección puede tener un maximo de 1500 caracteres."
+    }
+
+    return { pasaValidacion, mensaje }
+
+}
+
 const validarTexto = (texto, maxCaracteres) => {
     
     let strTexto = new String(texto)
