@@ -5,6 +5,7 @@ import { MdEmail, MdPassword,MdPhone,MdOutlinePermIdentity } from 'react-icons/a
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { registrarCliente } from "../hooks/useAcceso"
+import { validarUsuario } from "../lib/validarUsuario";
 
 const Register = () => {
 
@@ -81,7 +82,24 @@ const Register = () => {
     e.preventDefault();
 
     const usuario = formularioUsuario
-    useRegistrarUsuario.mutate({ usuario })
+
+    const { pasaValidacion, mensaje } = validarUsuario(usuario)
+
+    if(pasaValidacion){
+      useRegistrarUsuario.mutate({ usuario })
+    }
+    else{
+      Swal.fire({
+        title: "Registrar Usuario",
+        text: mensaje,
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        icon: "warning",
+        iconColor: "orange"
+      })
+    }
+    
   }
 
 

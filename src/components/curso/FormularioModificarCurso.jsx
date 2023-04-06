@@ -4,6 +4,7 @@ import Swal from "sweetalert2"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { modificarCurso } from "../../hooks/useCurso"
 import { useAccesoStore } from "../../store/accesoStore"
+import { validarCurso } from "../../lib/validarCurso"
 
 const FormularioModificarCurso = ({ curso }) => {
 
@@ -39,9 +40,27 @@ const FormularioModificarCurso = ({ curso }) => {
     }
 
     const handleSave = async () => {
-        useModificarCurso.mutate({ token, id: curso.idCurso, curso: formulario })
+
+        const {pasaValidacion, mensaje} = validarCurso(formulario)
+
+        if(pasaValidacion){
+            useModificarCurso.mutate({ token, id: curso.idCurso, curso: formulario })
         let btnCerrar = document.getElementById("btnCerrarCursoM")
         btnCerrar.click();
+        }
+        else{
+            Swal.fire({
+                title: "Guardar curso", 
+                text: mensaje, 
+                icon: "warning", 
+                timer: 3000, 
+                timerProgressBar: true,
+                showConfirmButton: false,
+                iconColor: "orange"
+            })
+        }
+
+        
     }
 
 

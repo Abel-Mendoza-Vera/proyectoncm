@@ -32,11 +32,11 @@ const A_Tabla_Usuarios = () => {
         listaStaff = data.filter((usuario) => usuario.roles.includes("staff"))
     }
     else {
-        listaUsuarios = data.filter((usuario) => usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.segundoApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()))
+        listaUsuarios = data.filter((usuario) => usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()))
 
-        listaClientes = data.filter((usuario) => (usuario.roles.includes("cliente")) && (usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.segundoApellido.toLowerCase().includes(buscadorUsuario.toLowerCase())))
+        listaClientes = data.filter((usuario) => (usuario.roles.includes("cliente")) && (usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase())))
 
-        listaStaff = data.filter((usuario) => usuario.roles.includes("staff") && (usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.segundoApellido.toLowerCase().includes(buscadorUsuario.toLowerCase())))
+        listaStaff = data.filter((usuario) => usuario.roles.includes("staff") && (usuario.nombre.toLowerCase().includes(buscadorUsuario.toLowerCase()) | usuario.primerApellido.toLowerCase().includes(buscadorUsuario.toLowerCase())))
     }
 
 

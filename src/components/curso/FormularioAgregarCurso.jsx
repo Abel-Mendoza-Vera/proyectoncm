@@ -4,6 +4,7 @@ import Swal from "sweetalert2"
 import { useAccesoStore } from "../../store/accesoStore"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { crearCurso } from '../../hooks/useCurso'
+import { validarCurso } from "../../lib/validarCurso"
 
 const Formulario = () => {
 
@@ -55,7 +56,24 @@ const Formulario = () => {
     }
 
     const handleSave = async () => {
-        useCrearCurso.mutate({ token, curso: formulario })
+
+        const { pasaValidacion, mensaje } = validarCurso(formulario)
+
+        if (pasaValidacion){
+            useCrearCurso.mutate({ token, curso: formulario })
+        }
+        else{
+            Swal.fire({
+                title: "Guardar curso", 
+                text: mensaje,
+                icon: "warning",
+                iconColor: "orange",
+                timer: 3000, 
+                timerProgressBar: true,
+                showConfirmButton: false
+            })
+        }
+        
     }
 
 
@@ -104,7 +122,7 @@ const Formulario = () => {
 
                             <div className="d-flex justify-content-evenly">
                                 <button type="button" className="btn btn-danger" id="btnCerrarCurso" data-bs-dismiss="modal"><span className='material-icons'>close</span>Cerrar</button>
-                                <button onClick={handleSave} type="submit" className="btn btn-success" data-bs-dismiss="modal"><span className='material-icons'>save</span>Guardar</button>
+                                <button onClick={handleSave} type="submit" className="btn btn-success" ><span className='material-icons'>save</span>Guardar</button>
                             </div>
 
                         </div>

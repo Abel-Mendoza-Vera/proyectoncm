@@ -5,6 +5,7 @@ import Swal from "sweetalert2"
 import { useAccesoStore } from '../../store/accesoStore';
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { crearUsuario } from '../../hooks/useUsuario';
+import { validarUsuario } from "../../lib/validarUsuario";
 
 const BotonAgregarUsuario = () => {
 
@@ -50,7 +51,6 @@ const BotonAgregarUsuario = () => {
 
     const limpiar = () => {
 
-
         setFormularioUsuario({
             ...formularioUsuario,
             nombre: "",
@@ -73,7 +73,25 @@ const BotonAgregarUsuario = () => {
     const handlerSubmitFormUsuario = async (e) => {
         e.preventDefault();
         const usuario = formularioUsuario
-        useCrearUsuario.mutate({ token, usuario })
+
+        const { pasaValidacion, mensaje } = validarUsuario(usuario)
+
+        if(pasaValidacion){
+            useCrearUsuario.mutate({ token, usuario })
+        }
+        else{
+            Swal.fire({
+              title: "Guardar Usuario",
+              text: mensaje,
+              timer: 2000,
+              timerProgressBar: true,
+              showConfirmButton: false,
+              icon: "warning",
+              iconColor: "orange"
+            })
+          }
+
+        
     }
 
 
