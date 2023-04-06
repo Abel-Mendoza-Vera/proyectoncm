@@ -167,7 +167,7 @@ const Register = () => {
                 <div className="input-group mb-3">
                   <span className='input-group-text'><MdOutlinePermIdentity size="2em" /></span>
                   <div className="form-floating">
-                  <input type="text" name='curp' value={curp} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" />
+                  <input type="text" maxLength="18" name='curp' value={curp} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" />
                     <label className='text-dark'>Curp</label>
                   </div>
                 </div>
@@ -175,7 +175,7 @@ const Register = () => {
                   <div className="input-group mb-3">
                   <span className='input-group-text'><MdPhone size="2em" /></span>
                   <div className="form-floating">
-                  <input type="number" name='telefono' value={telefono} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" required />
+                  <input type="number" max="1" name='telefono' value={telefono} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" required />
                     <label className='text-dark'>Teléfono</label>
                   </div>
                 </div>
