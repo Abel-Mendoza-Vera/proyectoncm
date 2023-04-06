@@ -72,13 +72,13 @@ const TarjetaMisCursos = ({ curso, archivo }) => {
     let listaLecciones = lecciones.filter((leccion) => leccion.estatus == 1)
     let numTotalLec = listaLecciones.length
     let listaCalif = []
-    
-    for(let j = 0; j < data.length; j++){
+
+    for (let j = 0; j < data.length; j++) {
         let calif = data[j]
 
-        for(let k = 0; k<listaLecciones.length; k++){
+        for (let k = 0; k < listaLecciones.length; k++) {
             let lec = listaLecciones[k]
-            if(lec.idLeccion == calif.idLeccion){
+            if (lec.idLeccion == calif.idLeccion) {
                 listaCalif.push(calif)
             }
         }
@@ -145,9 +145,14 @@ const TarjetaMisCursos = ({ curso, archivo }) => {
                                 :
                                 <>
                                     <p className='card-text'><small>Ultima conexión hace {diferencia} dias</small></p>
-                                    <div className="progress">
-                                        <div className={progreso == 100 ? "progress-bar bg-success" : "progress-bar"} role="progressbar" style={{ width: `${progreso}%` }} aria-valuenow={`${progreso}`} aria-valuemin="0" aria-valuemax="100">{progreso}%</div>
-                                    </div>
+                                    {
+                                        numTotalLec == 0 ?
+                                            <></>
+                                            :
+                                            <div className="progress">
+                                                <div className={progreso == 100 ? "progress-bar bg-success" : "progress-bar"} role="progressbar" style={{ width: `${progreso}%` }} aria-valuenow={`${progreso}`} aria-valuemin="0" aria-valuemax="100">{progreso}%</div>
+                                            </div>
+                                    }
                                 </>
                         }
 

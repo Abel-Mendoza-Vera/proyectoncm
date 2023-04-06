@@ -40,15 +40,7 @@ const Certificaciones = () => {
                     </li>
                 </ul>
             </div>
-            <div className="row mt-3 justify-content-end">
-
-                <div className='col-6'>
-                    <div className="input-group">
-                        <input className='form-control' placeholder='Buscar' type="search" name="buscadorUsuario" />
-                        <span className='input-group-text'><BiSearch size="2em" /></span>
-                    </div>
-                </div>
-            </div>
+            
             <div className="text-center">
                 <h4>
                     Mis Certificaciones
