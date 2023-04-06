@@ -175,7 +175,7 @@ const Register = () => {
                   <div className="input-group mb-3">
                   <span className='input-group-text'><MdPhone size="2em" /></span>
                   <div className="form-floating">
-                  <input type="number" max="1" name='telefono' value={telefono} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" required />
+                  <input type="number" name='telefono' value={telefono} onChange={(e) => handlerChangeFormUsuario(e)} className="form-control" placeholder="" required />
                     <label className='text-dark'>Teléfono</label>
                   </div>
                 </div>
