@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { modificarCliente } from '../../hooks/useAcceso';
 import { useState } from "react"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { validarUsuario } from '../../lib/validarUsuario'
 
 
 const U_Perfil = () => {
@@ -98,7 +99,23 @@ const U_Perfil = () => {
     const handlerSubmitFormUsuario = async (e) => {
         e.preventDefault();
         let objUsuario = { ...formularioUsuario, idUsuario: data.idUsuario }
-        useModificarCliente.mutate({ token, usuario: objUsuario })
+
+        const { pasaValidacion, mensaje } = validarUsuario(objUsuario)
+
+        if(pasaValidacion){
+            useModificarCliente.mutate({ token, usuario: objUsuario })
+        }
+        else{
+            Swal.fire({
+              title: "Guardar Usuario",
+              text: mensaje,
+              timer: 2000,
+              timerProgressBar: true,
+              showConfirmButton: false,
+              icon: "warning",
+              iconColor: "orange"
+            })
+          }
     }
 
 

@@ -5,6 +5,7 @@ import Swal from "sweetalert2"
 import { useAccesoStore } from '../../store/accesoStore';
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { modificarUsuario } from '../../hooks/useUsuario';
+import { validarUsuario } from "../../lib/validarUsuario";
 
 const BotonModificarUsuario = ({id, usuario}) => {
 
@@ -21,18 +22,6 @@ const BotonModificarUsuario = ({id, usuario}) => {
         },
         onError: () => { Swal.fire({ title: "Guardar usuario", text: "El usuario no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
     })
-
-    /*const useCrearUsuario = useMutation({
-        mutationFn: crearUsuario,
-        onSuccess: () => {
-            Swal.fire({
-                title: "Guardar usuario", text: "El usuario se ha guardado correctamente", icon: "success", timer: 1500, timerProgressBar: true
-            })
-            queryClient.invalidateQueries("getUsuarios")
-            limpiar();
-        },
-        onError: () => { Swal.fire({ title: "Guardar usuario", text: "El usuario no se ha guardado correctamente", icon: "error", timer: 1500, timerProgressBar: true }) }
-    })*/
 
     const [formularioUsuario, setFormularioUsuario] = useState({
         nombre: usuario.nombre,
@@ -63,8 +52,25 @@ const BotonModificarUsuario = ({id, usuario}) => {
 
     const handlerSubmitFormUsuario = async (e) => {
         e.preventDefault();
+        
+        const { pasaValidacion, mensaje } = validarUsuario(formularioUsuario)
 
-        useModificarUsuario.mutate({ token, id, usuario: formularioUsuario })
+        if(pasaValidacion){
+            useModificarUsuario.mutate({ token, id, usuario: formularioUsuario })
+        }
+        else{
+            Swal.fire({
+              title: "Guardar usuario",
+              text: mensaje,
+              timer: 2000,
+              timerProgressBar: true,
+              showConfirmButton: false,
+              icon: "warning",
+              iconColor: "orange"
+            })
+          }
+
+        
     }
 
 
