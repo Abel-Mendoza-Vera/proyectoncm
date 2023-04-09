@@ -68,7 +68,9 @@ const Navbar = () => {
                                 <>
                                     {
                                         usuario.roles.includes("staff") || usuario.roles.includes("administrador") ?
-                                            <>
+                                            <><li className="nav-item">
+                                                <Link to="/perfil" className="nav-link" >Perfil</Link>
+                                            </li>
                                                 <li className="nav-item dropdown">
                                                     <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                         Gestión
@@ -85,8 +87,11 @@ const Navbar = () => {
                                                         <li className="nav-item">
                                                             <Link to="/admin/compras" className="nav-link" >Compras</Link>
                                                         </li>
+
                                                     </ul>
+
                                                 </li>
+
                                             </>
                                             :
                                             <>
