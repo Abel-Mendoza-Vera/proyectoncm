@@ -35,7 +35,7 @@ export const validarCurso = (datos) => {
 export const validarLeccion = (datos) => {
 
     let pasaValidacion = true
-    mensaje = "Todo bien."
+    let mensaje = "Todo bien."
 
     if(!validarTexto(datos.nombre, 100)){
         pasaValidacion = false
